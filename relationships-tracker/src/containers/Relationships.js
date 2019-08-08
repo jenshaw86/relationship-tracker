@@ -8,7 +8,7 @@ const Relationships = props => {
  
     const displayAllRelationships = () => {
         if (props.relationships && props.relationships.length !== 0 ) {
-            props.relationships.map( rel => {
+            return props.relationships.map( rel => {
                 return <RelationshipCard relationship={rel} />
             })
         }
