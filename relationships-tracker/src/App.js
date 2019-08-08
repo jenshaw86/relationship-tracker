@@ -50,7 +50,7 @@ class App extends React.Component {
           </ul>
           <Route exact path="/" render={ () => < Home first_name={this.state.user.first_name} /> } />
           <Route path="/profile" render={ () => < Profile /> } />
-          <Route path="/relationships" render={ () => < Relationships /> } />
+          <Route path="/relationships" render={ () => < Relationships relationships={this.state.user.relationships} /> } />
           <Route path="/events" render={ () => < Events /> } />
           <Route path="/logout" render={ () => < Logout /> } />
         </Router>
