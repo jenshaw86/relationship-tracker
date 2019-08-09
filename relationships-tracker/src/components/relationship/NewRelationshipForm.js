@@ -6,7 +6,7 @@ import LastName from './form_components/LastName';
 import RelationshipType from './form_components/RelationshipType';
 import Phone from './form_components/Phone';
 import Email from './form_components/Email'
-
+import ContactFrequency from './form_components/ContactFrequency'
 
 const NewRelationshipForm = () => {
   const [firstName, setFirstName] = useState("");
@@ -14,7 +14,8 @@ const NewRelationshipForm = () => {
   const [relType, setRelType] = useState("Friend");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [birthdate, setBirthdate] = useState(new Date());
+  const [interval, setInterval] = useState(1);
+  const [measure, setMeasure] = useState("day")
 
   return (
     <Form>
@@ -28,13 +29,12 @@ const NewRelationshipForm = () => {
       <Email email={email} setEmail={setEmail} />
       <Phone phone={phone} setPhone={setPhone} />
       
-      {/* Birthday */}
-      <Birthdate birthdate={birthdate} setBirthdate={setBirthdate} />
       {/* Notification Frequency */}
-      <Form.Group>
-        <Form.Label>How often do you want to connect with this person?</Form.Label>
-        <Form.Control type="text" placeholder="" />
-      </Form.Group>
+      <Form.Row>
+        <ContactFrequency interval={interval} setInterval={setInterval} measure={measure} />
+        <ContactMeasure measure={measure} setMeasure={setMeasure} />
+      </Form.Row>
+      
       <Form.Group>
         <Form.Check type="checkbox" label="Send me reminders to connect" />
       </Form.Group>
