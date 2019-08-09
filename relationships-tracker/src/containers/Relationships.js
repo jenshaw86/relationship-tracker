@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import RelationshipCard from '../components/RelationshipCard'
 
-// props : 
-// relationships: []
+const Relationships = () => {
+    const [relationships, setRelationships] = useState([])
 
-const Relationships = props => {
- 
+    useEffect(() => {
+        fetch('http://localhost:3000/relationships')
+        .then(res => res.json())
+        .then(data => setRelationships(data))
+    }, [])
+
     const displayAllRelationships = () => {
-        if (props.relationships && props.relationships.length !== 0 ) {
-            return props.relationships.map( rel => {
-                return <RelationshipCard relationship={rel} />
+        if (relationships && relationships.length !== 0 ) {
+            return relationships.map(rel => {
+                return <RelationshipCard key={rel.id} relationship={rel} />
             })
         }
     }

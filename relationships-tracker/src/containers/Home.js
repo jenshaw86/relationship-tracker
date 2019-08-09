@@ -1,13 +1,10 @@
 import React from 'react';
 
-// props :
-// first_name
-
-const Home = props => {
+const Home = () => {
 
         return (
             <>
-                <h1>Welcome {props.first_name}!</h1>
+                <h1>Welcome Home!</h1>
             </>
         )
 }
