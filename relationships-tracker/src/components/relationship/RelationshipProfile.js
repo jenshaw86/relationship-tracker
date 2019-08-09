@@ -6,12 +6,17 @@ const RelationshipProfile = (props) => {
     useEffect(() => {
         fetch(`http://localhost:3000/relationships/${props.match.params.id}`)
         .then(res => res.json())
-        .then(data => setPerson(data))
-    }, [props])
+        .then(data => {
+            // console.log(data)
+            return setPerson(data)
+        }
+    )}, [])
     
+    console.log(person)
+
     return (
         <div>
-            <h1>{person.first_name}'s Profile</h1>
+            <h1>{person.first_name ? `${person.first_name}'s Profile` : null}</h1>
             
         </div>
     )
