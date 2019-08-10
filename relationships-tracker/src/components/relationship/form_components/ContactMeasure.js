@@ -1,7 +1,7 @@
 import React from 'react'
 import {Form} from "react-bootstrap";
 
-const ContactMeasure = () => {
+const ContactMeasure = props => {
   return (
     <>
       <Form.Group>

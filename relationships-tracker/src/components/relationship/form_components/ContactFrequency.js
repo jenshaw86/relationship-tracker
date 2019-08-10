@@ -1,25 +1,29 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Form} from "react-bootstrap";
 
 const ContactFrequency = props => {
-  const displayIntervalOptions = () => {
-    switch (props.measure) {
-      case "days":
-      case "weeks":
-      case "months":
-      default:
-    }
+  
+  const displayIntervals = () => {
+    return [...Array(99).keys()].map(val => {
+      let day = "day";
+      if ((val + 1) !== 1){
+        day = "days"
+      } 
+      
+      return <option key={val + 1} value={val+1}>{val + 1} {day}</option>
+    })
   }
 
   return (
     <>
       <Form.Group>
+        <Form.Label>How often do you want to connect?</Form.Label>
         <Form.Control 
           as="select" 
-          value={props.interval} 
-          onChange={(ev) => props.setInterval(ev.target.value)}            
+          value={props.currentInterval} 
+          onChange={(ev) => props.setCurrentInterval(ev.target.value)}            
           >
-          {}
+          {displayIntervals()}
         </Form.Control>
       </Form.Group>
     </>
