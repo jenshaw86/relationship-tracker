@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import {Button} from "react-bootstrap";
 
 // props: 
 // key={rel.id}, 
@@ -14,9 +15,13 @@ const RelationshipCard = (props) => {
         id
     } = props.relationship
     
-    // const handleClick = () => {
-    //     props.getRelationshipProfile(props.relationship)
-    // }
+    const handleOnClick = () => {
+        fetch(`http://localhost:3000/relationships/${id}`, {
+            method: 'DELETE'
+        })
+        .then(res => res.json())
+        .then(data => props.handleRemoveRelationship(data))
+    }
 
     return(
         <>
@@ -28,6 +33,7 @@ const RelationshipCard = (props) => {
                     </ul>
                 </div>
             </Link>
+            <Button onClick={handleOnClick}>Remove Relationship</Button>
         </>
     )
 }

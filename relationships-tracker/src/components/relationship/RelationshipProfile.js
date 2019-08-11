@@ -11,8 +11,6 @@ const RelationshipProfile = (props) => {
             return setPerson(data)
         }
     )}, [])
-    
-    console.log(person)
 
     return (
         <div>

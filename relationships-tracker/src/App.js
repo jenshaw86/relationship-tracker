@@ -6,7 +6,7 @@ import Profile from './containers/Profile'
 import Relationships from './containers/Relationships'
 import RelationshipProfile from './components/relationship/RelationshipProfile'
 import Events from './containers/Events'
-import EventProfile from './components/EventProfile'
+import EventProfile from './components/event/EventProfile'
 import Logout from './components/Logout'
 
 const App = () => {
@@ -27,7 +27,12 @@ const App = () => {
   }, [])
   
   const handleNewRelationship = person => setRelationships([...relationships, person]);
-  
+  const handleRemoveRelationship = data => setRelationships(data);
+  // const handleRemoveRelationship = id => {
+  //   const filtered = [...relationships].filter(rel => rel.id !== id);
+  //   setRelationships(filtered)
+  // }
+
   return (
     <>
       <h1>You can do this!</h1>
@@ -35,7 +40,7 @@ const App = () => {
         <Navbar />
         <Route exact path="/" render={ (props) => < Home {...props} /> } />
         <Route path="/profile" render={ (props) => < Profile {...props} user={currentUser} /> } />
-        <Route exact path="/relationships" render={ (props) => < Relationships {...props} relationships={relationships} handleNewRelationship={handleNewRelationship} /> } />
+        <Route exact path="/relationships" render={ (props) => < Relationships {...props} relationships={relationships} handleNewRelationship={handleNewRelationship} handleRemoveRelationship={handleRemoveRelationship} /> } />
         <Route path="/relationships/:id" render={ (props) => <RelationshipProfile {...props} /* relationship={relationshipView} */ /> } /> 
         <Route exact path="/events" render={ (props) => < Events {...props} events={events} /> } />
         <Route path="/events/:id" render={ (props) => <EventProfile {...props} /> } />

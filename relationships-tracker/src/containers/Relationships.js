@@ -17,9 +17,8 @@ const Relationships = props => {
         return (
           <RelationshipCard
             key={rel.id}
-            relationship={
-              rel
-            } 
+            relationship={rel}
+            handleRemoveRelationship={props.handleRemoveRelationship}
           />
         );
       });

@@ -7,11 +7,11 @@ const EventProfile = (props) => {
         fetch(`http://localhost:3000/events/${props.match.params.id}`)
         .then(res => res.json())
         .then(data => setEvent(data))
-    }, [props])
+    }, [])
     
     return (
         <div>
-            <h1>{event.name}</h1> 
+            <h1>{event.name ? event.name : null}</h1> 
         </div>
     )
 }
