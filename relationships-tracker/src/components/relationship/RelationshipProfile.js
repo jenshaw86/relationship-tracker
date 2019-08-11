@@ -14,7 +14,9 @@ const RelationshipProfile = (props) => {
 
     return (
         <div>
-            <h1>{person.first_name ? `${person.first_name}'s Profile` : null}</h1>
+            <div>
+                
+            </div>
             
         </div>
     )

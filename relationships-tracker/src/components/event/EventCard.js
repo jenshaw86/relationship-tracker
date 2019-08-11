@@ -20,7 +20,7 @@ const EventCard = (props) => {
         <>
             <Link to={`/events/${id}`}>
                 <div className='event_card'>
-                    <h3>{`${name}`}</h3>
+                    <h4>{`${name}`}</h4>
                 </div>
             </Link>
             <Button onClick={handleOnClick}>Cancel Event</Button>
