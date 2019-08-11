@@ -33,7 +33,7 @@ const Relationships = props => {
       {displayAllRelationships()}
 
       {/* Add New Relationship Form */}
-      < RelationshipModal show={show} handleClose={handleClose} />
+      < RelationshipModal show={show} handleClose={handleClose} handleNewRelationship={props.handleNewRelationship} />
     
     </div>
   );

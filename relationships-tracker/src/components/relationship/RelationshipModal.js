@@ -11,7 +11,7 @@ const RelationshipModal = props => {
           <Modal.Title>New Relationship to Track</Modal.Title>
         </Modal.Header>
         
-        <NewRelationshipForm handleClose={props.handleClose} />
+        <NewRelationshipForm handleClose={props.handleClose} handleNewRelationship={props.handleNewRelationship} />
       </Modal>
     </>
   )

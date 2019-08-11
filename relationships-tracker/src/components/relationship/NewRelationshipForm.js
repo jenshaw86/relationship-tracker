@@ -38,6 +38,8 @@ const NewRelationshipForm = props => {
         user_id: 1
       })
     })
+    .then(res => res.json())
+    .then(obj => props.handleNewRelationship(obj))
   }
 
   return (
