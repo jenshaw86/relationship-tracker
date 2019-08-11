@@ -11,7 +11,7 @@ const EventModal = props => {
           <Modal.Title>New Event</Modal.Title>
         </Modal.Header>
         
-        <NewEventForm handleClose={props.handleClose} />
+        <NewEventForm handleClose={props.handleClose} handleNewEvent={props.handleNewEvent} />
       </Modal>
     </>
   )
