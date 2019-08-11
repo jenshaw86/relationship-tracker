@@ -19,7 +19,7 @@ const Relationships = props => {
             key={rel.id}
             relationship={
               rel
-            } /* getRelationshipProfile={props.getRelationshipProfile} */
+            } 
           />
         );
       });
