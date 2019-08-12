@@ -14,3 +14,9 @@ export const lastConnection = (person) => {
     return "never"
   }
 }
+
+export const displayDate = (utc) => {
+  const dateArray = Date(utc).split(" ");
+  const [day, month, date, year, time] = dateArray
+  return `${month} ${day}, ${year}`
+}

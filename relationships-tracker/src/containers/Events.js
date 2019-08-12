@@ -15,7 +15,7 @@ const Events = props => {
       return props.events.map(event => {
         return <EventCard 
           key={event.id} 
-          event={event}
+          id={event.id}
           handleCancelEvent={props.handleCancelEvent} />
       })
     }

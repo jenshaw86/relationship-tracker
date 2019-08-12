@@ -9,7 +9,6 @@ const RelationshipProfile = (props) => {
         fetch(`http://localhost:3000/relationships/${props.match.params.id}`)
         .then(res => res.json())
         .then(data => {
-            // console.log(data)
             return setPerson(data)
         }
     )}, [props.match.params.id])
