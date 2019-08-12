@@ -1,6 +1,6 @@
 import React from 'react'
 import {Modal} from "react-bootstrap";
-import NewEventForm from './NewEventForm'
+import EventForm from './EventForm'
 
 const EventModal = props => {
   
@@ -19,7 +19,7 @@ const EventModal = props => {
           <Modal.Title>{formType()}</Modal.Title>
         </Modal.Header>
         
-        <NewEventForm handleClose={props.handleClose} handleNewEvent={props.handleNewEvent} />
+        <EventForm handleClose={props.handleClose} {...props} />
       </Modal>
     </>
   )

@@ -8,14 +8,16 @@ import StartDateTime from './form_components/StartDateTime'
 import EndDateTime from './form_components/EndDateTime'
 import Description from './form_components/Description';
 
-const NewEventForm = props => {
-  const [eventName, setEventName] = useState('');
-  const [invitees, setInvitees] = useState([]);
-  const [location, setLocation] = useState('');
-  const [description, setDescription] = useState('');
+const EventForm = props => {
+  const [eventName, setEventName] = useState(props.event ? props.event.name : '');
+  const [invitees, setInvitees] = useState(props.event? props.event.relationships : []);
+  const [location, setLocation] = useState(props.event ? props.event.location : '');
+  const [description, setDescription] = useState(props.event ? props.event.description : '');
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(startDate);
 
+
+  // POST new event and relationship_event
   const handleSubmit = (event) => {
     event.preventDefault();
     props.handleClose();
@@ -57,8 +59,16 @@ const NewEventForm = props => {
     .then(data => console.log(data))
   }
 
+  const displaySubmitButton = () => {
+    if (props.handleNewEvent) {
+      return <Button variant="primary" type="submit">Confirm</Button>
+    } else if (props.handleEditEvent) {
+      return <Button variant="primary" type="submit">Edit</Button>
+    }
+  }
+
   return (
-    <Form onSubmit={(ev) => handleSubmit(ev)}>
+    <Form>
       <Modal.Body>
         {/* Event Name */}
         <EventName eventName={eventName} setEventName={setEventName} />
@@ -80,13 +90,11 @@ const NewEventForm = props => {
           <Button variant="secondary" onClick={() => props.handleClose()}>
             Close
           </Button>
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
+          {displaySubmitButton()}
         </ButtonToolbar>
       </Modal.Footer>
     </Form>
   )
 }
 
-export default NewEventForm;
+export default EventForm;

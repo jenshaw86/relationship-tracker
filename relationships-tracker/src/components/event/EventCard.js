@@ -42,7 +42,7 @@ const EventCard = (props) => {
             <Button onClick={handleDelete}>Cancel Event</Button>
 
             {/* Edit Event Modal */}
-            <EventModal show={show} handleClose={handleClose} handleEditEvent={props.handleEditEvent} />
+            <EventModal show={show} handleClose={handleClose} handleEditEvent={props.handleEditEvent} event={event} />
         </>
     )
 }
