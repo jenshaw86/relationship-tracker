@@ -59,11 +59,18 @@ const EventForm = props => {
     .then(data => console.log(data))
   }
 
+  const handleSubmitEdit = (event) => {
+    event.preventDefault();
+    console.log("editing event")
+    props.handleClose();
+
+  }
+
   const displaySubmitButton = () => {
     if (props.handleNewEvent) {
       return <Button variant="primary" type="submit" onClick={(e) => handleSubmit(e)} >Create</Button>
     } else if (props.handleEditEvent) {
-      return <Button variant="primary" type="submit">Edit</Button>
+      return <Button variant="primary" type="submit" onClick={(e) => handleSubmitEdit(e)}>Edit</Button>
     }
   }
 
