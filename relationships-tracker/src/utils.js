@@ -7,7 +7,9 @@ export const lastConnection = (person) => {
     let filtered = person.events.filter(ev => Date.parse(ev.end_date) < now)
     if (filtered.length !== 0) {
       let last = Date(filtered[filtered.length - 1].end_date)
-      let [day, month, date, year] = last.split(" ");
+      let dateArr = last.split(" ");
+      let [, month, date, year] = dateArr
+
       return `${month} ${date}, ${year}`
     } else {
       return "never"

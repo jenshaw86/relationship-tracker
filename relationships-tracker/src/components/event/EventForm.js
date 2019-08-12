@@ -11,7 +11,7 @@ import Description from './form_components/Description';
 
 const EventForm = props => {
   const [eventName, setEventName] = useState(props.event ? props.event.name : '');
-  const [invitees, setInvitees] = useState(props.event? props.event.relationships : []);
+  const [invitees, setInvitees] = useState(props.event? props.event.relationships.map(r => `${r.first_name} ${r.last_name}`) : []);
   const [location, setLocation] = useState(props.event ? props.event.location : '');
   const [description, setDescription] = useState(props.event ? props.event.description : '');
   const [startDate, setStartDate] = useState(props.event ? showDate(props.event.start_date) : new Date());
