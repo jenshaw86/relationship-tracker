@@ -30,7 +30,7 @@ const EventForm = props => {
       body: JSON.stringify({
         name: eventName,
         start_date: startDate,
-        endDate: endDate,
+        end_date: endDate,
         location: location,
         description: description,
         user_id: 1,
@@ -61,7 +61,7 @@ const EventForm = props => {
 
   const displaySubmitButton = () => {
     if (props.handleNewEvent) {
-      return <Button variant="primary" type="submit">Confirm</Button>
+      return <Button variant="primary" type="submit">Create</Button>
     } else if (props.handleEditEvent) {
       return <Button variant="primary" type="submit">Edit</Button>
     }
