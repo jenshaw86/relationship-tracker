@@ -61,7 +61,7 @@ const EventForm = props => {
 
   const displaySubmitButton = () => {
     if (props.handleNewEvent) {
-      return <Button variant="primary" type="submit">Create</Button>
+      return <Button variant="primary" type="submit" onClick={(e) => handleSubmit(e)} >Create</Button>
     } else if (props.handleEditEvent) {
       return <Button variant="primary" type="submit">Edit</Button>
     }
