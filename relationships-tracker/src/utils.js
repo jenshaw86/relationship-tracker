@@ -33,7 +33,7 @@ export const showDate = (str) => {
   let [fullDate, time] = str.split("T");
   let [year, month, date] = fullDate.split("-")
   let [hour, min] = time.split(":")
-  return new Date(Date.UTC(year, (month-1), (date-1), hour, min))
+  return new Date(Date.UTC(year, month-1, date, hour, min))
 }
 
 // display invitees of event
