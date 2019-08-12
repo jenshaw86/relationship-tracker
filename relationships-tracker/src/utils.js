@@ -1,3 +1,5 @@
+// RELATIONSHIP FUNCTIONS
+
 // display last connection date
 export const lastConnection = (person) => {
   if (person.events && person.events.length !== 0) {
@@ -15,8 +17,20 @@ export const lastConnection = (person) => {
   }
 }
 
+// EVENT FUNCTIONS
+
+// display date MMMM-DD-YYYY 
 export const displayDate = (utc) => {
   const dateArray = Date(utc).split(" ");
   const [day, month, date, year, time] = dateArray
-  return `${month} ${day}, ${year}`
+  return `${month} ${date}, ${year}`
+}
+
+// display invitees of event
+export const displayInvitees = (event) => {
+  if (event.relationships && event.length !==0) {
+      return event.relationships.map(rel => {
+          return `${rel.first_name} ${rel.last_name}`
+      })
+  }
 }
