@@ -12,7 +12,10 @@ const StartDateTime = props => {
         <Form.Label>Start Date</Form.Label>
         <DatePicker 
           selected={props.startDate} 
-          onChange={date => props.setStartDate(date)} 
+          onChange={date => {
+            console.log(date)
+            props.setStartDate(date)} 
+          }
           minDate={subDays(new Date(), 0)}
           />
       </Form.Group>

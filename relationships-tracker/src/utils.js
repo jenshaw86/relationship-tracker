@@ -26,6 +26,14 @@ export const displayDate = (utc) => {
   return `${month} ${date}, ${year}`
 }
 
+// convert date to something
+export const showDate = (str) => {
+  let [fullDate, time] = str.split("T");
+  let [year, month, date] = fullDate.split("-")
+  let [hour, min] = time.split(":")
+  return new Date(Date.UTC(year, (month-1), (date-1), hour, min))
+}
+
 // display invitees of event
 export const displayInvitees = (event) => {
   if (event.relationships && event.length !==0) {

@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import {Form, Button, ButtonToolbar, Modal} from "react-bootstrap";
+import {showDate} from '../../utils'
 
 import EventName from './form_components/EventName';
 import Invitees from './form_components/Invitees';
@@ -13,8 +14,8 @@ const EventForm = props => {
   const [invitees, setInvitees] = useState(props.event? props.event.relationships : []);
   const [location, setLocation] = useState(props.event ? props.event.location : '');
   const [description, setDescription] = useState(props.event ? props.event.description : '');
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(startDate);
+  const [startDate, setStartDate] = useState(props.event ? showDate(props.event.start_date) : new Date());
+  const [endDate, setEndDate] = useState(props.event ? showDate(props.event.end_date) : startDate);
 
 
   // POST new event and relationship_event
@@ -59,6 +60,7 @@ const EventForm = props => {
     .then(data => console.log(data))
   }
 
+  // PATCH event
   const handleSubmitEdit = (event) => {
     event.preventDefault();
     console.log("editing event")
