@@ -23,6 +23,7 @@ const App = () => {
   // event handlers
   const handleNewEvent = event => setEvents([...events, event]);
   const handleCancelEvent = data => setEvents(data);
+  const handleEditEvent = event => console.log("edit event");
 
   // On login, fetch user data
   useEffect(() => {
@@ -63,7 +64,8 @@ const App = () => {
             {...props} 
             events={events} 
             handleNewEvent={handleNewEvent} 
-            handleCancelEvent={handleCancelEvent} /> } />
+            handleCancelEvent={handleCancelEvent} 
+            handleEditEvent={handleEditEvent} /> } />
         <Route path="/events/:id" 
           render={props => <EventProfile 
             {...props} /> } />

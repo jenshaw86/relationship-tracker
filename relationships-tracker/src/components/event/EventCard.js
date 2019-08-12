@@ -2,17 +2,26 @@ import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import {displayDate, displayInvitees} from '../../utils'
+import EventModal from './EventModal'
 
 const EventCard = (props) => {
+    // State: current event viewed, modal view
     const [event, setEvent] = useState({})
+    const [show, setShow] = useState(false);
     
+    // New Event Modal Handlers
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    
+    // Fetch event instance
     useEffect( () => {
         fetch(`http://localhost:3000/events/${props.id}`)
         .then(res => res.json())
         .then(obj => setEvent(obj))
     }, [props.id])
 
-    const handleOnClick = () => {
+    // Delete event instance
+    const handleDelete = () => {
         fetch(`http://localhost:3000/events/${props.id}`, {
             method: 'DELETE'
         })
@@ -29,8 +38,11 @@ const EventCard = (props) => {
                     <p>with {displayInvitees(event)}</p>
                 </div>
             </Link>
-            <Button>Edit Event</Button>
-            <Button onClick={handleOnClick}>Cancel Event</Button>
+            <Button variant="info" onClick={handleShow}>Edit Event</Button>
+            <Button onClick={handleDelete}>Cancel Event</Button>
+
+            {/* Edit Event Modal */}
+            <EventModal show={show} handleClose={handleClose} handleEditEvent={props.handleEditEvent} />
         </>
     )
 }
