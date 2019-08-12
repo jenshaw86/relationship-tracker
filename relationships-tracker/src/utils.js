@@ -19,14 +19,16 @@ export const lastConnection = (person) => {
 
 // EVENT FUNCTIONS
 
-// display date MMMM-DD-YYYY 
-export const displayDate = (utc) => {
-  const dateArray = Date(utc).split(" ");
-  const [day, month, date, year, time] = dateArray
-  return `${month} ${date}, ${year}`
+// display date
+export const displayDate = (str) => {
+  if (str) {
+    const dateArray = new Date(str);
+    const [day, month, date, year] = dateArray.toDateString().split(" ")
+    return `${day}, ${month} ${date}, ${year}`
+  }
 }
 
-// convert date to something
+// convert date to something friggin' useful
 export const showDate = (str) => {
   let [fullDate, time] = str.split("T");
   let [year, month, date] = fullDate.split("-")
