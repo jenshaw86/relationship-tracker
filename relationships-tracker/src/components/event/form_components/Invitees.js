@@ -8,8 +8,8 @@ const Invitee = props => {
       <Form.Control 
       type='text' 
       placeholder="Enter invitee's name"
-      value={props.invitee}
-      onChange={ev => props.setInvitee(ev.target.value)} />
+      value={props.invitees}
+      onChange={ev => props.setInvitees([ev.target.value])} />
     </Form.Group>
   )
 }

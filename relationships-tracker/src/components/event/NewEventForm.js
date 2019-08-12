@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {Form, Button, ButtonToolbar, Modal} from "react-bootstrap";
 
 import EventName from './form_components/EventName';
-import Invitee from './form_components/Invitee';
+import Invitees from './form_components/Invitees';
 import Location from './form_components/Location';
 import StartDateTime from './form_components/StartDateTime'
 import EndDateTime from './form_components/EndDateTime'
@@ -10,7 +10,7 @@ import Description from './form_components/Description';
 
 const NewEventForm = props => {
   const [eventName, setEventName] = useState('');
-  const [invitee, setInvitee] = useState('');
+  const [invitees, setInvitees] = useState([]);
   const [location, setLocation] = useState('');
   const [description, setDescription] = useState('');
   const [startDate, setStartDate] = useState(new Date());
@@ -32,11 +32,29 @@ const NewEventForm = props => {
         location: location,
         description: description,
         user_id: 1,
-        relationship_id: 1
       })
     })
     .then(res => res.json())
-    .then(obj => props.handleNewEvent(obj))
+    .then(obj => {
+      postRelEvent(obj);
+      props.handleNewEvent(obj);
+    })
+  }
+
+  const postRelEvent = (obj) => {
+    fetch(`http://localhost:3000/relationship_events`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }, 
+      body: JSON.stringify({
+        relationship_id: 1,
+        event_id: obj.id
+      })
+    })
+    .then(res => res.json())
+    .then(data => console.log(data))
   }
 
   return (
@@ -45,7 +63,7 @@ const NewEventForm = props => {
         {/* Event Name */}
         <EventName eventName={eventName} setEventName={setEventName} />
         {/* Invitee Name */}
-        <Invitee invitee={invitee} setInvitee={setInvitee} />
+        <Invitees invitees={invitees} setInvitees={setInvitees} />
         {/* Location */}
         <Location location={location} setLocation={setLocation} />
         {/* Start Date, Time */}

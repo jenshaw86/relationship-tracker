@@ -18,6 +18,7 @@ const RelationshipProfile = (props) => {
         <div>
           <img src={`${person.image}`} width="150" alt={`${person.first_name} ${person.last_name}`}/>
           <Button>Edit Relationship</Button>
+          <Button>Remove Relationship</Button>
         </div>
         <div>
           <h4>{person.first_name} {person.last_name}</h4>
