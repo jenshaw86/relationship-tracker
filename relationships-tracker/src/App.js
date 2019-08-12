@@ -35,6 +35,7 @@ const App = () => {
     })
   }, [])
   
+
   // Render Navbar
   // Routes
   return (

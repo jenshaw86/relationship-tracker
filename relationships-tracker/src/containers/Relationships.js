@@ -22,7 +22,7 @@ const Relationships = props => {
       return (
         <RelationshipCard
           key={rel.id}
-          relationship={rel}
+          id={rel.id}
           handleRemoveRelationship={props.handleRemoveRelationship}
         />
       );

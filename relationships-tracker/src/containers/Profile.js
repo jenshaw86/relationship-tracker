@@ -7,7 +7,7 @@ const Profile = (props) => {
   return (
     <>
       <div>
-        <img src={`${image}`} width="150" />
+        <img src={`${image}`} width="150" alt={`${first_name} ${last_name}`}/>
         <Button>Edit Profile</Button>
       </div>
       <div>
