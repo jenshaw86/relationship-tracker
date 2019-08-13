@@ -46,3 +46,9 @@ export const displayInvitees = (event) => {
       })
   }
 }
+
+// display full name
+
+export const fullName = (first, last) => {
+  return `${first} ${last}`
+}

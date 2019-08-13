@@ -1,15 +1,16 @@
 import React from 'react';
-import { Button, ButtonToolbar } from 'react-bootstrap'
+import { Button, ButtonToolbar } from 'react-bootstrap';
+import { fullName } from '../utils'
 
-const Profile = (props) => { 
-  const {first_name, last_name, image, email, phone_number} = props.user
+const Profile = props => { 
+  const { first_name, last_name, email, phone_number, image } = props.user
   
   return (
     <>
       <div>
         <img src={`${image}`} width="150" alt={`${first_name} ${last_name}`}/>
         
-        <div><h1>{first_name} {last_name}</h1></div>
+        <div><h1>{fullName(first_name, last_name)}</h1></div>
         
         <ButtonToolbar>
           <Button>Upcoming Events</Button>

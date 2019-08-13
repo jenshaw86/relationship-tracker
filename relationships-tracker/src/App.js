@@ -54,8 +54,7 @@ const App = () => {
           render={props => < Home 
             {...props} /> } />
         <Route path="/profile" 
-          render={props => < Profile 
-            {...props} 
+          render={() => < Profile  
             user={currentUser} /> } />
         <Route path="/relationships" exact 
           render={props => < Relationships 
