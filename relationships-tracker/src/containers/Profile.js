@@ -7,6 +7,7 @@ import { fullName, filterPastEvents, filterFutureEvents } from '../utils'
 import ProfileModal from '../components/profile/ProfileModal'
 import Events from '../containers/Events'
 // import ProfileRoutes from '../components/ProfileRoutes'
+import ProfileDetails from '../components/profile/ProfileDetails'
 
 const Profile = props => { 
   // Edit Profile Modal State
@@ -43,7 +44,7 @@ const Profile = props => {
           render={() => <Events events={pastEvents} />} 
         />
         <Route path={`${props.match.path}/info`} 
-          // render={() => <Details />} 
+          render={() => <ProfileDetails email={email} phone_number={phone_number} />} 
         />
 
         {/* Edit Profile Modal */}

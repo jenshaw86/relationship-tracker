@@ -13,8 +13,8 @@ const ProfileModal = props => {
   const [phone, setPhone] = useState(props.user.phone_number)
   const [image, setImage] = useState(props.user.image)
 
-  const handleEdit = (e) => {
-    e.preventDefault();
+  const handleEdit = () => {
+    // ev.preventDefault();
     props.handleClose();
     fetch(`http://localhost:3000/users/${props.user.id}`, {
       method: 'PATCH',
@@ -58,7 +58,7 @@ const ProfileModal = props => {
           <Button variant="secondary" onClick={() => props.handleClose()}>
             Close
           </Button>
-          <Button variant="primary" type="submit" onClick={(event) => handleEdit(event)}>
+          <Button variant="primary" type="submit" onClick={() => handleEdit()}>
             Edit
           </Button>
         </ButtonToolbar>

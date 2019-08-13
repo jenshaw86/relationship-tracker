@@ -56,7 +56,7 @@ export const fullName = (first, last) => {
 // filter past events
 export const filterPastEvents = events => {
   if (events && events.length !== 0) {
-    let now = new Date;
+    let now = new Date();
     now = now.toISOString();
     return events.filter(event => event.end_date < now).sort((a,b) => a.start_date > b.start_date ? -1 : 1)
   }
@@ -65,7 +65,7 @@ export const filterPastEvents = events => {
 // filter upcoming events
 export const filterFutureEvents = events => {
   if (events && events.length !== 0) {
-    let now = new Date;
+    let now = new Date();
     now = now.toISOString();
     return events.filter(event => event.end_date > now).sort((a,b) => a.start_date < b.start_date ? -1 : 1)
   }

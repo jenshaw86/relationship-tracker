@@ -28,8 +28,6 @@ const Events = props => {
 
   return (
     <div>
-      <h1>All Events</h1>
-      
       <Button variant="info" onClick={handleShow}>Add New Event</Button>
       
       { displayAllEvents() }
