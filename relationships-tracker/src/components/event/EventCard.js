@@ -4,34 +4,30 @@ import { Button } from 'react-bootstrap';
 import {displayDate, displayInvitees} from '../../utils'
 import EventModal from './EventModal'
 
+// PROPS: event object
+//  functions: setEvents()
+
 const EventCard = (props) => {
     // State: current event viewed, modal view
-    const [event, setEvent] = useState({})
+    const [event, setEvent] = useState(props.event)
     const [show, setShow] = useState(false);
     
     // New Event Modal Handlers
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    
-    // Fetch event instance
-    useEffect( () => {
-        fetch(`http://localhost:3000/events/${props.id}`)
-        .then(res => res.json())
-        .then(obj => setEvent(obj))
-    }, [props.id])
 
     // Delete event instance
     const handleDelete = () => {
-        fetch(`http://localhost:3000/events/${props.id}`, {
+        fetch(`http://localhost:3000/events/${props.event.id}`, {
             method: 'DELETE'
         })
         .then(res => res.json())
-        .then(data => props.handleCancelEvent(data))
+        .then(data => props.setEvents(data))
     }
 
     return(
         <>
-            <Link to={`/events/${props.id}`}>
+            <Link to={`/events/${props.event.id}`}>
                 <div className='event_card'>
                     <h4>{displayDate(event.start_date)}</h4>
                     <h4>{event.name}</h4>
@@ -42,7 +38,7 @@ const EventCard = (props) => {
             <Button onClick={handleDelete}>Cancel Event</Button>
 
             {/* Edit Event Modal */}
-            <EventModal show={show} handleClose={handleClose} handleEditEvent={props.handleEditEvent} event={event} />
+            <EventModal show={show} handleClose={handleClose} setEvents={props.setEvents} handleEditEvent={props.handleEditEvent} event={event} />
         </>
     )
 }

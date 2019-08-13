@@ -3,6 +3,10 @@ import RelationshipCard from "../components/relationship/RelationshipCard";
 import { Button } from "react-bootstrap";
 import RelationshipModal from "../components/relationship/RelationshipModal"
 
+// PROPS: 
+// all user relationships
+// functions => handleNewRelationships, handleRemoveRelationships, setCurrentRelationship, setRelationships
+
 const Relationships = props => {
   // modal state
   const [show, setShow] = useState(false);
@@ -22,8 +26,8 @@ const Relationships = props => {
       return (
         <RelationshipCard
           key={rel.id}
-          id={rel.id}
-          handleRemoveRelationship={props.handleRemoveRelationship}
+          relationship={rel}
+          setRelationships={props.setRelationships}
         />
       );
     });

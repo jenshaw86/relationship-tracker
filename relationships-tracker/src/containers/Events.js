@@ -4,6 +4,8 @@ import { Button } from 'react-bootstrap';
 import EventCard from '../components/event/EventCard';
 import EventModal from '../components/event/EventModal'
 
+// PROPS: setEvents()
+
 const Events = props => {
   // New Event Modal State
   const [show, setShow] = useState(false);
@@ -17,9 +19,9 @@ const Events = props => {
       return props.events.map(event => {
         return <EventCard 
           key={event.id} 
-          id={event.id}
-          handleEditEvent={props.handleEditEvent}
-          handleCancelEvent={props.handleCancelEvent} />
+          event={event}
+          setEvents={props.setEvents}
+          handleEditEvent={props.handleEditEvent} />
       })
     }
   }
@@ -33,7 +35,7 @@ const Events = props => {
       { displayAllEvents() }
 
       {/* Add New Event Form */}
-      <EventModal show={show} handleClose={handleClose} handleNewEvent={props.handleNewEvent} />
+      <EventModal show={show} handleClose={handleClose} handleNewEvent={props.handleNewEvent} setEvents={props.setEvents} />
     </div> 
   )
 }

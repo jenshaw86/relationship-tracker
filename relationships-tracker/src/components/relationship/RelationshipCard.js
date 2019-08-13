@@ -2,34 +2,25 @@ import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import {Button} from "react-bootstrap";
 import {lastConnection} from '../../utils'
-// props: 
-// id={rel.id}, 
-// relationship={rel}, 
-// getRelationshipProfile={props.getRelationshipProfile}
+
+// PROPS: relationship (object)
+// functions => setRelationships
 
 const RelationshipCard = props => {
-  const [person, setPerson] = useState({})
-  
-  useEffect( () => {
-    fetch(`http://localhost:3000/relationships/${props.id}`)
-    .then(res => res.json())
-    .then(obj => setPerson(obj))
-  }, [props.id])
-  // relationship properties
-  // const {first_name, last_name, relationship_type, image, events, id} = props.relationship
+  const [person, setPerson] = useState(props.relationship)
   
   // handle delete relationship
   const handleOnClick = () => {
-    fetch(`http://localhost:3000/relationships/${props.id}`, {
+    fetch(`http://localhost:3000/relationships/${props.relationship.id}`, {
       method: 'DELETE'
     })
     .then(res => res.json())
-    .then(data => props.handleRemoveRelationship(data))
+    .then(data => props.setRelationships(data))
   }  
 
   return(
     <>
-      <Link to={`/relationships/${props.id}`} >
+      <Link to={`/relationships/${props.relationship.id}`} >
         <div className='relationship_card'>
           <div>
             <img src={`${person.image}`} width="100" alt={`${person.first_name} ${person.last_name}`} />

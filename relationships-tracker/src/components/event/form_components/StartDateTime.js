@@ -13,7 +13,6 @@ const StartDateTime = props => {
         <DatePicker 
           selected={props.startDate} 
           onChange={date => {
-            console.log(date)
             props.setStartDate(date)} 
           }
           minDate={subDays(new Date(), 0)}

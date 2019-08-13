@@ -2,12 +2,14 @@ import React from 'react'
 import {Modal} from "react-bootstrap";
 import EventForm from './EventForm'
 
+// PROPS: setEvents()
+
 const EventModal = props => {
   
   const formType = () => {
     if (props.handleNewEvent) {
       return "New Event"
-    } else if (props.handleEditEvent) {
+    } else {
       return "Edit Event"
     }
   }

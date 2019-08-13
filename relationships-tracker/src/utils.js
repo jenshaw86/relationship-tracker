@@ -46,3 +46,12 @@ export const displayInvitees = (event) => {
       })
   }
 }
+
+// handles Relationship deletion
+export const deleteRelationship = (person, setRelationships) => {
+  fetch(`http://localhost:3000/relationships/${person.id}`, {
+    method: 'DELETE'
+  })
+  .then(res => res.json())
+  .then(data => setRelationships(data))
+}  

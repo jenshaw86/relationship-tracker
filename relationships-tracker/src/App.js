@@ -18,21 +18,28 @@ const App = () => {
 
   // relationship handlers
   const handleNewRelationship = person => setRelationships([...relationships, person]);
-  const handleRemoveRelationship = data => setRelationships(data);
 
   // event handlers
   const handleNewEvent = event => setEvents([...events, event]);
-  const handleCancelEvent = data => setEvents(data);
-  const handleEditEvent = event => console.log("edit event");
 
   // On login, fetch user data
   useEffect(() => {
     fetch(`http://localhost:3000/users/1`) //TODO: specify user on login
     .then(res => res.json())
-    .then(data=> {
-      setCurrentUser(data);
-      setRelationships(data.relationships);
-      setEvents(data.events);
+    .then(user => {
+      setCurrentUser(user)
+      fetch(`http://localhost:3000/relationships`)
+      .then(res => res.json())
+      .then(data => {
+        const user_relationships = data.filter(rel => rel.user_id === 1) // Filter relationships whose user_ids match user 1
+        setRelationships(user_relationships)
+        fetch(`http://localhost:3000/events`)
+        .then(res => res.json())
+        .then(data => {
+          const user_events = data.filter(ev => ev.user_id === 1) // Filter events whose user_ids match user 1
+          setEvents(user_events)
+        })
+      })
     })
   }, [])
   
@@ -55,17 +62,16 @@ const App = () => {
             {...props} 
             relationships={relationships} 
             handleNewRelationship={handleNewRelationship} 
-            handleRemoveRelationship={handleRemoveRelationship} /> } />
+            setRelationships={setRelationships} /> } />
         <Route path="/relationships/:id" 
           render={props => <RelationshipProfile 
-            {...props} /> } /> 
+            {...props} setRelationships={setRelationships} /> } /> 
         <Route path="/events" exact 
           render={props => < Events 
             {...props} 
             events={events} 
-            handleNewEvent={handleNewEvent} 
-            handleCancelEvent={handleCancelEvent} 
-            handleEditEvent={handleEditEvent} /> } />
+            setEvents={setEvents}
+            handleNewEvent={handleNewEvent} /> } />
         <Route path="/events/:id" 
           render={props => <EventProfile 
             {...props} /> } />

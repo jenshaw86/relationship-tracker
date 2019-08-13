@@ -9,6 +9,9 @@ import StartDateTime from './form_components/StartDateTime'
 import EndDateTime from './form_components/EndDateTime'
 import Description from './form_components/Description';
 
+// PROPS : 
+// functions setEvents() OR handleNewEvent()
+
 const EventForm = props => {
   const [eventName, setEventName] = useState(props.event ? props.event.name : '');
   const [invitees, setInvitees] = useState(props.event? props.event.relationships.map(r => `${r.first_name} ${r.last_name}`) : []);
@@ -63,15 +66,30 @@ const EventForm = props => {
   // PATCH event
   const handleSubmitEdit = (event) => {
     event.preventDefault();
-    console.log("editing event")
+    fetch(`http://localhost:3000/events/${props.event.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Accept': 'application/json', 
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: eventName,
+        start_date: startDate,
+        end_date: endDate,
+        location: location,
+        description: description,
+        user_id: 1,
+      })
+    })
+    .then(res => res.json())
+    .then(obj => props.setEvents(obj))
     props.handleClose();
-
   }
 
   const displaySubmitButton = () => {
     if (props.handleNewEvent) {
       return <Button variant="primary" type="submit" onClick={(e) => handleSubmit(e)} >Create</Button>
-    } else if (props.handleEditEvent) {
+    } else {
       return <Button variant="primary" type="submit" onClick={(e) => handleSubmitEdit(e)}>Edit</Button>
     }
   }
