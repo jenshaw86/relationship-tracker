@@ -1,10 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Route, Link } from 'react-router-dom'
 import { Button, ButtonToolbar } from 'react-bootstrap';
-import { fullName } from '../utils'
+import { fullName, filterPastEvents, filterFutureEvents } from '../utils'
+
+// import ProfileNav from '../components/profile/ProfileNav'
+import ProfileModal from '../components/profile/ProfileModal'
+import Events from '../containers/Events'
+// import ProfileRoutes from '../components/ProfileRoutes'
 
 const Profile = props => { 
-  const { first_name, last_name, email, phone_number, image } = props.user
-  
+  // Edit Profile Modal State
+  const [show, setShow] = useState(false);
+  // Edit Profile Modal Handlers
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const { first_name, last_name, email, phone_number, image, events } = props.user
+
+  const pastEvents = filterPastEvents(events);
+  const futureEvents = filterFutureEvents(events);
+
   return (
     <>
       <div>
@@ -12,20 +27,27 @@ const Profile = props => {
         
         <div><h1>{fullName(first_name, last_name)}</h1></div>
         
+        {/* <ProfileNav match={props.match} /> */}
         <ButtonToolbar>
-          <Button>Upcoming Events</Button>
-          <Button>Past Events</Button>
-          <Button>Edit Profile</Button>
-          <Button>Add Event</Button>
-          <Button>Info</Button>
+          <Link to={`${props.match.path}/upcoming_events`}><Button>Upcoming Events</Button></Link>
+          <Link to={`${props.match.path}/past_events`}><Button>Past Events</Button></Link>
+          <Button onClick={() => handleShow()} >Edit Profile</Button>
+          <Link><Button>Add Event</Button></Link>
+          <Link to={`${props.match.path}/info`}><Button>Info</Button></Link>
         </ButtonToolbar>
-      </div>
-      
-      <div>
-        <p>Email:</p>
-        <p>{email}</p>
-        <p>Phone:</p>
-        <p>{phone_number}</p>
+
+        <Route path={`${props.match.path}/upcoming_events`} 
+          render={() => <Events events={futureEvents} />} 
+        />
+        <Route path={`${props.match.path}/past_events`} 
+          render={() => <Events events={pastEvents} />} 
+        />
+        <Route path={`${props.match.path}/info`} 
+          // render={() => <Details />} 
+        />
+
+        {/* Edit Profile Modal */}
+        <ProfileModal show={show} handleClose={handleClose} user={props.user} setCurrentUser={props.setCurrentUser} />
       </div>
     </>
   )

@@ -1,11 +1,11 @@
 import React, {useState} from 'react'
 import {Form, Button, ButtonToolbar, Modal} from "react-bootstrap";
 
-import FirstName from './form_components/FirstName';
-import LastName from './form_components/LastName';
+import FirstName from '../form/FirstName';
+import LastName from '../form/LastName';
 import RelationshipType from './form_components/RelationshipType';
-import Phone from './form_components/Phone';
-import Email from './form_components/Email'
+import Phone from '../form/Phone';
+import Email from '../form/Email'
 import ContactFrequency from './form_components/ContactFrequency'
 // import Notification from './form_components/Notification'
 

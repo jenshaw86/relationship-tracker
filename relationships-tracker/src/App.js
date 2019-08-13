@@ -15,7 +15,8 @@ const App = () => {
   const [currentUser, setCurrentUser] = useState({});
   const [relationships, setRelationships] = useState([]);
   const [events, setEvents] = useState([])
-
+  // user handlers
+  
   // relationship handlers
   const handleNewRelationship = person => setRelationships([...relationships, person]);
 
@@ -48,14 +49,15 @@ const App = () => {
   // Routes
   return (
     <>
-      {/* <Router> */}
         <Navbar />
         <Route path="/" exact 
           render={props => < Home 
             {...props} /> } />
         <Route path="/profile" 
-          render={() => < Profile  
-            user={currentUser} /> } />
+          render={props => < Profile
+            {...props}  
+            user={currentUser} 
+            setCurrentUser={setCurrentUser} /> } />
         <Route path="/relationships" exact 
           render={props => < Relationships 
             {...props} 
@@ -76,7 +78,6 @@ const App = () => {
             {...props} /> } />
         <Route path="/logout" 
           render={ () => < Logout /> } />
-      {/* </Router> */}
     </>
   );
 }

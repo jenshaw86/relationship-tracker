@@ -52,3 +52,21 @@ export const displayInvitees = (event) => {
 export const fullName = (first, last) => {
   return `${first} ${last}`
 }
+
+// filter past events
+export const filterPastEvents = events => {
+  if (events && events.length !== 0) {
+    let now = new Date;
+    now = now.toISOString();
+    return events.filter(event => event.end_date < now).sort((a,b) => a.start_date > b.start_date ? -1 : 1)
+  }
+}
+
+// filter upcoming events
+export const filterFutureEvents = events => {
+  if (events && events.length !== 0) {
+    let now = new Date;
+    now = now.toISOString();
+    return events.filter(event => event.end_date > now).sort((a,b) => a.start_date < b.start_date ? -1 : 1)
+  }
+}

@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap';
 import EventCard from '../components/event/EventCard';
 import EventModal from '../components/event/EventModal'
 
-// PROPS: setEvents()
+// PROPS: setEvents(), events
 
 const Events = props => {
   // New Event Modal State
