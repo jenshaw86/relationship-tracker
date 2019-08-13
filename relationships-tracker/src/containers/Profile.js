@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'react-bootstrap'
+import { Button, ButtonToolbar } from 'react-bootstrap'
 
 const Profile = (props) => { 
   const {first_name, last_name, image, email, phone_number} = props.user
@@ -8,11 +8,18 @@ const Profile = (props) => {
     <>
       <div>
         <img src={`${image}`} width="150" alt={`${first_name} ${last_name}`}/>
-        <Button>Edit Profile</Button>
+        
+        <div><h1>{first_name} {last_name}</h1></div>
+        
+        <ButtonToolbar>
+          <Button>Upcoming Events</Button>
+          <Button>Past Events</Button>
+          <Button>Edit Profile</Button>
+          <Button>Add Event</Button>
+          <Button>Info</Button>
+        </ButtonToolbar>
       </div>
-      <div>
-        <h1>{first_name} {last_name}</h1>
-      </div>
+      
       <div>
         <p>Email:</p>
         <p>{email}</p>

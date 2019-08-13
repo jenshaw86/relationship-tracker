@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {BrowserRouter as Router, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 // import { Button } from 'react-bootstrap'
 import Navbar from './components/Navbar'
 import Home from './containers/Home'
@@ -48,7 +48,7 @@ const App = () => {
   // Routes
   return (
     <>
-      <Router>
+      {/* <Router> */}
         <Navbar />
         <Route path="/" exact 
           render={props => < Home 
@@ -77,7 +77,7 @@ const App = () => {
             {...props} /> } />
         <Route path="/logout" 
           render={ () => < Logout /> } />
-      </Router>
+      {/* </Router> */}
     </>
   );
 }
