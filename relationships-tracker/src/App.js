@@ -16,7 +16,7 @@ const App = () => {
   const [relationships, setRelationships] = useState([]);
   const [events, setEvents] = useState([])
   // user handlers
-  
+
   // relationship handlers
   const handleNewRelationship = person => setRelationships([...relationships, person]);
 
@@ -44,6 +44,7 @@ const App = () => {
     })
   }, [])
   
+  
 
   // Render Navbar
   // Routes
@@ -57,6 +58,7 @@ const App = () => {
           render={props => < Profile
             {...props}  
             user={currentUser} 
+            events={events}
             setCurrentUser={setCurrentUser} /> } />
         <Route path="/relationships" exact 
           render={props => < Relationships 
@@ -68,11 +70,15 @@ const App = () => {
           render={props => <RelationshipProfile 
             {...props} setRelationships={setRelationships} /> } /> 
         <Route path="/events" exact 
-          render={props => < Events 
-            {...props} 
-            events={events} 
-            setEvents={setEvents}
-            handleNewEvent={handleNewEvent} /> } />
+          render={props => <>
+                <h3>All Events</h3>
+                < Events 
+                  {...props} 
+                  events={events} 
+                  setEvents={setEvents}
+                  handleNewEvent={handleNewEvent} />
+              </> 
+          } />
         <Route path="/events/:id" 
           render={props => <EventProfile 
             {...props} /> } />

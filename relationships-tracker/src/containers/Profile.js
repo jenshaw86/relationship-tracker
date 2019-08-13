@@ -16,10 +16,10 @@ const Profile = props => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const { first_name, last_name, email, phone_number, image, events } = props.user
+  const { first_name, last_name, email, phone_number, image } = props.user
 
-  const pastEvents = filterPastEvents(events);
-  const futureEvents = filterFutureEvents(events);
+  const pastEvents = filterPastEvents(props.events);
+  const futureEvents = filterFutureEvents(props.events);
 
   return (
     <>
