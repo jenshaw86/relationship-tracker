@@ -70,4 +70,16 @@ export const filterFutureEvents = events => {
   }
 }
 
-// 
+// lists all friends coming to an event 
+export const whoIsComing = invitees => {
+  if (invitees && invitees.length !== 0) {
+    let list = ""
+    let i = 0
+    while (i < invitees.length-1) {
+      list += `${invitees[i].first_name} ${invitees[i].last_name}, `;
+      i++;
+    }
+    list += `${invitees[i].first_name} ${invitees[i].last_name}`
+    return list
+  }
+}

@@ -20,7 +20,7 @@ const RelationshipProfile = (props) => {
           <Button>Edit Relationship</Button>
         </div>
         <div>
-          <h4>{person.first_name} {person.last_name}</h4>
+          <h3>{person.first_name} {person.last_name}</h3>
           <p>{person.relationship_type}</p>
           <p>Last connected: {lastConnection(person)}</p>          
         </div>

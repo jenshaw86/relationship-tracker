@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import {whoIsComing} from '../../utils'
 
 const EventProfile = props => {
     const [event, setEvent] = useState({}) 
@@ -9,9 +10,13 @@ const EventProfile = props => {
         .then(data => setEvent(data))
     }, [props.match.params.id])
     
+    
+
     return (
         <div>
-            <h1>{event.name ? event.name : null}</h1> 
+            <h3>{event.name ? event.name : null}</h3> 
+            <h4>Who's coming?</h4>
+            <p>{whoIsComing(event.relationships)}</p>
         </div>
     )
 }
