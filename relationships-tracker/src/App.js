@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { Route } from 'react-router-dom';
+import Dashboard from './containers/Dashboard'
+
 // import { Button } from 'react-bootstrap'
 import Navbar from './components/Navbar'
 import Home from './containers/Home'
@@ -50,7 +52,24 @@ const App = () => {
   return (
     <>
         <Navbar />
-        <Route path="/" exact 
+        
+        <Route path="/" exact
+          render={ () => <Dashboard events={events} />}
+        />
+{/*         
+        <Route path="/upcoming_events" 
+          render={ () => <Events /> }
+        /> */}
+
+        {/* <Route path="/account" exact
+          render={() => <Account />}
+        />
+        <Route path="/relationships" exact
+          render={() => <Relationships />}
+        /> */}
+
+
+        {/* <Route path="/" exact 
           render={props => < Home 
             {...props} /> } />
         <Route path="/profile" 
@@ -84,7 +103,7 @@ const App = () => {
           render={props => <EventProfile 
             {...props} /> } />
         <Route path="/logout" 
-          render={ () => < Logout /> } />
+          render={ () => < Logout /> } /> */}
     </>
   );
 }
