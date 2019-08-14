@@ -34,7 +34,7 @@ const Dashboard = props => {
       return (
         <div>
           <EventToggler handleClick={handleClick}/>
-          <AddEventButton />
+          <AddEventButton handleNewEvent={props.handleNewEvent} relationships={props.relationships} />
           <Events events={state.display} setEvents={props.setEvents} />
         </div>
       )
@@ -42,7 +42,7 @@ const Dashboard = props => {
       return (
         <div>
           <EventToggler handleClick={handleClick} />
-          <AddEventButton handleNewEvent={props.handleNewEvent} />
+          <AddEventButton handleNewEvent={props.handleNewEvent} relationships={props.relationships} />
           <Events events={upcomingEvents} setEvents={props.setEvents} />
         </div>
       )

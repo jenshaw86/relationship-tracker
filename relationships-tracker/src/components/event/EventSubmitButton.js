@@ -5,7 +5,7 @@ import {Form, Button, ButtonToolbar, Modal} from "react-bootstrap";
 const EventSubmitButton = props => {
   // POST new event and relationship_event
   const handleSubmit = event => {
-    event.preventDefault();
+    event.preventDefault();    
     props.handleClose();
     fetch(`http://localhost:3000/events`, {
       method: 'POST',
@@ -28,7 +28,7 @@ const EventSubmitButton = props => {
     })
   }
 
-  const postRelEvent = obj => {
+  const postRelEvent = (obj) => {
     fetch(`http://localhost:3000/relationship_events`, {
       method: 'POST',
       headers: {
@@ -36,7 +36,7 @@ const EventSubmitButton = props => {
         'Content-Type': 'application/json'
       }, 
       body: JSON.stringify({
-        relationship_id: 2,
+        relationship_id: props.inviteeId,
         event_id: obj.id
       })
     })
