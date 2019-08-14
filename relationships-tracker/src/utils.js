@@ -48,7 +48,6 @@ export const displayInvitees = (event) => {
 }
 
 // display full name
-
 export const fullName = (first, last) => {
   return `${first} ${last}`
 }
@@ -70,3 +69,5 @@ export const filterFutureEvents = events => {
     return events.filter(event => event.end_date > now).sort((a,b) => a.start_date < b.start_date ? -1 : 1)
   }
 }
+
+// 

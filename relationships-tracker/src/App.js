@@ -11,6 +11,8 @@ import EventProfile from './components/event/EventProfile'
 // import EventCard from './components/event/EventCard'
 import Logout from './components/Logout'
 
+import {filterFutureEvents} from './utils'
+
 const App = () => {
   const [currentUser, setCurrentUser] = useState({});
   const [relationships, setRelationships] = useState([]);
@@ -25,6 +27,7 @@ const App = () => {
 
   // On login, fetch user data
   useEffect(() => {
+    console.log("something changed!")
     fetch(`http://localhost:3000/users/1`) //TODO: specify user on login
     .then(res => res.json())
     .then(user => {
@@ -44,10 +47,6 @@ const App = () => {
     })
   }, [])
   
-  
-
-  // Render Navbar
-  // Routes
   return (
     <>
         <Navbar />
@@ -59,7 +58,9 @@ const App = () => {
             {...props}  
             user={currentUser} 
             events={events}
-            setCurrentUser={setCurrentUser} /> } />
+            setCurrentUser={setCurrentUser} 
+            handleNewEvent={handleNewEvent} 
+            setEvents={setEvents} /> } />
         <Route path="/relationships" exact 
           render={props => < Relationships 
             {...props} 
@@ -74,7 +75,7 @@ const App = () => {
                 <h3>All Events</h3>
                 < Events 
                   {...props} 
-                  events={events} 
+                  events={filterFutureEvents(events)} 
                   setEvents={setEvents}
                   handleNewEvent={handleNewEvent} />
               </> 

@@ -22,7 +22,7 @@ const EventForm = props => {
 
 
   // POST new event and relationship_event
-  const handleSubmit = (event) => {
+  const handleSubmit = event => {
     event.preventDefault();
     props.handleClose();
     fetch(`http://localhost:3000/events`, {
@@ -43,11 +43,10 @@ const EventForm = props => {
     .then(res => res.json())
     .then(obj => {
       postRelEvent(obj);
-      props.handleNewEvent(obj);
     })
   }
 
-  const postRelEvent = (obj) => {
+  const postRelEvent = obj => {
     fetch(`http://localhost:3000/relationship_events`, {
       method: 'POST',
       headers: {
@@ -55,12 +54,20 @@ const EventForm = props => {
         'Content-Type': 'application/json'
       }, 
       body: JSON.stringify({
-        relationship_id: 1,
+        relationship_id: 2,
         event_id: obj.id
       })
     })
     .then(res => res.json())
-    .then(data => console.log(data))
+    .then(() => {
+      refreshEvent(obj)
+    })
+  }
+
+  const refreshEvent = obj => {
+    fetch(`http://localhost:3000/events/${obj.id}`)
+    .then(res => res.json())
+    .then(data => props.handleNewEvent(data))
   }
 
   // PATCH event

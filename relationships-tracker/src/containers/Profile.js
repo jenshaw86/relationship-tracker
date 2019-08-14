@@ -6,15 +6,20 @@ import { fullName, filterPastEvents, filterFutureEvents } from '../utils'
 // import ProfileNav from '../components/profile/ProfileNav'
 import ProfileModal from '../components/profile/ProfileModal'
 import Events from '../containers/Events'
+import EventModal from '../components/event/EventModal'
 // import ProfileRoutes from '../components/ProfileRoutes'
 import ProfileDetails from '../components/profile/ProfileDetails'
 
 const Profile = props => { 
-  // Edit Profile Modal State
-  const [show, setShow] = useState(false);
-  // Edit Profile Modal Handlers
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  // Edit Profile Modal State and Handlers
+  const [showProfileModal, setShowProfileModal] = useState(false);
+  const handleShowProfileModal = () => setShowProfileModal(true);
+  const handleCloseProfileModal = () => setShowProfileModal(false);
+
+  // New Event Modal State and Handlers
+  const [showNewEventModal, setShowNewEventModal] = useState(false);
+  const handleShowNewEventModal = () => setShowNewEventModal(true);
+  const handleCloseNewEventModal = () => setShowNewEventModal(false);
 
   const { first_name, last_name, email, phone_number, image } = props.user
 
@@ -32,8 +37,8 @@ const Profile = props => {
         <ButtonToolbar>
           <Link to={`${props.match.path}/upcoming_events`}><Button>Upcoming Events</Button></Link>
           <Link to={`${props.match.path}/past_events`}><Button>Past Events</Button></Link>
-          <Button onClick={() => handleShow()} >Edit Profile</Button>
-          <Link><Button>Add Event</Button></Link>
+          <Button onClick={() => handleShowProfileModal()} >Edit Profile</Button>
+          <Button onClick={ () => handleShowNewEventModal() }>Add Event</Button>
           <Link to={`${props.match.path}/info`}><Button>Info</Button></Link>
         </ButtonToolbar>
 
@@ -48,7 +53,8 @@ const Profile = props => {
         />
 
         {/* Edit Profile Modal */}
-        <ProfileModal show={show} handleClose={handleClose} user={props.user} setCurrentUser={props.setCurrentUser} />
+        <ProfileModal show={showProfileModal} handleClose={handleCloseProfileModal} user={props.user} setCurrentUser={props.setCurrentUser} />
+        <EventModal show={showNewEventModal} handleClose={handleCloseNewEventModal} handleNewEvent={props.handleNewEvent} setEvents={props.setEvents} />
       </div>
     </>
   )
