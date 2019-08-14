@@ -20,7 +20,9 @@ const EventCard = (props) => {
                 </div>
             </Link>
 
-            <EditEventButton event={event} setEvents={props.setEvents} handleEditEvent={props.handleEditEvent}/>
+            <EditEventButton event={event} setEvents={props.setEvents} 
+            // handleEditEvent={props.handleEditEvent}
+            />
             <DeleteEventButton eventId={event.id} setEvents={props.setEvents} />
         </>
     )

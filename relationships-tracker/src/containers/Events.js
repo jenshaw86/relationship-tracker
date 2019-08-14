@@ -15,7 +15,8 @@ const Events = props => {
           key={event.id} 
           event={event}
           setEvents={props.setEvents}
-          handleEditEvent={props.handleEditEvent} />
+          // handleEditEvent={props.handleEditEvent} 
+          />
       })
     }
   }

@@ -12,7 +12,9 @@ const EditEvent = props => {
   return (
     <>
     <Button variant="info" onClick={handleShow}>Edit Event</Button>
-    <EventModal show={show} handleClose={handleClose} setEvents={props.setEvents} handleEditEvent={props.handleEditEvent} event={props.event} />
+    <EventModal show={show} handleClose={handleClose} setEvents={props.setEvents} 
+    // handleEditEvent={props.handleEditEvent} 
+    event={props.event} />
     </>
   )
 }
