@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import {Form, Button, ButtonToolbar, Modal} from "react-bootstrap";
 import {showDate} from '../../utils'
+import EventSubmitButton from './EventSubmitButton'
 
 import EventName from './form_components/EventName';
 import Invitees from './form_components/Invitees';
@@ -20,86 +21,85 @@ const EventForm = props => {
   const [startDate, setStartDate] = useState(props.event ? showDate(props.event.start_date) : new Date());
   const [endDate, setEndDate] = useState(props.event ? showDate(props.event.end_date) : startDate);
 
-
   // POST new event and relationship_event
-  const handleSubmit = event => {
-    event.preventDefault();
-    props.handleClose();
-    fetch(`http://localhost:3000/events`, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }, 
-      body: JSON.stringify({
-        name: eventName,
-        start_date: startDate,
-        end_date: endDate,
-        location: location,
-        description: description,
-        user_id: 1,
-      })
-    })
-    .then(res => res.json())
-    .then(obj => {
-      postRelEvent(obj);
-    })
-  }
+  // const handleSubmit = event => {
+  //   event.preventDefault();
+  //   props.handleClose();
+  //   fetch(`http://localhost:3000/events`, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Accept': 'application/json',
+  //       'Content-Type': 'application/json'
+  //     }, 
+  //     body: JSON.stringify({
+  //       name: eventName,
+  //       start_date: startDate,
+  //       end_date: endDate,
+  //       location: location,
+  //       description: description,
+  //       user_id: 1,
+  //     })
+  //   })
+  //   .then(res => res.json())
+  //   .then(obj => {
+  //     postRelEvent(obj);
+  //   })
+  // }
 
-  const postRelEvent = obj => {
-    fetch(`http://localhost:3000/relationship_events`, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }, 
-      body: JSON.stringify({
-        relationship_id: 2,
-        event_id: obj.id
-      })
-    })
-    .then(res => res.json())
-    .then(() => {
-      refreshEvent(obj)
-    })
-  }
+  // const postRelEvent = obj => {
+  //   fetch(`http://localhost:3000/relationship_events`, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Accept': 'application/json',
+  //       'Content-Type': 'application/json'
+  //     }, 
+  //     body: JSON.stringify({
+  //       relationship_id: 2,
+  //       event_id: obj.id
+  //     })
+  //   })
+  //   .then(res => res.json())
+  //   .then(() => {
+  //     refreshEvent(obj)
+  //   })
+  // }
 
-  const refreshEvent = obj => {
-    fetch(`http://localhost:3000/events/${obj.id}`)
-    .then(res => res.json())
-    .then(data => props.handleNewEvent(data))
-  }
+  // const refreshEvent = obj => {
+  //   fetch(`http://localhost:3000/events/${obj.id}`)
+  //   .then(res => res.json())
+  //   .then(data => props.handleNewEvent(data))
+  // }
 
-  // PATCH event
-  const handleSubmitEdit = (event) => {
-    event.preventDefault();
-    fetch(`http://localhost:3000/events/${props.event.id}`, {
-      method: 'PATCH',
-      headers: {
-        'Accept': 'application/json', 
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        name: eventName,
-        start_date: startDate,
-        end_date: endDate,
-        location: location,
-        description: description,
-        user_id: 1,
-      })
-    })
-    .then(res => res.json())
-    .then(obj => props.setEvents(obj))
-    props.handleClose();
-  }
+  // // PATCH event
+  // const handleSubmitEdit = (event) => {
+  //   event.preventDefault();
+  //   fetch(`http://localhost:3000/events/${props.event.id}`, {
+  //     method: 'PATCH',
+  //     headers: {
+  //       'Accept': 'application/json', 
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify({
+  //       name: eventName,
+  //       start_date: startDate,
+  //       end_date: endDate,
+  //       location: location,
+  //       description: description,
+  //       user_id: 1,
+  //     })
+  //   })
+  //   .then(res => res.json())
+  //   .then(obj => props.setEvents(obj))
+  //   props.handleClose();
+  // }
 
-  const displaySubmitButton = () => {
-    if (props.handleNewEvent) {
-      return <Button variant="primary" type="submit" onClick={(e) => handleSubmit(e)} >Create</Button>
-    } else {
-      return <Button variant="primary" type="submit" onClick={(e) => handleSubmitEdit(e)}>Edit</Button>
-    }
-  }
+  // const displaySubmitButton = () => {
+  //   if (props.handleNewEvent) {
+  //     return <Button variant="primary" type="submit" onClick={(e) => handleSubmit(e)} >Create</Button>
+  //   } else {
+  //     return <Button variant="primary" type="submit" onClick={(e) => handleSubmitEdit(e)}>Edit</Button>
+  //   }
+  // }
 
   return (
     <Form>
@@ -124,7 +124,8 @@ const EventForm = props => {
           <Button variant="secondary" onClick={() => props.handleClose()}>
             Close
           </Button>
-          {displaySubmitButton()}
+          {/* {displaySubmitButton()} */}
+          <EventSubmitButton {...props} eventName={eventName} startDate={startDate} endDate={endDate} location={location} description={description} />
         </ButtonToolbar>
       </Modal.Footer>
     </Form>
