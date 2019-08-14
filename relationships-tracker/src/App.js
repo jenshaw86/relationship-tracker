@@ -29,7 +29,6 @@ const App = () => {
 
   // On login, fetch user data
   useEffect(() => {
-    console.log("something changed!")
     fetch(`http://localhost:3000/users/1`) //TODO: specify user on login
     .then(res => res.json())
     .then(user => {
