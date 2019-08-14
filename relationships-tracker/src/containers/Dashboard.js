@@ -42,7 +42,7 @@ const Dashboard = props => {
       return (
         <div>
           <EventToggler handleClick={handleClick} />
-          <AddEventButton />
+          <AddEventButton handleNewEvent={props.handleNewEvent} />
           <Events events={upcomingEvents} setEvents={props.setEvents} />
         </div>
       )

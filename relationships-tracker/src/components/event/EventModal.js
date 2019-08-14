@@ -9,7 +9,7 @@ const EventModal = props => {
   const formType = () => {
     if (props.handleNewEvent) {
       return "New Event"
-    } else {
+    } else if (props.handleEditEvent) {
       return "Edit Event"
     }
   }
