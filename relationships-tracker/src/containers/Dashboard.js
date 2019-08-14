@@ -1,6 +1,7 @@
 import React, { useReducer } from 'react';
 import {filterFutureEvents, filterPastEvents} from '../utils';
 import Events from './Events';
+import AddEvent from '../components/event/AddEvent'
 import EventToggler from '../components/event/EventToggler'
 
 // props: 
@@ -33,14 +34,16 @@ const Dashboard = props => {
       return (
         <div>
           <EventToggler handleClick={handleClick}/>
-          <Events events={state.display} />
+          <AddEvent />
+          <Events events={state.display} setEvents={props.setEvents} />
         </div>
       )
     } else {
       return (
         <div>
           <EventToggler handleClick={handleClick} />
-          <Events events={upcomingEvents} />
+          <AddEvent />
+          <Events events={upcomingEvents} setEvents={props.setEvents} />
         </div>
       )
     }

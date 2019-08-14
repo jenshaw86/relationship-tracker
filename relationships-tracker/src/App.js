@@ -53,7 +53,7 @@ const App = () => {
         <Navbar />
         
         <Route path="/" exact
-          render={ () => <Dashboard events={events} />}
+          render={ () => <Dashboard events={events} setEvents={setEvents} handleNewEvent={handleNewEvent} />}
         />
 {/*         
         <Route path="/upcoming_events" 
