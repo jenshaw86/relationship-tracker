@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from 'react'
-import {Form, Button, ButtonToolbar, Modal} from "react-bootstrap";
-import {showDate} from '../../utils'
+import React, { useState } from 'react'
+import { Form, Button, ButtonToolbar, Modal } from "react-bootstrap";
+import { showDate } from '../../utils'
 import EventSubmitButton from './EventSubmitButton'
 import EventName from './form_components/EventName';
 import Invitees from './form_components/Invitees';
@@ -18,7 +18,7 @@ const EventForm = props => {
   const [description, setDescription] = useState(props.event ? props.event.description : '');
   const [startDate, setStartDate] = useState(props.event ? showDate(props.event.start_date) : new Date());
   const [endDate, setEndDate] = useState(props.event ? showDate(props.event.end_date) : startDate);
-  const [inviteeId, setInviteeId] = useState(props.event ? props.event.relationships[0].id : 0)
+  const [inviteeId, setInviteeId] = useState(props.event ? props.event.relationships[0].id : 0);
 
   return (
     <Form>

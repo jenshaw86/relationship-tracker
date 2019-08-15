@@ -1,5 +1,5 @@
 import React from 'react';
-import {Form, Button, ButtonToolbar, Modal} from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 
 const EventSubmitButton = props => {

@@ -17,8 +17,6 @@ const Dashboard = props => {
     switch (action.type) {
       case 'past':
         return {display: pastEvents};
-      case 'all':
-        return {display: props.events};
       case 'upcoming':
         return initialState;
       default:

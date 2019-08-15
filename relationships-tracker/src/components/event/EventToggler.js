@@ -7,7 +7,6 @@ const EventToggler = props => {
     <div>
       <p>
         <span onClick={ () => props.handleClick('past') } >Past</span> |
-        <span onClick={ () => props.handleClick('all') } >All</span> |
         <span onClick={ () => props.handleClick('upcoming') } >Upcoming</span>
       </p>
     </div>

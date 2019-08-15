@@ -16,14 +16,15 @@ const Invitee = props => {
     <Form.Group>
       <Form.Label>Invite:</Form.Label>
       <Form.Control as="select" 
-        value={props.inviteeId}
-        onChange={ev => props.setInviteeId(ev.target.value)}>
+        // value={props.inviteeId}
+        // onChange={ev => props.setInviteeId(ev.target.value)}
+        >
         {displayNames()}
       </Form.Control>
     </Form.Group>
   )
 }
 
-export default Invitee
+export default Invitee;
 
 // TODO add autocomplete package to accurately fill name of relationships
