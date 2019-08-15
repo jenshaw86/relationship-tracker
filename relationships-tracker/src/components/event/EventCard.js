@@ -8,22 +8,22 @@ import DeleteEventButton from './DeleteEventButton'
 //  functions: setEvents
 
 const EventCard = (props) => {
-    const event = props.event
+    const obj = props.event
 
     return(
         <>
-            <Link to={`/events/${event.id}`}>
-                <div className='event_event'>
-                    <h4>{displayDate(event.start_date)}</h4>
-                    <h4>{event.name}</h4>
-                    <p>with {displayInvitees(event)}</p>
+            <Link to={`/events/${obj.event.id}`}>
+                <div>
+                    <h4>{displayDate(obj.event.start_date)}</h4>
+                    <h4>{obj.event.name}</h4>
+                    <p>with {displayInvitees(obj)}</p>
                 </div>
             </Link>
 
-            <EditEventButton event={event} setEvents={props.setEvents} 
-            // handleEditEvent={props.handleEditEvent}
-            />
-            <DeleteEventButton eventId={event.id} setEvents={props.setEvents} />
+            {/* <EditEventButton event={obj} setEvents={props.setEvents} relationships={props.relationships} */}
+            {/* // handleEditEvent={props.handleEditEvent} */}
+            {/* /> */}
+            {/* <DeleteEventButton eventId={event.id} setEvents={props.setEvents} /> */}
         </>
     )
 }

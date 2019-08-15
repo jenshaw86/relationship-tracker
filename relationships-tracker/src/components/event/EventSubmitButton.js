@@ -5,7 +5,8 @@ import { Button } from "react-bootstrap";
 const EventSubmitButton = props => {
   // POST new event and relationship_event
   const handleSubmit = event => {
-    event.preventDefault();    
+    event.preventDefault();
+    console.log('submit new event')
     props.handleClose();
     fetch(`http://localhost:3000/events`, {
       method: 'POST',
@@ -23,12 +24,11 @@ const EventSubmitButton = props => {
       })
     })
     .then(res => res.json())
-    .then(obj => {
-      postRelEvent(obj);
-    })
+    .then(obj => postRelEvent(obj))
   }
 
   const postRelEvent = (obj) => {
+    console.log('submit new relevent')
     fetch(`http://localhost:3000/relationship_events`, {
       method: 'POST',
       headers: {
@@ -41,20 +41,14 @@ const EventSubmitButton = props => {
       })
     })
     .then(res => res.json())
-    .then(() => {
-      refreshEvent(obj)
-    })
-  }
-
-  const refreshEvent = obj => {
-    fetch(`http://localhost:3000/events/${obj.id}`)
-    .then(res => res.json())
-    .then(data => props.handleNewEvent(data))
+    .then(() => refreshEvents(obj))
   }
 
   // PATCH event
-  const handleSubmitEdit = (event) => {
+  const handleSubmitEdit = event => {
     event.preventDefault();
+    props.handleClose();
+    console.log('patch event')
     fetch(`http://localhost:3000/events/${props.event.id}`, {
       method: 'PATCH',
       headers: {
@@ -71,8 +65,39 @@ const EventSubmitButton = props => {
       })
     })
     .then(res => res.json())
-    .then(obj => props.setEvents(obj))
-    props.handleClose();
+    .then(obj => patchRelEvent(obj))
+  }
+
+  const patchRelEvent = (obj) => {
+    console.log('patch relevent')
+    fetch(`http://localhost:3000/relationship_events/${props.event.relationship_events[0].id}`, {
+      method: 'PATCH',
+      headers: {
+        'Accept': 'application/json', 
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        relationship_id: props.inviteeId,
+        event_id: props.event.id
+      })
+    })
+    .then(res => res.json())
+    .then(() => refreshEvents(obj))
+  }
+
+  // Replace Event State
+  const refreshEvents = obj => {
+    // if there's a new obj, then fetch obj and add to event state
+    if(props.handleNewEvent) {
+      console.log('handle new event')
+      fetch(`http://localhost:3000/events/${obj.id}`)
+      .then(res => res.json())
+      .then(obj => props.handleNewEvent(obj))
+    } else {
+      console.log('handle edited event')
+      props.setEvents(obj)
+    }
+      // props.setEvents(data))
   }
 
   const displaySubmitButton = () => {

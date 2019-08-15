@@ -8,11 +8,12 @@ const Events = props => {
   // Show all Event Cards
   const displayAllEvents = () => {
     if (props.events && props.events.length !== 0 ) {
-      return props.events.map(event => {
+      return props.events.map(obj => {
         return <EventCard 
-          key={event.id} 
-          event={event}
+          key={obj.event.id} 
+          event={obj}
           setEvents={props.setEvents}
+          relationships={props.relationships}
           // handleEditEvent={props.handleEditEvent} 
           />
       })

@@ -57,7 +57,7 @@ export const filterPastEvents = events => {
   if (events && events.length !== 0) {
     let now = new Date();
     now = now.toISOString();
-    return events.filter(event => event.end_date < now).sort((a,b) => a.start_date > b.start_date ? -1 : 1)
+    return events.filter(obj => obj.event.end_date < now).sort((a,b) => a.event.start_date > b.event.start_date ? -1 : 1)
   }
 }
 
@@ -66,7 +66,7 @@ export const filterFutureEvents = events => {
   if (events && events.length !== 0) {
     let now = new Date();
     now = now.toISOString();
-    return events.filter(event => event.end_date > now).sort((a,b) => a.start_date < b.start_date ? -1 : 1)
+    return events.filter(obj => obj.event.end_date > now).sort((a,b) => a.event.start_date < b.event.eventstart_date ? -1 : 1)
   }
 }
 

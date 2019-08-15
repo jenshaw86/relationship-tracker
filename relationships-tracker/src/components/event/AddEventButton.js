@@ -12,7 +12,9 @@ const AddEvent = props => {
   return (
     <div>
       <Button variant="info" onClick={handleShow}>Add New Event</Button>
-      <EventModal show={show} handleClose={handleClose} handleNewEvent={props.handleNewEvent} setEvents={props.setEvents} relationships={props.relationships}/>
+      <EventModal show={show} handleClose={handleClose} 
+      handleNewEvent={props.handleNewEvent} 
+      setEvents={props.setEvents} relationships={props.relationships}/>
     </div> 
   )
 }

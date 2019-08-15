@@ -16,8 +16,11 @@ const Invitee = props => {
     <Form.Group>
       <Form.Label>Invite:</Form.Label>
       <Form.Control as="select" 
-        // value={props.inviteeId}
-        // onChange={ev => props.setInviteeId(ev.target.value)}
+        value={props.inviteeId}
+        onChange={ev => {
+          console.log(ev.target.value)
+          props.setInviteeId(ev.target.value)
+        }}
         >
         {displayNames()}
       </Form.Control>

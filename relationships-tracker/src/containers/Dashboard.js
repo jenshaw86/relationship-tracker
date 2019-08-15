@@ -8,7 +8,7 @@ import EventToggler from '../components/event/EventToggler'
 // events
 
 const Dashboard = props => {
-  const upcomingEvents = filterFutureEvents(props.events);
+  const upcomingEvents = filterFutureEvents(props.events); 
   const pastEvents = filterPastEvents(props.events);
   
   const initialState = {display: upcomingEvents};
@@ -32,16 +32,20 @@ const Dashboard = props => {
       return (
         <div>
           <EventToggler handleClick={handleClick}/>
-          <AddEventButton handleNewEvent={props.handleNewEvent} relationships={props.relationships} />
-          <Events events={state.display} setEvents={props.setEvents} />
+          <AddEventButton 
+          handleNewEvent={props.handleNewEvent} 
+          relationships={props.relationships} />
+          <Events events={state.display} setEvents={props.setEvents} relationships={props.relationships} />
         </div>
       )
     } else {
       return (
         <div>
           <EventToggler handleClick={handleClick} />
-          <AddEventButton handleNewEvent={props.handleNewEvent} relationships={props.relationships} />
-          <Events events={upcomingEvents} setEvents={props.setEvents} />
+          <AddEventButton 
+          handleNewEvent={props.handleNewEvent} 
+          relationships={props.relationships} />
+          <Events events={upcomingEvents} setEvents={props.setEvents} relationships={props.relationships} />
         </div>
       )
     }
