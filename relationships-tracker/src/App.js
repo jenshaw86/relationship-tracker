@@ -29,37 +29,26 @@ const App = () => {
 
   // On login, fetch user data
   useEffect(() => {
-    // fetch(`http://localhost:3000/users/1`) //TODO: specify user on login
-    // .then(res => res.json())
-    // .then(user => {
-    //   setCurrentUser(user)
-    //   console.log('fetched user data')
-    //   fetch(`http://localhost:3000/relationships`)
-    //   .then(res => res.json())
-    //   .then(data => {
-    //     console.log('fetched all relationships')
-    //     const user_relationships = data.filter(rel => rel.user_id === 1) // Filter relationships whose user_ids match user 1
-    //     setRelationships(user_relationships)
-    //     fetch(`http://localhost:3000/events`)
-    //     .then(res => res.json())
-    //     .then(data => {
-    //       console.log('fetched all events')
-    //       const user_events = data.filter(ev => ev.user_id === 1) // Filter events whose user_ids match user 1
-    //       setEvents(user_events)
-    //       console.log("fetches complete")
-    //     })
-    //   })
-    // })
     fetch(`http://localhost:3000/users/1`) //TODO: specify user on login
     .then(res => res.json())
-    .then(userData => {
-      setCurrentUser(userData.user)
-      setEvents(userData.events)
-      setRelationships(userData.relationships)
-      console.log("fetched")
+    .then(user => {
+      setCurrentUser(user)
+      console.log('fetched user data')
+      fetch(`http://localhost:3000/users/1/relationships`)
+      .then(res => res.json())
+      .then(user_rels => {
+        console.log('fetched all relationships')
+        setRelationships(user_rels)
+        fetch(`http://localhost:3000/users/1/events`)
+        .then(res => res.json())
+        .then(user_events => {
+          console.log('fetched all events')
+          setEvents(user_events)
+          console.log("fetches complete")
+        })
+      })
     })
-    }, [])
-  // })
+  }, [])
   
   return (
     <>
@@ -76,7 +65,7 @@ const App = () => {
         /> */}
 
         {/* <Route path="/account" exact
-          render={() => <Account />}
+          render={`() => <Account />}
         />
         <Route path="/relationships" exact
           render={() => <Relationships />}

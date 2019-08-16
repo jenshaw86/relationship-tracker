@@ -13,11 +13,11 @@ import Description from './form_components/Description';
 // functions setEvents() OR handleNewEvent()
 
 const EventForm = props => {
-  const [eventName, setEventName] = useState(props.event ? props.event.event.name : '');
-  const [location, setLocation] = useState(props.event ? props.event.event.location : '');
-  const [description, setDescription] = useState(props.event ? props.event.event.description : '');
-  const [startDate, setStartDate] = useState(props.event ? showDate(props.event.event.start_date) : new Date());
-  const [endDate, setEndDate] = useState(props.event ? showDate(props.event.event.end_date) : startDate);
+  const [eventName, setEventName] = useState(props.event ? props.event.name : '');
+  const [location, setLocation] = useState(props.event ? props.event.location : '');
+  const [description, setDescription] = useState(props.event ? props.event.description : '');
+  const [startDate, setStartDate] = useState(props.event ? showDate(props.event.start_date) : new Date());
+  const [endDate, setEndDate] = useState(props.event ? showDate(props.event.end_date) : startDate);
   const [inviteeId, setInviteeId] = useState(props.event ? props.event.relationships[0].id : 0);
 
   return (

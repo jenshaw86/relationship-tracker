@@ -10,10 +10,10 @@ import DeleteEventButton from './DeleteEventButton'
 const EventCard = (props) => {
     return(
         <>
-            <Link to={`/events/${props.event.event.id}`}>
+            <Link to={`/events/${props.event.id}`}>
                 <div>
-                    <h4>{displayDate(props.event.event.start_date)}</h4>
-                    <h4>{props.event.event.name}</h4>
+                    <h4>{displayDate(props.event.start_date)}</h4>
+                    <h4>{props.event.name}</h4>
                     <p>with {displayInvitees(props.event)}</p>
                 </div>
             </Link>

@@ -49,7 +49,7 @@ const EventSubmitButton = props => {
     event.preventDefault();
     props.handleClose();
     console.log('patch event')
-    fetch(`http://localhost:3000/events/${props.event.event.id}`, {
+    fetch(`http://localhost:3000/events/${props.event.id}`, {
       method: 'PATCH',
       headers: {
         'Accept': 'application/json', 
@@ -65,12 +65,15 @@ const EventSubmitButton = props => {
       })
     })
     .then(res => res.json())
-    .then(obj => patchRelEvent(obj))
+    .then(obj => {
+
+      patchRelEvent(obj)
+    })
   }
 
   const patchRelEvent = (obj) => {
     console.log('patch relevent')
-    fetch(`http://localhost:3000/relationship_events/${props.event.relationship_events.id}`, {
+    fetch(`http://localhost:3000/relationship_events/${props.event.relationship_events[0].id}`, {
       method: 'PATCH',
       headers: {
         'Accept': 'application/json', 
@@ -95,9 +98,9 @@ const EventSubmitButton = props => {
       .then(obj => props.handleNewEvent(obj))
     } else {
       console.log('handle edited event')
+      debugger;
       props.setEvents(obj)
     }
-      // props.setEvents(data))
   }
 
   const displaySubmitButton = () => {
