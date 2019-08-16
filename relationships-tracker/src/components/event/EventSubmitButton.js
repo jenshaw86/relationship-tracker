@@ -24,7 +24,11 @@ const EventSubmitButton = props => {
       })
     })
     .then(res => res.json())
-    .then(obj => postRelEvent(obj))
+    .then(obj => 
+      {
+        console.log(obj)
+        postRelEvent(obj)
+      })
   }
 
   const postRelEvent = (obj) => {
@@ -98,7 +102,6 @@ const EventSubmitButton = props => {
       .then(obj => props.handleNewEvent(obj))
     } else {
       console.log('handle edited event')
-      debugger;
       props.setEvents(obj)
     }
   }

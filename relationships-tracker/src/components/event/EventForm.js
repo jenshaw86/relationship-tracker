@@ -18,7 +18,7 @@ const EventForm = props => {
   const [description, setDescription] = useState(props.event ? props.event.description : '');
   const [startDate, setStartDate] = useState(props.event ? showDate(props.event.start_date) : new Date());
   const [endDate, setEndDate] = useState(props.event ? showDate(props.event.end_date) : startDate);
-  const [inviteeId, setInviteeId] = useState(props.event ? props.event.relationships[0].id : 0);
+  const [inviteeId, setInviteeId] = useState(props.event ? props.event.relationships[0].id : 1);
 
   return (
     <Form>
