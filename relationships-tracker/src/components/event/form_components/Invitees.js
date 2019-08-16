@@ -6,7 +6,7 @@ const Invitee = props => {
     if(props.relationships && props.relationships.length !== 0) {
       return props.relationships.map(rel => {
         return (
-          <option key={rel.id} value={rel.id}>{`${rel.first_name} ${rel.last_name}`}</option>
+          <option key={rel.relationship.id} value={rel.relationship.id}>{`${rel.relationship.first_name} ${rel.relationship.last_name}`}</option>
         )
       })
     }

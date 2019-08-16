@@ -49,7 +49,7 @@ const EventSubmitButton = props => {
     event.preventDefault();
     props.handleClose();
     console.log('patch event')
-    fetch(`http://localhost:3000/events/${props.event.id}`, {
+    fetch(`http://localhost:3000/events/${props.event.event.id}`, {
       method: 'PATCH',
       headers: {
         'Accept': 'application/json', 
@@ -70,7 +70,7 @@ const EventSubmitButton = props => {
 
   const patchRelEvent = (obj) => {
     console.log('patch relevent')
-    fetch(`http://localhost:3000/relationship_events/${props.event.relationship_events[0].id}`, {
+    fetch(`http://localhost:3000/relationship_events/${props.event.relationship_events.id}`, {
       method: 'PATCH',
       headers: {
         'Accept': 'application/json', 
