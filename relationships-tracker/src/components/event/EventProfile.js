@@ -1,22 +1,14 @@
-import React, {useState, useEffect} from 'react'
-import {whoIsComing} from '../../utils'
+import React from 'react'
+import {whoIsComing, displayDate, displayTime} from '../../utils'
 
 const EventProfile = props => {
-    const [event, setEvent] = useState({}) 
-
-    useEffect(() => {
-        fetch(`http://localhost:3000/events/${props.match.params.id}`)
-        .then(res => res.json())
-        .then(data => setEvent(data))
-    }, [props.match.params.id])
-    
-    
-
     return (
         <div>
-            <h3>{event.name ? event.name : null}</h3> 
-            <h4>Who's coming?</h4>
-            <p>{whoIsComing(event.relationships)}</p>
+            <h3>{props.event.name ? props.event.name : null}</h3> 
+            <div>Date: {displayDate(props.event.start_date)} at {displayTime(props.event.start_date)} </div>
+            <div>Who's going: {whoIsComing(props.event.relationships)}</div>
+            <div>Where: {props.event.location}</div>
+            <div>About: {props.event.description}</div>
         </div>
     )
 }

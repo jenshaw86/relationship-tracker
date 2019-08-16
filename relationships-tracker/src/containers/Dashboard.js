@@ -35,7 +35,7 @@ const Dashboard = props => {
           <AddEventButton 
           handleNewEvent={props.handleNewEvent} 
           relationships={props.relationships} />
-          <Events events={state.display} setEvents={props.setEvents} relationships={props.relationships} />
+          <Events events={state.display} setEvents={props.setEvents} relationships={props.relationships} viewEvent={props.viewEvent} />
         </div>
       )
     } else {
@@ -45,7 +45,7 @@ const Dashboard = props => {
           <AddEventButton 
           handleNewEvent={props.handleNewEvent} 
           relationships={props.relationships} />
-          <Events events={upcomingEvents} setEvents={props.setEvents} relationships={props.relationships} />
+          <Events events={upcomingEvents} setEvents={props.setEvents} relationships={props.relationships} viewEvent={props.viewEvent}/>
         </div>
       )
     }

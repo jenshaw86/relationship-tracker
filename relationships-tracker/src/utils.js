@@ -21,13 +21,22 @@ export const lastConnection = (person) => {
 
 // EVENT FUNCTIONS
 
-// display date
 export const displayDate = (str) => {
-  if (str) {
-    const dateArray = new Date(str);
-    const [day, month, date, year] = dateArray.toDateString().split(" ")
-    return `${day}, ${month} ${date}, ${year}`
+  let dateArray = new Date(str)
+  const [day, month, date, year] = dateArray.toDateString().split(" ")
+  return `${day}, ${month} ${date}, ${year}`
+}
+
+export const displayTime = str => {
+  let dateArray = new Date(str)
+  let time = dateArray.toTimeString().split(" ")[0]
+  let [hour, min] = time.split(":")
+  let meridiem = "am"
+  if (hour > 12) {
+    hour = hour - 12;
+    meridiem = "pm"
   }
+  return `${hour}:${min} ${meridiem}`
 }
 
 // convert date to something friggin' useful

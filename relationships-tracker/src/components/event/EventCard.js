@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {displayDate, displayInvitees} from '../../utils'
+import {/*displayDate,*/ displayInvitees} from '../../utils'
 import EditEventButton from './EditEventButton'
 import DeleteEventButton from './DeleteEventButton'
 
@@ -10,9 +10,9 @@ import DeleteEventButton from './DeleteEventButton'
 const EventCard = (props) => {
     return(
         <>
-            <Link to={`/events/${props.event.id}`}>
+            <Link to={`/events/${props.event.name}`} onClick={() => props.viewEvent(props.event)} >
                 <div>
-                    <h4>{displayDate(props.event.start_date)}</h4>
+                    {/* <h4>{displayDate(props.event.start_date)}</h4> */}
                     <h4>{props.event.name}</h4>
                     <p>with {displayInvitees(props.event)}</p>
                 </div>

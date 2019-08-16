@@ -9,7 +9,7 @@ import Navbar from './components/Navbar'
 // import Relationships from './containers/Relationships'
 // import RelationshipProfile from './components/relationship/RelationshipProfile'
 // import Events from './containers/Events'
-// import EventProfile from './components/event/EventProfile'
+import EventProfile from './components/event/EventProfile'
 // import EventCard from './components/event/EventCard'
 // import Logout from './components/Logout'
 
@@ -19,6 +19,7 @@ const App = () => {
   const [currentUser, setCurrentUser] = useState({});
   const [relationships, setRelationships] = useState([]);
   const [events, setEvents] = useState([]);
+  const [eventView, setEventView] = useState({});
   // user handlers
 
   // relationship handlers
@@ -50,19 +51,27 @@ const App = () => {
     })
   }, [])
   
+  const viewEvent = (event) => {
+    setEventView(event)
+  }
+
   return (
     <>
         <Navbar />
         
-        <Route path="/" exact
+        <Route path="/events"
           render={ () => <Dashboard events={events} relationships={relationships} setEvents={setEvents} 
           handleNewEvent={handleNewEvent}
+          viewEvent={viewEvent}
            />}
         />
-{/*         
-        <Route path="/upcoming_events" 
+        <Route path="/events/:name"
+          render={ () => <EventProfile event={eventView} />}
+        />
+            
+        {/* <Route path="/upcoming_events" 
           render={ () => <Events /> }
-        /> */}
+        /> */} 
 
         {/* <Route path="/account" exact
           render={`() => <Account />}

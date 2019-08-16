@@ -14,6 +14,7 @@ const Events = props => {
           event={event}
           setEvents={props.setEvents}
           relationships={props.relationships}
+          viewEvent={props.viewEvent}
           // handleEditEvent={props.handleEditEvent} 
           />
       })
