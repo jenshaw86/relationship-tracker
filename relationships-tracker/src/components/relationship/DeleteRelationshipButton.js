@@ -8,8 +8,16 @@ const DeleteRelationshipButton = props => {
       method: 'DELETE'
     })
     .then(res => res.json())
-    .then(data => props.setRelationships(data))
+    .then(data => {
+      props.setRelationships(data)
+      deleteRelEvent()
+    })
   }  
+
+  const deleteRelEvent = () => {
+    // clean up all events related to relationship
+    // get all relationship events, delete
+  }
 
   return (
     <Button onClick={handleOnClick}>Remove</Button>

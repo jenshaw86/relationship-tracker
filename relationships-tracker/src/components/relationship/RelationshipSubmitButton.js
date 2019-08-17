@@ -65,7 +65,6 @@ const RelationshipSubmitButton = props => {
   return(
     <div>
       {displaySubmitButton()}
-      
     </div>
   )
 }
