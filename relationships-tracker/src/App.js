@@ -6,7 +6,7 @@ import EventDashboard from './containers/EventDashboard'
 import Navbar from './components/Navbar'
 // import Home from './containers/Home'
 import Account from './containers/Account'
-// import Relationships from './containers/Relationships'
+import Relationships from './containers/Relationships'
 // import RelationshipProfile from './components/relationship/RelationshipProfile'
 // import Events from './containers/Events'
 import EventProfile from './components/event/EventProfile'
@@ -23,7 +23,7 @@ const App = () => {
   // user handlers
 
   // relationship handlers
-  // const handleNewRelationship = person => setRelationships([...relationships, person]);
+  const handleNewRelationship = person => setRelationships([...relationships, person]);
 
   // event handlers
   const handleNewEvent = event => setEvents([...events, event]);
@@ -60,15 +60,17 @@ const App = () => {
       <Navbar />
 
       <Route path='/account' exact render={ () => <Account user={currentUser} />} />
-
+      
+      {/* All and specific events */}
       <Route path="/events"
         render={ () => <EventDashboard events={events} relationships={relationships} setEvents={setEvents} 
         handleNewEvent={handleNewEvent}
         viewEvent={viewEvent}
       /> } />
-
       <Route path='/events/:time/:name' render={ () => <EventProfile event={eventView} />} />
 
+      {/* All relationships */}
+      <Route path="/relationships" render={() => <Relationships relationships={relationships} handleNewRelationship={handleNewRelationship} setRelationships={setRelationships} /> } />
           
     </div>
   )

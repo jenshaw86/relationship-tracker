@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
 import { Button } from "react-bootstrap";
 
 
@@ -117,7 +118,9 @@ const EventSubmitButton = props => {
 
   return (
     <>
-    {displaySubmitButton()}
+    <Link to="/events/upcoming">
+      {displaySubmitButton()}
+    </Link>
     </>
   )
 }
