@@ -5,7 +5,7 @@ import Dashboard from './containers/Dashboard'
 // import { Button } from 'react-bootstrap'
 import Navbar from './components/Navbar'
 // import Home from './containers/Home'
-// import Profile from './containers/Profile'
+import Account from './containers/Account'
 // import Relationships from './containers/Relationships'
 // import RelationshipProfile from './components/relationship/RelationshipProfile'
 // import Events from './containers/Events'
@@ -56,68 +56,26 @@ const App = () => {
   }
 
   return (
-    <>
-        <Navbar />
-        
-        <Route path="/events"
-          render={ () => <Dashboard events={events} relationships={relationships} setEvents={setEvents} 
-          handleNewEvent={handleNewEvent}
-          viewEvent={viewEvent}
-           />}
-        />
-        <Route path="/events/:name"
-          render={ () => <EventProfile event={eventView} />}
-        />
-            
-        {/* <Route path="/upcoming_events" 
-          render={ () => <Events /> }
-        /> */} 
+    <div>
+      <Navbar />
+      
+      <Route path ="/" exact 
+      render={() => <Account user={currentUser} /> } />
 
-        {/* <Route path="/account" exact
-          render={`() => <Account />}
-        />
-        <Route path="/relationships" exact
-          render={() => <Relationships />}
-        /> */}
+      
 
+      <Route path="/events"
+        render={ () => <Dashboard events={events} relationships={relationships} setEvents={setEvents} 
+        handleNewEvent={handleNewEvent}
+        viewEvent={viewEvent}
+      /> } />
 
-        {/* <Route path="/" exact 
-          render={props => < Home 
-            {...props} /> } />
-        <Route path="/profile" 
-          render={props => < Profile
-            {...props}  
-            user={currentUser} 
-            events={events}
-            setCurrentUser={setCurrentUser} 
-            handleNewEvent={handleNewEvent} 
-            setEvents={setEvents} /> } />
-        <Route path="/relationships" exact 
-          render={props => < Relationships 
-            {...props} 
-            relationships={relationships} 
-            handleNewRelationship={handleNewRelationship} 
-            setRelationships={setRelationships} /> } />
-        <Route path="/relationships/:id" 
-          render={props => <RelationshipProfile 
-            {...props} setRelationships={setRelationships} /> } /> 
-        <Route path="/events" exact 
-          render={props => <>
-                <h3>All Events</h3>
-                < Events 
-                  {...props} 
-                  events={filterFutureEvents(events)} 
-                  setEvents={setEvents}
-                  handleNewEvent={handleNewEvent} />
-              </> 
-          } />
-        <Route path="/events/:id" 
-          render={props => <EventProfile 
-            {...props} /> } />
-        <Route path="/logout" 
-          render={ () => < Logout /> } /> */}
-    </>
-  );
+      <Route path="/events/:name"
+        render={ () => <EventProfile event={eventView} />}
+      />
+          
+    </div>
+  )
 }
 
 export default App;
