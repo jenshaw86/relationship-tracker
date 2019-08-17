@@ -1,10 +1,7 @@
 import React from 'react';
-import EventCard from '../components/event/EventCard';
-
-// PROPS: setEvents(), events
+import EventCard from './EventCard';
 
 const Events = props => {
-
   // Show all Event Cards
   const displayAllEvents = () => {
     if (props.events && props.events.length !== 0 ) {

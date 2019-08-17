@@ -1,13 +1,12 @@
 import React, {useState} from 'react'
 import {Form, Button, ButtonToolbar, Modal} from "react-bootstrap";
-
+// Form Components
 import FirstName from '../form/FirstName';
 import LastName from '../form/LastName';
 import RelationshipType from './form_components/RelationshipType';
 import Phone from '../form/Phone';
 import Email from '../form/Email'
 import ContactFrequency from './form_components/ContactFrequency'
-// import Notification from './form_components/Notification'
 
 const NewRelationshipForm = props => {
   const [firstName, setFirstName] = useState("");
@@ -16,7 +15,6 @@ const NewRelationshipForm = props => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [currentInterval, setCurrentInterval] = useState(7);
-  // const [checkbox, setCheckbox] = useState(false)
 
   const handleSubmit = (event) => {
     event.preventDefault();

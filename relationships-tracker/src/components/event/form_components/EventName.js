@@ -1,9 +1,6 @@
 import React from 'react';
 import {Form} from 'react-bootstrap'
 
-// props: 
-//  eventName, setEventName
-
 const EventName = props => {
   return (
     <Form.Group>

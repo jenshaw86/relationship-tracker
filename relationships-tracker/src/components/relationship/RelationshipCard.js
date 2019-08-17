@@ -2,21 +2,13 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {Button} from "react-bootstrap";
 import {lastConnection} from '../../utils'
+import DeleteRelationshipButton from './DeleteRelationshipButton'
 
 // PROPS: relationship (object)
 // functions => setRelationships
 
 const RelationshipCard = props => {
   const [person, setPerson] = useState(props.relationship)
-  
-  // handle delete relationship
-  const handleOnClick = () => {
-    fetch(`http://localhost:3000/relationships/${props.relationship.id}`, {
-      method: 'DELETE'
-    })
-    .then(res => res.json())
-    .then(data => props.setRelationships(data))
-  }  
 
   return(
     <>
@@ -34,7 +26,7 @@ const RelationshipCard = props => {
           </div>
         </div>
       </Link>
-      <Button onClick={handleOnClick}>Remove</Button>
+      <DeleteRelationshipButton relationship={props.relationship} setRelationships={props.setRelationships} />
     </>
   )
 }

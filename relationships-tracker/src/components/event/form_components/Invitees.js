@@ -2,6 +2,7 @@ import React from 'react';
 import {Form} from 'react-bootstrap';
 
 const Invitee = props => {
+  
   const displayNames = () => {
     if(props.relationships && props.relationships.length !== 0) {
       return props.relationships.map(relationship => {
@@ -29,5 +30,3 @@ const Invitee = props => {
 }
 
 export default Invitee;
-
-// TODO add autocomplete package to accurately fill name of relationships

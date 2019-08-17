@@ -6,13 +6,7 @@ import EventForm from './EventForm'
 
 const EventModal = props => {
   
-  const formType = () => {
-    if (props.handleNewEvent) {
-      return "New Event"
-    } else {
-      return "Edit Event"
-    }
-  }
+  const formType = () => props.handleNewEvent ? "New Event" : "Edit Event"
 
   return (
     <>

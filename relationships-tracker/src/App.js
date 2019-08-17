@@ -1,16 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import { Route } from 'react-router-dom';
-import EventDashboard from './containers/EventDashboard'
-
-// import { Button } from 'react-bootstrap'
 import Navbar from './components/Navbar'
+import EventDashboard from './components/event/EventDashboard'
+import EventProfile from './components/event/EventProfile'
 // import Home from './containers/Home'
 import Account from './containers/Account'
-import Relationships from './containers/Relationships'
+import RelationshipsList from './components/relationship/RelationshipsList'
 // import RelationshipProfile from './components/relationship/RelationshipProfile'
-// import Events from './containers/Events'
-import EventProfile from './components/event/EventProfile'
-// import EventCard from './components/event/EventCard'
 // import Logout from './components/Logout'
 
 // import {filterFutureEvents} from './utils'
@@ -20,6 +16,7 @@ const App = () => {
   const [relationships, setRelationships] = useState([]);
   const [events, setEvents] = useState([]);
   const [eventView, setEventView] = useState({});
+  
   // user handlers
 
   // relationship handlers
@@ -70,7 +67,7 @@ const App = () => {
       <Route path='/events/:time/:name' render={ () => <EventProfile event={eventView} />} />
 
       {/* All relationships */}
-      <Route path="/relationships" render={() => <Relationships relationships={relationships} handleNewRelationship={handleNewRelationship} setRelationships={setRelationships} /> } />
+      <Route path="/relationships" render={() => <RelationshipsList relationships={relationships} handleNewRelationship={handleNewRelationship} setRelationships={setRelationships} /> } />
           
     </div>
   )

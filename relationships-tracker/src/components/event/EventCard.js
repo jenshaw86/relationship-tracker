@@ -1,37 +1,33 @@
 import React from 'react';
-import { Link, Route } from 'react-router-dom';
-import {/*displayDate,*/ displayInvitees} from '../../utils'
+import {Link} from 'react-router-dom';
+import {displayDate, displayInvitees} from '../../utils'
 import EditEventButton from './EditEventButton'
 import DeleteEventButton from './DeleteEventButton'
-import EventProfile from './EventProfile'
-// PROPS: event object
-//  functions: setEvents
 
 const EventCard = (props) => {
-    const displayButtons = () => {
-        if (props.relationships) {
-            return (
-                <>
-                    <EditEventButton event={props.event} setEvents={props.setEvents} relationships={props.relationships}/> 
-                    <DeleteEventButton event={props.event} setEvents={props.setEvents} />
-                </>
-            )
-        } 
-    }
-
-    return(
+  const displayButtons = () => {
+    if (props.relationships) {
+    return (
         <>
-            <Link to={`${props.path}/${props.event.name}`} onClick={() => props.viewEvent(props.event)}  >
-                <div>
-                    {/* <h4>{displayDate(props.event.start_date)}</h4> */}
-                    <h4>{props.event.name}</h4>
-                    <p>with {displayInvitees(props.event)}</p>
-                </div>
-            </Link>
-            {displayButtons()} {/* Edit and Delete Buttons */}
-            
+          <EditEventButton event={props.event} setEvents={props.setEvents} relationships={props.relationships}/> 
+          <DeleteEventButton event={props.event} setEvents={props.setEvents} />
         </>
-    )
+      )
+    } 
+  }
+
+  return(
+    <>
+      <Link to={`${props.path}/${props.event.name}`} onClick={() => props.viewEvent(props.event)}  >
+        <div>
+          <h4>{displayDate(props.event.start_date)}</h4>
+          <h4>{props.event.name}</h4>
+          <p>with {displayInvitees(props.event)}</p>
+        </div>
+      </Link>
+      {displayButtons()} {/* Edit and Delete Buttons */}
+    </>
+  )
 }
 
 export default EventCard
