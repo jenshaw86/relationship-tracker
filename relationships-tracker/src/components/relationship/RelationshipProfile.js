@@ -1,23 +1,15 @@
-import React, {useState, useEffect} from 'react'
-import { Button } from 'react-bootstrap'
+import React from 'react'
+import EditRelationshipButton from './EditRelationshipButton'
 import {lastConnection} from '../../utils'
 
 const RelationshipProfile = (props) => {
-    const [person, setPerson] = useState({}) 
 
-    useEffect(() => {
-        fetch(`http://localhost:3000/relationships/${props.match.params.id}`)
-        .then(res => res.json())
-        .then(data => {
-            return setPerson(data)
-        }
-    )}, [props.match.params.id])
-
+  const person = props.relationship
     return (
       <div>
         <div>
           <img src={`${person.image}`} width="150" alt={`${person.first_name} ${person.last_name}`}/>
-          <Button>Edit Relationship</Button>
+          <EditRelationshipButton relationship={props.relationship} setRelationships={props.setRelationships} setRelationshipView={props.setRelationshipView} />
         </div>
         <div>
           <h3>{person.first_name} {person.last_name}</h3>

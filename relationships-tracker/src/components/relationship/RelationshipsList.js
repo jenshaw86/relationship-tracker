@@ -11,6 +11,7 @@ const Relationships = props => {
           key={rel.id}
           relationship={rel}
           setRelationships={props.setRelationships}
+          setRelationshipView={props.setRelationshipView}
         />
       );
     });

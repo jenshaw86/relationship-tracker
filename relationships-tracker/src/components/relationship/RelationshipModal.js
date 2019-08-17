@@ -1,17 +1,19 @@
 import React from 'react'
 import {Modal} from "react-bootstrap";
-import NewRelationshipForm from './NewRelationshipForm'
+import RelationshipForm from './RelationshipForm'
 
 const RelationshipModal = props => {
-  
+
+  const formType = () => props.handleNewRelationship ? "New Relationship" : "Edit Relationship"
+
   return (
     <>
       <Modal show={props.show} onHide={() => props.handleClose()}>
         <Modal.Header closeButton>
-          <Modal.Title>New Relationship to Track</Modal.Title>
+          <Modal.Title>{formType()}</Modal.Title>
         </Modal.Header>
         
-        <NewRelationshipForm handleClose={props.handleClose} handleNewRelationship={props.handleNewRelationship} />
+        <RelationshipForm handleClose={props.handleClose} {...props} />
       </Modal>
     </>
   )

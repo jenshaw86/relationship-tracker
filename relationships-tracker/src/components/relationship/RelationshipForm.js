@@ -8,37 +8,15 @@ import Phone from '../form/Phone';
 import Email from '../form/Email'
 import ContactFrequency from './form_components/ContactFrequency'
 
-const NewRelationshipForm = props => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [relType, setRelType] = useState("Friend");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [currentInterval, setCurrentInterval] = useState(7);
+import RelationshipSubmitButton from './RelationshipSubmitButton'
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    props.handleClose();
-    fetch(`http://localhost:3000/relationships`, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }, 
-      body: JSON.stringify({
-        first_name: firstName,
-        last_name: lastName,
-        relationship_type: relType,
-        image: "https://www.thesun.co.uk/wp-content/uploads/2016/06/nintchdbpict000242868564.jpg",
-        email: email,
-        phone_number: phone,
-        contact_frequency: currentInterval,
-        user_id: 1
-      })
-    })
-    .then(res => res.json())
-    .then(obj => props.handleNewRelationship(obj))
-  }
+const NewRelationshipForm = props => {
+  const [firstName, setFirstName] = useState(props.relationship ? props.relationship.first_name : '');
+  const [lastName, setLastName] = useState(props.relationship ? props.relationship.last_name : '');
+  const [relType, setRelType] = useState(props.relationship ? props.relationship.relationship_type : 'Friend');
+  const [email, setEmail] =  useState(props.relationship ? props.relationship.email : '');
+  const [phone, setPhone] =  useState(props.relationship ? props.relationship.phone_number : '');
+  const [currentInterval, setCurrentInterval] =  useState(props.relationship ? props.relationship.contact_frequency : 7);
 
   return (
     
@@ -65,9 +43,7 @@ const NewRelationshipForm = props => {
           <Button variant="secondary" onClick={() => props.handleClose()}>
             Close
           </Button>
-          <Button variant="primary" type="submit" onClick={(event) => handleSubmit(event)}>
-            Submit
-          </Button>
+          <RelationshipSubmitButton {...props} firstName={firstName} lastName={lastName} relType={relType} email={email} phone={phone} contact_frequency={currentInterval} />
         </ButtonToolbar>
       </Modal.Footer>
     </Form>

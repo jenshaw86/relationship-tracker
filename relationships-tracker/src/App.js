@@ -6,7 +6,7 @@ import EventProfile from './components/event/EventProfile'
 // import Home from './containers/Home'
 import Account from './containers/Account'
 import RelationshipsList from './components/relationship/RelationshipsList'
-// import RelationshipProfile from './components/relationship/RelationshipProfile'
+import RelationshipProfile from './components/relationship/RelationshipProfile'
 // import Logout from './components/Logout'
 
 // import {filterFutureEvents} from './utils'
@@ -16,6 +16,7 @@ const App = () => {
   const [relationships, setRelationships] = useState([]);
   const [events, setEvents] = useState([]);
   const [eventView, setEventView] = useState({});
+  const [relationshipView, setRelationshipView] = useState({})
   
   // user handlers
 
@@ -31,18 +32,14 @@ const App = () => {
     .then(res => res.json())
     .then(user => {
       setCurrentUser(user)
-      console.log('fetched user data')
       fetch(`http://localhost:3000/users/1/relationships`)
       .then(res => res.json())
       .then(user_rels => {
-        console.log('fetched all relationships')
         setRelationships(user_rels)
         fetch(`http://localhost:3000/users/1/events`)
         .then(res => res.json())
         .then(user_events => {
-          console.log('fetched all events')
           setEvents(user_events)
-          console.log("fetches complete")
         })
       })
     })
@@ -67,8 +64,8 @@ const App = () => {
       <Route path='/events/:time/:name' render={ () => <EventProfile event={eventView} />} />
 
       {/* All relationships */}
-      <Route path="/relationships" render={() => <RelationshipsList relationships={relationships} handleNewRelationship={handleNewRelationship} setRelationships={setRelationships} /> } />
-          
+      <Route path="/relationships" exact render={() => <RelationshipsList relationships={relationships} handleNewRelationship={handleNewRelationship} setRelationships={setRelationships} setRelationshipView={setRelationshipView} /> } />
+      <Route path="/relationships/:name" render={ () => <RelationshipProfile relationship={relationshipView} setRelationships={setRelationships} setRelationshipView={setRelationshipView} /> } />
     </div>
   )
 }

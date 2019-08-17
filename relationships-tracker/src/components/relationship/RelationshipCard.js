@@ -1,18 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import {Button} from "react-bootstrap";
 import {lastConnection} from '../../utils'
 import DeleteRelationshipButton from './DeleteRelationshipButton'
 
-// PROPS: relationship (object)
-// functions => setRelationships
-
 const RelationshipCard = props => {
-  const [person, setPerson] = useState(props.relationship)
+  const person = props.relationship
 
   return(
     <>
-      <Link to={`/relationships/${props.relationship.id}`} >
+      <Link to={`/relationships/${props.relationship.id}`} onClick={() => props.setRelationshipView(person)} >
         <div className='relationship_card'>
           <div>
             <img src={`${person.image}`} width="100" alt={`${person.first_name} ${person.last_name}`} />
