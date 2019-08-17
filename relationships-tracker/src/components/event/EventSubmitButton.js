@@ -102,6 +102,7 @@ const EventSubmitButton = props => {
       .then(obj => props.handleNewEvent(obj))
     } else {
       console.log('handle edited event')
+      console.log(obj)
       props.setEvents(obj)
     }
   }

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { Route } from 'react-router-dom';
-import Dashboard from './containers/Dashboard'
+import EventDashboard from './containers/EventDashboard'
 
 // import { Button } from 'react-bootstrap'
 import Navbar from './components/Navbar'
@@ -58,21 +58,17 @@ const App = () => {
   return (
     <div>
       <Navbar />
-      
-      <Route path ="/" exact 
-      render={() => <Account user={currentUser} /> } />
 
-      
+      <Route path='/account' exact render={ () => <Account user={currentUser} />} />
 
       <Route path="/events"
-        render={ () => <Dashboard events={events} relationships={relationships} setEvents={setEvents} 
+        render={ () => <EventDashboard events={events} relationships={relationships} setEvents={setEvents} 
         handleNewEvent={handleNewEvent}
         viewEvent={viewEvent}
       /> } />
 
-      <Route path="/events/:name"
-        render={ () => <EventProfile event={eventView} />}
-      />
+      <Route path='/events/:time/:name' render={ () => <EventProfile event={eventView} />} />
+
           
     </div>
   )

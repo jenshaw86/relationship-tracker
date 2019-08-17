@@ -13,9 +13,9 @@ const Events = props => {
           key={event.id} 
           event={event}
           setEvents={props.setEvents}
-          relationships={props.relationships}
           viewEvent={props.viewEvent}
-          // handleEditEvent={props.handleEditEvent} 
+          path={props.path}
+          {...props}
           />
       })
     }
