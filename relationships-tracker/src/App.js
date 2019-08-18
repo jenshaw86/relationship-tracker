@@ -57,15 +57,27 @@ const App = () => {
       
       {/* All and specific events */}
       <Route path="/events"
-        render={ () => <EventDashboard events={events} relationships={relationships} setEvents={setEvents} 
-        handleNewEvent={handleNewEvent}
-        viewEvent={viewEvent}
+        render={ () => <EventDashboard events={events} relationships={relationships} setEvents={setEvents} handleNewEvent={handleNewEvent} viewEvent={viewEvent}
+        setRelationships={setRelationships}
       /> } />
       <Route path='/events/:time/:name' render={ () => <EventProfile event={eventView} />} />
 
       {/* All relationships */}
-      <Route path="/relationships" exact render={() => <RelationshipsList relationships={relationships} handleNewRelationship={handleNewRelationship} setRelationships={setRelationships} setRelationshipView={setRelationshipView} /> } />
-      <Route path="/relationships/:name" render={ () => <RelationshipProfile relationship={relationshipView} setRelationships={setRelationships} setRelationshipView={setRelationshipView} /> } />
+      <Route path="/relationships" exact 
+        render={() => <RelationshipsList 
+          relationships={relationships} 
+          handleNewRelationship={handleNewRelationship} 
+          setRelationships={setRelationships} 
+          setRelationshipView={setRelationshipView} 
+          setEvents={setEvents} /> } 
+      />
+      <Route path="/relationships/:name" 
+        render={ () => <RelationshipProfile 
+          relationship={relationshipView} 
+          setRelationships={setRelationships} 
+          setRelationshipView={setRelationshipView} 
+          viewEvent={viewEvent} /> } 
+      />
     </div>
   )
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import EditRelationshipButton from './EditRelationshipButton'
 import {lastConnection} from '../../utils'
+import EventsList from '../event/EventsList'
 
 const RelationshipProfile = (props) => {
 
@@ -22,7 +23,7 @@ const RelationshipProfile = (props) => {
           <p>Phone:</p>
           <p>{person.phone_number}</p>
         </div>
-        <div></div>
+        <EventsList events={props.relationship.events} viewEvent={props.viewEvent} />
       </div>
     )
 }

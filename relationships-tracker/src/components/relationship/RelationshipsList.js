@@ -12,6 +12,7 @@ const Relationships = props => {
           relationship={rel}
           setRelationships={props.setRelationships}
           setRelationshipView={props.setRelationshipView}
+          setEvents={props.setEvents}
         />
       );
     });

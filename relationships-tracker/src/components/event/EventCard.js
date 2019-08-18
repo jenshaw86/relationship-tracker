@@ -22,7 +22,6 @@ const EventCard = (props) => {
         <div>
           <h4>{displayDate(props.event.start_date)}</h4>
           <h4>{props.event.name}</h4>
-          <p>with {displayInvitees(props.event)}</p>
         </div>
       </Link>
       {displayButtons()} {/* Edit and Delete Buttons */}

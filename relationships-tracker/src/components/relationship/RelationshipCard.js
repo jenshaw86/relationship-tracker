@@ -22,7 +22,7 @@ const RelationshipCard = props => {
           </div>
         </div>
       </Link>
-      <DeleteRelationshipButton relationship={props.relationship} setRelationships={props.setRelationships} />
+      <DeleteRelationshipButton relationship={props.relationship} setRelationships={props.setRelationships} setEvents={props.setEvents} />
     </>
   )
 }

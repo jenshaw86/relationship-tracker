@@ -2,6 +2,7 @@ import React from 'react'
 import {whoIsComing, displayDate, displayTime} from '../../utils'
 
 const EventProfile = props => {
+
     return (
         <div>
             <h3>{props.event.name ? props.event.name : null}</h3> 
@@ -9,6 +10,7 @@ const EventProfile = props => {
             <div>Who's going: {whoIsComing(props.event.relationships)}</div>
             <div>Where: {props.event.location}</div>
             <div>About: {props.event.description}</div>
+
         </div>
     )
 }

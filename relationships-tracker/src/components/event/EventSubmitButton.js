@@ -27,7 +27,6 @@ const EventSubmitButton = props => {
     .then(res => res.json())
     .then(obj => 
       {
-        console.log(obj)
         postRelEvent(obj)
       })
   }
@@ -46,7 +45,7 @@ const EventSubmitButton = props => {
       })
     })
     .then(res => res.json())
-    .then(() => refreshEvents(obj))
+    .then(() => refreshState(obj))
   }
 
   // PATCH event
@@ -90,22 +89,29 @@ const EventSubmitButton = props => {
       })
     })
     .then(res => res.json())
-    .then(() => refreshEvents(obj))
+    .then(() => refreshState(obj))
   }
 
   // Replace Event State
-  const refreshEvents = obj => {
+  const refreshState = (eventObj, relId) => {
     // if there's a new obj, then fetch obj and add to event state
     if(props.handleNewEvent) {
-      console.log('handle new event')
-      fetch(`http://localhost:3000/events/${obj.id}`)
+      fetch(`http://localhost:3000/events/${eventObj.id}`)
       .then(res => res.json())
-      .then(obj => props.handleNewEvent(obj))
+      .then(obj => {
+        props.handleNewEvent(obj)
+        resetRelationshipsData();
+      })
     } else {
-      console.log('handle edited event')
-      console.log(obj)
-      props.setEvents(obj)
+      props.setEvents(eventObj);
+      resetRelationshipsData();
     }
+  }
+
+  const resetRelationshipsData = () => {
+    fetch(`http://localhost:3000/users/1/relationships`)
+      .then(res => res.json())
+      .then(data => props.setRelationships(data))
   }
 
   const displaySubmitButton = () => {
