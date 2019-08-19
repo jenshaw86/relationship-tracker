@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import { Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import {Container} from 'react-bootstrap';
 import Navbar from './components/Navbar'
 import EventDashboard from './components/event/EventDashboard'
 import EventProfile from './components/event/EventProfile'
-// import Home from './containers/Home'
+import Home from './containers/Home'
 import Account from './containers/Account'
 import RelationshipsList from './components/relationship/RelationshipsList'
 import RelationshipProfile from './components/relationship/RelationshipProfile'
@@ -11,75 +12,105 @@ import RelationshipProfile from './components/relationship/RelationshipProfile'
 
 // import {filterFutureEvents} from './utils'
 
-const App = () => {
-  const [currentUser, setCurrentUser] = useState({});
-  const [relationships, setRelationships] = useState([]);
-  const [events, setEvents] = useState([]);
-  const [eventView, setEventView] = useState({});
-  const [relationshipView, setRelationshipView] = useState({})
-  
-  // user handlers
+class App extends React.Component {
 
-  // relationship handlers
-  const handleNewRelationship = person => setRelationships([...relationships, person]);
+  constructor() {
+    super()
+    this.state = {
+      currentUser: {},
+      events: [],
+      relationships: [], 
+      eventView: {},
+      relationshipView: {}
+    }
+  }
 
-  // event handlers
-  const handleNewEvent = event => setEvents([...events, event]);
-
-  // On login, fetch user data
-  useEffect(() => {
+  componentDidMount() {
     fetch(`http://localhost:3000/users/1`) //TODO: specify user on login
     .then(res => res.json())
     .then(user => {
-      setCurrentUser(user)
       fetch(`http://localhost:3000/users/1/relationships`)
       .then(res => res.json())
-      .then(user_rels => {
-        setRelationships(user_rels)
+      .then(user_relationships => {
         fetch(`http://localhost:3000/users/1/events`)
         .then(res => res.json())
         .then(user_events => {
-          setEvents(user_events)
+          this.setState({currentUser: user, relationships: user_relationships, events: user_events})
         })
       })
     })
-  }, [])
-  
-  const viewEvent = (event) => {
-    setEventView(event)
   }
 
-  return (
-    <div>
-      <Navbar />
+  handleNewEvent = event => {
+    fetch(`http://localhost:3000/users/1/relationships`)
+    .then(res => res.json())
+    .then(data => {
+      this.setState({events: [...this.state.events, event], relationships: data});
+    })
+  }
 
-      <Route path='/account' exact render={ () => <Account user={currentUser} />} />
+  updateEvents = data => this.setState({events: data})
+
+  viewEvent = event => {
+    this.setState({eventView: event})
+  }
+
+  handleNewRelationship = (newRelationship) => {
+    this.setState({relationships: [...this.state.relationships, newRelationship]})
+  }
+
+  viewRelationship = (person) => {
+    this.setState({relationshipView: person})
+  }
+
+  updateRelationships = data => {
+    this.setState({relationships: data})
+  }
+
+  render() {
+    return(
+      <div>
+      <Router>
+
+      <Navbar />
       
+      <Route path='/' exact render={() => <Home /> } /> 
+      <Route path='/account' exact render={ () => <Account user={this.state.currentUser} />} />
       {/* All and specific events */}
       <Route path="/events"
-        render={ () => <EventDashboard events={events} relationships={relationships} setEvents={setEvents} handleNewEvent={handleNewEvent} viewEvent={viewEvent}
-        setRelationships={setRelationships}
+        render={ (browserHistory) => <EventDashboard
+          {...browserHistory}
+          events={this.state.events} 
+          relationships={this.state.relationships} 
+          handleNewEvent={this.handleNewEvent} 
+          updateEvents={this.updateEvents}
+          viewEvent={this.viewEvent}
       /> } />
-      <Route path='/events/:time/:name' render={ () => <EventProfile event={eventView} />} />
+
+      <Route path='/events/:time/:name' render={ () => <EventProfile event={this.state.eventView} />} />
 
       {/* All relationships */}
       <Route path="/relationships" exact 
         render={() => <RelationshipsList 
-          relationships={relationships} 
-          handleNewRelationship={handleNewRelationship} 
-          setRelationships={setRelationships} 
-          setRelationshipView={setRelationshipView} 
-          setEvents={setEvents} /> } 
+          relationships={this.state.relationships} 
+          handleNewRelationship={this.handleNewRelationship} 
+          viewRelationship={this.viewRelationship}
+          updateRelationships={this.updateRelationships}
+          updateEvents={this.updateEvents}
+          /> } 
       />
-      <Route path="/relationships/:name" 
+      <Route path="/relationships/:id" 
         render={ () => <RelationshipProfile 
-          relationship={relationshipView} 
-          setRelationships={setRelationships} 
-          setRelationshipView={setRelationshipView} 
-          viewEvent={viewEvent} /> } 
+          relationship={this.state.relationshipView}
+          viewRelationship={this.viewRelationship}
+          updateRelationships={this.updateRelationships}
+          viewEvent={this.viewEvent}
+          /> } 
       />
+      </Router>
     </div>
-  )
+    )
+  }
 }
 
 export default App;

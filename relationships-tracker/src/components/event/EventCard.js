@@ -9,8 +9,8 @@ const EventCard = (props) => {
     if (props.relationships) {
     return (
         <>
-          <EditEventButton event={props.event} setEvents={props.setEvents} relationships={props.relationships}/> 
-          <DeleteEventButton event={props.event} setEvents={props.setEvents} />
+          <EditEventButton event={props.event} updateEvents={props.updateEvents} relationships={props.relationships} /> 
+          <DeleteEventButton event={props.event} updateEvents={props.updateEvents} />
         </>
       )
     } 
@@ -18,7 +18,7 @@ const EventCard = (props) => {
 
   return(
     <>
-      <Link to={`${props.path}/${props.event.name}`} onClick={() => props.viewEvent(props.event)}  >
+      <Link to={`events/${props.event.name}`} onClick={() => props.viewEvent(props.event)}  >
         <div>
           <h4>{displayDate(props.event.start_date)}</h4>
           <h4>{props.event.name}</h4>

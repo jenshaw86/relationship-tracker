@@ -10,7 +10,12 @@ const RelationshipProfile = (props) => {
       <div>
         <div>
           <img src={`${person.image}`} width="150" alt={`${person.first_name} ${person.last_name}`}/>
-          <EditRelationshipButton relationship={props.relationship} setRelationships={props.setRelationships} setRelationshipView={props.setRelationshipView} />
+          <EditRelationshipButton relationship={props.relationship}
+          viewRelationship={props.viewRelationship} 
+          updateRelationships={props.updateRelationships}
+          // setRelationships={props.setRelationships} 
+          // setRelationshipView={props.setRelationshipView} 
+          />
         </div>
         <div>
           <h3>{person.first_name} {person.last_name}</h3>

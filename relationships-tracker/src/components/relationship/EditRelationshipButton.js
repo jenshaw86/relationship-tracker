@@ -11,7 +11,10 @@ const EditRelationshipButton = props => {
   return (
     <div>
       <Button onClick={() => handleShow()} >Edit Relationship</Button>
-      <RelationshipModal show={show} handleClose={handleClose} relationship={props.relationship} setRelationships={props.setRelationships} setRelationshipView={props.setRelationshipView} />
+      <RelationshipModal show={show} handleClose={handleClose} relationship={props.relationship} 
+      viewRelationship={props.viewRelationship}
+      updateRelationships={props.updateRelationships}
+      />
     </div>
   )
 }

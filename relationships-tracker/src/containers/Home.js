@@ -1,12 +1,14 @@
-import React from 'react';
+import React from 'react'
 
-const Home = () => {
+const Home = props => {
 
-        return (
-            <>
-                <h1>Old Version!</h1>
-            </>
-        )
+  return (
+    <div>
+      <h1>
+        Welcome to my App!
+      </h1>
+    </div>
+  )
 }
 
 export default Home

@@ -13,7 +13,7 @@ const DeleteEvent = props => {
           method: 'DELETE'
       })
       .then(res => res.json())
-      .then(data => props.setEvents(data))
+      .then(data => props.updateEvents(data))
     })
   }
 

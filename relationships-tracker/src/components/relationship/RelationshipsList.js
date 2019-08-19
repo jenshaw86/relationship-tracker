@@ -1,6 +1,7 @@
 import React from "react";
 import RelationshipCard from "./RelationshipCard";
 import AddRelationshipButton from './AddRelationshipButton'
+import {Container} from 'react-bootstrap'
 
 const Relationships = props => {
   // show all relationships
@@ -10,9 +11,9 @@ const Relationships = props => {
         <RelationshipCard
           key={rel.id}
           relationship={rel}
-          setRelationships={props.setRelationships}
-          setRelationshipView={props.setRelationshipView}
-          setEvents={props.setEvents}
+          viewRelationship={props.viewRelationship}
+          updateRelationships={props.updateRelationships}
+          updateEvents={props.updateEvents}
         />
       );
     });
@@ -38,10 +39,10 @@ const Relationships = props => {
   };
 
   return (
-    <div>
+    <Container>
       <h1>All Relationships</h1>
       {displayRelationshipsPage()}    
-    </div>
+    </Container>
   );
 };
 

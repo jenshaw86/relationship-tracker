@@ -6,6 +6,7 @@ import LastName from '../form/LastName';
 import RelationshipType from './form_components/RelationshipType';
 import Phone from '../form/Phone';
 import Email from '../form/Email'
+import Image from '../form/Image'
 import ContactFrequency from './form_components/ContactFrequency'
 
 import RelationshipSubmitButton from './RelationshipSubmitButton'
@@ -14,8 +15,9 @@ const NewRelationshipForm = props => {
   const [firstName, setFirstName] = useState(props.relationship ? props.relationship.first_name : '');
   const [lastName, setLastName] = useState(props.relationship ? props.relationship.last_name : '');
   const [relType, setRelType] = useState(props.relationship ? props.relationship.relationship_type : 'Friend');
-  const [email, setEmail] =  useState(props.relationship ? props.relationship.email : '');
-  const [phone, setPhone] =  useState(props.relationship ? props.relationship.phone_number : '');
+  const [email, setEmail] = useState(props.relationship ? props.relationship.email : '');
+  const [phone, setPhone] = useState(props.relationship ? props.relationship.phone_number : '');
+  const [image, setImage] = useState(props.relationship ? props.relationship.image : '');
   const [currentInterval, setCurrentInterval] =  useState(props.relationship ? props.relationship.contact_frequency : 7);
 
   return (
@@ -28,11 +30,11 @@ const NewRelationshipForm = props => {
           <LastName lastName={lastName} setLastName={setLastName} />
         </Form.Row>
 
-        {/* Relationship Type, Email, Phone */}
+        {/* Relationship Type, Email, Phone, Image */}
         <RelationshipType relType={relType} setRelType={setRelType} />
         <Email email={email} setEmail={setEmail} />
         <Phone phone={phone} setPhone={setPhone} />
-        
+        <Image image={image} setImage={setImage} />
         {/* Notification Frequency */}
         <ContactFrequency currentInterval={currentInterval} setCurrentInterval={setCurrentInterval} />
       </Modal.Body>
@@ -43,7 +45,7 @@ const NewRelationshipForm = props => {
           <Button variant="secondary" onClick={() => props.handleClose()}>
             Close
           </Button>
-          <RelationshipSubmitButton {...props} firstName={firstName} lastName={lastName} relType={relType} email={email} phone={phone} contact_frequency={currentInterval} />
+          <RelationshipSubmitButton {...props} firstName={firstName} lastName={lastName} relType={relType} email={email} phone={phone} image={image} contact_frequency={currentInterval} />
         </ButtonToolbar>
       </Modal.Footer>
     </Form>

@@ -37,7 +37,7 @@ const DeleteRelationshipButton = props => {
                 })
                 .then(res => res.json())
                 .then(data => {
-                  props.setEvents(data)
+                  props.updateEvents(data)
                   deleteRelEvent(eventId)
                 })
               } else {
@@ -70,7 +70,7 @@ const DeleteRelationshipButton = props => {
       method: 'DELETE'
     })
     .then(res => res.json())
-    .then(data => props.setRelationships(data))
+    .then(data => props.updateRelationships(data))
   }
   
 

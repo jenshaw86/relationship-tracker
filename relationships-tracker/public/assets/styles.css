@@ -1,0 +1,35 @@
+.home {
+  background: url("https://images.unsplash.com/photo-1486704155675-e4c07f8ad160?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #71a0a5;
+  padding: 2%;
+}
+
+a {
+  color: #acc6aa;
+  text-decoration: none;
+  font-size: 1.5em;
+}
+
+a:hover {
+  color: #566355;
+}
+
+.header {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -100px;
+}

@@ -8,7 +8,7 @@ const RelationshipCard = props => {
 
   return(
     <>
-      <Link to={`/relationships/${props.relationship.id}`} onClick={() => props.setRelationshipView(person)} >
+      <Link to={`/relationships/${props.relationship.id}`} onClick={() => props.viewRelationship(person)} >
         <div className='relationship_card'>
           <div>
             <img src={`${person.image}`} width="100" alt={`${person.first_name} ${person.last_name}`} />
@@ -22,7 +22,10 @@ const RelationshipCard = props => {
           </div>
         </div>
       </Link>
-      <DeleteRelationshipButton relationship={props.relationship} setRelationships={props.setRelationships} setEvents={props.setEvents} />
+      <DeleteRelationshipButton relationship={props.relationship} 
+      updateRelationships={props.updateRelationships}
+      updateEvents={props.updateEvents}
+      />
     </>
   )
 }

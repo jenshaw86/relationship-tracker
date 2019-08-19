@@ -5,6 +5,9 @@ const RelationshipSubmitButton = props => {
   const handleSubmit = (event) => {
     event.preventDefault();
     props.handleClose();
+    if(props.image === '') {
+      props.image = "https://www.thesun.co.uk/wp-content/uploads/2016/06/nintchdbpict000242868564.jpg"
+    }
     fetch(`http://localhost:3000/relationships`, {
       method: 'POST',
       headers: {
@@ -15,7 +18,7 @@ const RelationshipSubmitButton = props => {
         first_name: props.firstName,
         last_name: props.lastName,
         relationship_type: props.relType,
-        image: "https://www.thesun.co.uk/wp-content/uploads/2016/06/nintchdbpict000242868564.jpg",
+        image: props.image,
         email: props.email,
         phone_number: props.phone,
         contact_frequency: props.contact_frequency,
@@ -23,7 +26,7 @@ const RelationshipSubmitButton = props => {
       })
     })
     .then(res => res.json())
-    .then(obj => props.handleNewRelationship(obj))
+    .then(newPerson => props.handleNewRelationship(newPerson))
   }
 
   const handleSubmitEdit = (event) => {
@@ -39,7 +42,7 @@ const RelationshipSubmitButton = props => {
         first_name: props.firstName,
         last_name: props.lastName,
         relationship_type: props.relType,
-        image: "https://www.thesun.co.uk/wp-content/uploads/2016/06/nintchdbpict000242868564.jpg",
+        image: props.image,
         email: props.email,
         phone_number: props.phone,
         contact_frequency: props.contact_frequency,
@@ -47,10 +50,10 @@ const RelationshipSubmitButton = props => {
       })
     })
     .then(res => res.json())
-    .then(obj => {
-      props.setRelationships(obj)
-      const editedRel = obj.find(rel => rel.id === props.relationship.id)
-      props.setRelationshipView(editedRel)
+    .then(allRels => {
+      props.updateRelationships(allRels)
+      const editedRel = allRels.find(rel => rel.id === props.relationship.id)
+      props.viewRelationship(editedRel)
     })
   }
 

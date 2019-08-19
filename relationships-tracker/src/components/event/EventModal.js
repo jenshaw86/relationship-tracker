@@ -15,7 +15,7 @@ const EventModal = props => {
           <Modal.Title>{formType()}</Modal.Title>
         </Modal.Header>
         
-        <EventForm handleClose={props.handleClose} relationships={props.relationships} {...props} />
+        <EventForm handleClose={props.handleClose} {...props} />
       </Modal>
     </>
   )
