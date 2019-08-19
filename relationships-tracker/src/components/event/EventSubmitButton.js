@@ -32,7 +32,6 @@ const EventSubmitButton = props => {
   }
 
   const postRelEvent = (obj) => {
-    // debugger;
     console.log('submit new relevent')
     fetch(`http://localhost:3000/relationship_events`, {
       method: 'POST',

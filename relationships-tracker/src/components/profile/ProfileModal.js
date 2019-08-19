@@ -31,7 +31,7 @@ const ProfileModal = props => {
       })
     })
     .then(res => res.json())
-    .then(data => props.setCurrentUser(data))
+    .then(data => props.updateUserProfile(data))
   }
 
   return (

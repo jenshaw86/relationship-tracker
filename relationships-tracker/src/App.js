@@ -1,6 +1,5 @@
-import React, {useState, useEffect} from 'react';
+import React, {Component} from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import {Container} from 'react-bootstrap';
 import Navbar from './components/Navbar'
 import EventDashboard from './components/event/EventDashboard'
 import EventProfile from './components/event/EventProfile'
@@ -12,7 +11,7 @@ import RelationshipProfile from './components/relationship/RelationshipProfile'
 
 // import {filterFutureEvents} from './utils'
 
-class App extends React.Component {
+class App extends Component {
 
   constructor() {
     super()
@@ -67,6 +66,10 @@ class App extends React.Component {
     this.setState({relationships: data})
   }
 
+  updateUserProfile = data => {
+    this.setState({currentUser: data})
+  }
+
   render() {
     return(
       <div>
@@ -75,7 +78,7 @@ class App extends React.Component {
       <Navbar />
       
       <Route path='/' exact render={() => <Home /> } /> 
-      <Route path='/account' exact render={ () => <Account user={this.state.currentUser} />} />
+      <Route path='/account' exact render={ () => <Account user={this.state.currentUser} updateUserProfile={this.updateUserProfile} />} />
       {/* All and specific events */}
       <Route path="/events"
         render={ (browserHistory) => <EventDashboard
