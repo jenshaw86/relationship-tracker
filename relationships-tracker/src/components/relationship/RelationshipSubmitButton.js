@@ -5,8 +5,9 @@ const RelationshipSubmitButton = props => {
   const handleSubmit = (event) => {
     event.preventDefault();
     props.handleClose();
+    let imageUrl = props.image
     if(props.image === '') {
-      props.image = "https://www.thesun.co.uk/wp-content/uploads/2016/06/nintchdbpict000242868564.jpg"
+      imageUrl = "https://www.thesun.co.uk/wp-content/uploads/2016/06/nintchdbpict000242868564.jpg"
     }
     fetch(`http://localhost:3000/relationships`, {
       method: 'POST',
@@ -18,7 +19,7 @@ const RelationshipSubmitButton = props => {
         first_name: props.firstName,
         last_name: props.lastName,
         relationship_type: props.relType,
-        image: props.image,
+        image: imageUrl,
         email: props.email,
         phone_number: props.phone,
         contact_frequency: props.contact_frequency,

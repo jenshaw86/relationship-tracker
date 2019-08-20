@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {displayDate, displayInvitees} from '../../utils'
+import {displayDate} from '../../utils'
 import EditEventButton from './EditEventButton'
 import DeleteEventButton from './DeleteEventButton'
 

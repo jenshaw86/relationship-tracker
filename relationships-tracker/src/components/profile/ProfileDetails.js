@@ -3,8 +3,7 @@ import React from 'react';
 const ProfileDetails = props => {
   return (
     <>
-      <p>Email: {props.email}</p>
-      <p>Phone: {props.phone_number}</p>
+      <h1>More Details here</h1>
     </>
   )
 }

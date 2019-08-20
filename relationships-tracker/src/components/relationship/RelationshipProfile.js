@@ -2,6 +2,7 @@ import React from 'react'
 import EditRelationshipButton from './EditRelationshipButton'
 import {lastConnection} from '../../utils'
 import EventsList from '../event/EventsList'
+import AddEventButton from '../event/AddEventButton'
 
 const RelationshipProfile = (props) => {
 
@@ -13,9 +14,8 @@ const RelationshipProfile = (props) => {
           <EditRelationshipButton relationship={props.relationship}
           viewRelationship={props.viewRelationship} 
           updateRelationships={props.updateRelationships}
-          // setRelationships={props.setRelationships} 
-          // setRelationshipView={props.setRelationshipView} 
           />
+          <AddEventButton relationship={props.relationship} />
         </div>
         <div>
           <h3>{person.first_name} {person.last_name}</h3>
