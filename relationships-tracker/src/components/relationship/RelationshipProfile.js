@@ -1,12 +1,30 @@
 import React from 'react'
+import {Redirect} from 'react-router-dom'
 import EditRelationshipButton from './EditRelationshipButton'
-import {lastConnection} from '../../utils'
+import {lastConnection, connectionGap} from '../../utils'
 import EventsList from '../event/EventsList'
 import AddEventButton from '../event/AddEventButton'
 
 const RelationshipProfile = (props) => {
-
   const person = props.relationship
+  let gap = connectionGap(person);
+
+
+  const connectionGapMessage = gap => {
+    if (gap !== null) {
+      return `It's been ${gap} days since you've met up with ${person.first_name}.`
+    } else {
+      return `You haven't met up with ${person.first_name} yet! `
+    }
+  }
+
+  const meetupReminder = () => {
+    if (gap >= person.contact_frequency) {
+      return `Maybe it's time to make plans to meet up!`
+    }
+  }
+
+  if(props.relationship.first_name) {
     return (
       <div>
         <div>
@@ -15,12 +33,15 @@ const RelationshipProfile = (props) => {
           viewRelationship={props.viewRelationship} 
           updateRelationships={props.updateRelationships}
           />
-          <AddEventButton relationship={props.relationship} />
+          <AddEventButton relationship={props.relationship} handleNewEvent={props.handleNewEvent} />
         </div>
         <div>
           <h3>{person.first_name} {person.last_name}</h3>
           <p>{person.relationship_type}</p>
-          <p>Last connected: {lastConnection(person)}</p>          
+          <p>Last connected: {lastConnection(person)}</p> 
+          <p>Connection cycle: Every {person.contact_frequency} days</p>
+          <p>{connectionGapMessage(gap)} </p>
+          <p>{meetupReminder()}</p>
         </div>
         <div>
           <p>Email:</p>
@@ -31,6 +52,11 @@ const RelationshipProfile = (props) => {
         <EventsList events={props.relationship.events} viewEvent={props.viewEvent} />
       </div>
     )
+  } else {
+    return <Redirect to="/relationships" />
+  }
+
+    
 }
 
 export default RelationshipProfile

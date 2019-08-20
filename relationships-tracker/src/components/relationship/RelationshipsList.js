@@ -1,18 +1,15 @@
-import React, {useState, Component} from "react";
+import React, {Component} from "react";
 import RelationshipCard from "./RelationshipCard";
 import AddRelationshipButton from './AddRelationshipButton'
 import {Container, Form} from 'react-bootstrap'
 
 class RelationshipsList extends Component {
-  constructor() {
-    super()
-    this.state = {
-      listOrder: []
-    }
+  constructor(props) {
+    super(props)
+    // this.state = {listOrder: this.props.relationships}
   }
-
-  componentDidMount() {
-    this.setState({listOrder: this.props.relationships.sort((a,b) => a.first_name < b.first_name ? -1 : 1)})
+  static getDerivedStateFromProps(props, _state) {
+    return {listOrder: props.relationships}
   }
   
   handleChange = val => {
@@ -31,8 +28,10 @@ class RelationshipsList extends Component {
         newOrder = (this.state.listOrder.sort((a,b) => a.last_name > b.last_name ? -1 : 1))
         break;
       case "most_recent":
+        newOrder = this.state.listOrder.sort((a,b) => mostRecentEvent(a,b))
         break;
       case "least_recent":
+        newOrder = this.state.listOrder.sort((a,b) => mostRecentEvent(a,b)).reverse()
         break;
       case "most_freq":
         newOrder = (this.state.listOrder.sort((a,b) => b.events.length - a.events.length))
@@ -43,7 +42,27 @@ class RelationshipsList extends Component {
       default:
         break;
     }
-    this.setState({listOrder: newOrder})
+    this.setState({listOrder: newOrder});
+
+    function mostRecentEvent(a, b) {
+      let recentA = 0;
+      let recentB = 0;
+      let now = (new Date()).getTime()
+
+      a.events.forEach(ev => {
+        let endDate = new Date(ev.end_date.toLocaleString()).getTime()
+        if (endDate < now && endDate > recentA) {
+          recentA = endDate
+        }
+      })
+      b.events.forEach(ev => {
+        let endDate = new Date(ev.end_date.toLocaleString()).getTime()
+        if (endDate < now && endDate > recentB) {
+          recentB = endDate
+        }
+      })
+      return recentA > recentB ? -1 : 1
+    }
   }
 
   displayFilter = () => {
@@ -100,6 +119,7 @@ class RelationshipsList extends Component {
       return (
         <div>
           <h4>You're not tracking any relationships!</h4>
+          <h5>Get started!</h5>
           <AddRelationshipButton handleNewRelationship={this.props.handleNewRelationship}/>
         </div>
       )

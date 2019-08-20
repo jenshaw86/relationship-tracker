@@ -6,6 +6,11 @@ import DeleteRelationshipButton from './DeleteRelationshipButton'
 const RelationshipCard = props => {
   const person = props.relationship
 
+  const suggestMeetup = () => {
+    // If now minus last connected >= contact_frequency
+    // Then make suggestion
+    // Else don't
+  }
   return(
     <>
       <Link to={`/relationships/${props.relationship.id}`} onClick={() => props.viewRelationship(person)} >
@@ -19,6 +24,9 @@ const RelationshipCard = props => {
           </div>
           <div>
             <p>Last connected: {lastConnection(person)}</p>
+          </div>
+          <div>
+            <p>Connection cycle: Every {person.contact_frequency} days</p>
           </div>
         </div>
       </Link>

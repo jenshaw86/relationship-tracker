@@ -1,16 +1,26 @@
 // RELATIONSHIP FUNCTIONS
 
 // display last connection date
+export const lastDate = (person) => {
+  if (person.events && person.events.length !== 0) {
+    let now = Date.parse(new Date());
+    let filtered = person.events.filter(ev => Date.parse(ev.end_date) < now).sort((a,b) => a.end_date - b.end_date)
+    if (filtered.length !== 0) {
+      return new Date(filtered[filtered.length - 1].end_date)
+    }
+  }
+}
+
 export const lastConnection = (person) => {
   if (person.events && person.events.length !== 0) {
     let now = Date.parse(new Date());
-    let filtered = person.events.filter(ev => Date.parse(ev.end_date) < now)
+    let filtered = person.events.filter(ev => Date.parse(ev.end_date) < now).sort((a,b) => a.end_date - b.end_date)
     if (filtered.length !== 0) {
-      let last = Date(filtered[filtered.length - 1].end_date)
-      let dateArr = last.split(" ");
-      let [, month, date, year] = dateArr
+      let last = new Date(filtered[filtered.length - 1].end_date)
+      let dateArr = last.toUTCString().split(" ");
+      let [day, date, month, year] = dateArr
 
-      return `${month} ${date}, ${year}`
+      return `${day} ${month} ${date}, ${year}`
     } else {
       return "never"
     }
@@ -18,6 +28,25 @@ export const lastConnection = (person) => {
     return "never"
   }
 }
+
+export const connectionGap = (person) => {
+  if (person.events && person.events.length !== 0) {
+    let now = Date.parse(new Date());
+    let filtered = person.events.filter(ev => Date.parse(ev.end_date) < now).sort((a,b) => a.end_date - b.end_date)
+    if (filtered.length !== 0) {
+      let lastDate = new Date(filtered[filtered.length - 1].end_date)
+      let now = new Date();
+      let diffSec = Math.abs(now.getTime() - lastDate.getTime())
+      let diffDay = Math.ceil(diffSec/(1000*60*60*24))
+      return diffDay
+    } else {
+      return null
+    }
+  } else {
+    return null
+  }
+}
+
 
 // EVENT FUNCTIONS
 

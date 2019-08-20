@@ -77,7 +77,7 @@ class App extends Component {
 
       <Navbar />
       
-      `<Route path='/' exact render={() => <Home /> } /> 
+      <Route path='/' exact render={() => <Home /> } /> 
       <Route path='/account' render={() => <Account user={this.state.currentUser} updateUserProfile={this.updateUserProfile} />} />
       <Route path='/account/basic' render={ () => <ProfileBasics user={this.state.currentUser} />} />
       <Route path='/account/more_info' exact render={ () => <ProfileDetails user={this.state.currentUser} />} />
@@ -110,6 +110,7 @@ class App extends Component {
           relationship={this.state.relationshipView}
           viewRelationship={this.viewRelationship}
           updateRelationships={this.updateRelationships}
+          handleNewEvent={this.handleNewEvent} 
           viewEvent={this.viewEvent}
           /> } 
       />

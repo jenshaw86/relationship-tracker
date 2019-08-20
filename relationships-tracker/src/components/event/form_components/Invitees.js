@@ -4,12 +4,17 @@ import {Form} from 'react-bootstrap';
 const Invitee = props => {
   
   const displayNames = () => {
+
     if(props.relationships && props.relationships.length !== 0) {
       return props.relationships.map(relationship => {
         return (
           <option key={relationship.id} value={relationship.id}>{`${relationship.first_name} ${relationship.last_name}`}</option>
         )
       })
+    } else if (props.relationship) {
+      return (
+        <option value={props.relationship.id}>{`${props.relationship.first_name} ${props.relationship.last_name}`}</option>
+      )
     }
   }
 

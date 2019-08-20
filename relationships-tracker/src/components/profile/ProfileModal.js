@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {Modal, Form, Button, ButtonToolbar} from "react-bootstrap";
 import FirstName from '../form/FirstName'
 import LastName from '../form/LastName';
@@ -12,6 +12,15 @@ const ProfileModal = props => {
   const [email, setEmail] = useState(props.user.email)
   const [phone, setPhone] = useState(props.user.phone_number)
   const [image, setImage] = useState(props.user.image)
+
+  // TODO: finish setting state below
+  useEffect(() => {
+    setFirstName(props.user.first_name)
+    setLastName(props.user.last_name)
+    setEmail(props.user.email)
+    setPhone(props.user.phone_number)
+    setImage(props.user.image)
+  }, [props.user] )
 
   const handleEdit = () => {
     // ev.preventDefault();

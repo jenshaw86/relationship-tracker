@@ -5,7 +5,6 @@ import {whoIsComing, displayDate, displayTime} from '../../utils'
 const EventProfile = props => {
 
     if (props.event.name) {
-        console.log(props.event)
         return (
             <div>
                 <h3>{props.event.name ? props.event.name : null}</h3> 

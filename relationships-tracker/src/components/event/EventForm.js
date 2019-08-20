@@ -27,7 +27,8 @@ const EventForm = props => {
         <EventName eventName={eventName} setEventName={setEventName} />
         {/* Invitee Name */}
         <Invitees inviteeId={inviteeId} setInviteeId={setInviteeId} 
-        relationships={props.relationships} 
+        // relationships={props.relationships} 
+        {...props}
         // relationships={props.relEventData.relationships} 
         />
         {/* Location */}
