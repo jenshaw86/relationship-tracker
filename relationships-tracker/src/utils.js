@@ -122,3 +122,11 @@ export const whoIsComing = invitees => {
     return list
   }
 }
+
+export const displayPhoneNumber = num => {
+  let country = num.slice(0,2)
+  let area = num.slice(2,5)
+  let office = num.slice(5,8)
+  let line = num.slice(8)
+  return `${country} (${area}) ${office}-${line}`
+}

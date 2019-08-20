@@ -5,7 +5,7 @@ const FirstName = (props) => {
   return (
     <Form.Group as={Col}>          
       <Form.Label>First Name</Form.Label>
-      <Form.Control 
+      <Form.Control
         type="text" 
         placeholder="Enter first name" 
         value={props.firstName} 

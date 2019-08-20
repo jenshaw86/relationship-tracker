@@ -1,7 +1,7 @@
 import React from 'react'
 import {Redirect} from 'react-router-dom'
 import EditRelationshipButton from './EditRelationshipButton'
-import {lastConnection, connectionGap} from '../../utils'
+import {lastConnection, connectionGap, displayPhoneNumber} from '../../utils'
 import EventsList from '../event/EventsList'
 import AddEventButton from '../event/AddEventButton'
 
@@ -47,7 +47,7 @@ const RelationshipProfile = (props) => {
           <p>Email:</p>
           <p>{person.email}</p>
           <p>Phone:</p>
-          <p>{person.phone_number}</p>
+          <p>{displayPhoneNumber(person.phone_number)}</p>
         </div>
         <EventsList events={props.relationship.events} viewEvent={props.viewEvent} />
       </div>
