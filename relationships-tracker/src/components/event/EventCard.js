@@ -18,7 +18,7 @@ const EventCard = (props) => {
 
   return(
     <>
-      <Link to={`events/${props.event.name}`} onClick={() => props.viewEvent(props.event)}  >
+      <Link to={"/event/${props.event.name}"} onClick={() => props.viewEvent(props.event)}  >
         <div>
           <h4>{displayDate(props.event.start_date)}</h4>
           <h4>{props.event.name}</h4>

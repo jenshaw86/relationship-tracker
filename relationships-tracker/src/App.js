@@ -79,7 +79,7 @@ class App extends Component {
       <Route path='/account' render={() => <Account user={this.state.currentUser} events={this.state.events} updateUserProfile={this.updateUserProfile} />} />
       
       {/* All and specific events */}
-      <Route path="/events"
+      <Route path="/events" 
         render={ (browserHistory) => <EventDashboard
           {...browserHistory}
           events={this.state.events} 
@@ -89,7 +89,7 @@ class App extends Component {
           viewEvent={this.viewEvent}
       /> } />
 
-      <Route path='/events/:time/:name' render={ () => <EventProfile event={this.state.eventView} />} />
+      <Route path='/event/:name' render={ () => <EventProfile event={this.state.eventView} />} />
 
       {/* All relationships */}
       <Route path="/relationships" exact 
