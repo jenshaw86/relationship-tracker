@@ -24,7 +24,6 @@ const Invitee = props => {
       <Form.Control as="select" 
         value={props.inviteeId}
         onChange={ev => {
-          console.log(ev.target.value)
           props.setInviteeId(ev.target.value)
         }}
         >

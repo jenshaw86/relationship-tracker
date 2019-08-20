@@ -4,11 +4,9 @@ import Navbar from './components/Navbar'
 import EventDashboard from './components/event/EventDashboard'
 import EventProfile from './components/event/EventProfile'
 import Home from './containers/Home'
-import Account from './containers/Account'
-import ProfileBasics from './components/profile/ProfileBasics'
+import Account from './components/profile/Account'
 import RelationshipsList from './components/relationship/RelationshipsList'
 import RelationshipProfile from './components/relationship/RelationshipProfile'
-import ProfileDetails from './components/profile/ProfileDetails';
 import './styles.css'
 
 class App extends Component {
@@ -78,9 +76,7 @@ class App extends Component {
       <Navbar />
       
       <Route path='/' exact render={() => <Home /> } /> 
-      <Route path='/account' render={() => <Account user={this.state.currentUser} updateUserProfile={this.updateUserProfile} />} />
-      <Route path='/account/basic' render={ () => <ProfileBasics user={this.state.currentUser} />} />
-      <Route path='/account/more_info' exact render={ () => <ProfileDetails user={this.state.currentUser} />} />
+      <Route path='/account' render={() => <Account user={this.state.currentUser} events={this.state.events} updateUserProfile={this.updateUserProfile} />} />
       
       {/* All and specific events */}
       <Route path="/events"

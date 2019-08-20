@@ -6,9 +6,6 @@ const Phone = (props) => {
     <Form.Group>
       <Form.Label>Phone Number</Form.Label>
       <Form.Control 
-        required
-        maxlength="10"
-        minlength="10"
         type="text" 
         placeholder="Enter phone number" 
         value={props.phone}

@@ -7,7 +7,6 @@ const EventSubmitButton = props => {
   // POST new event and relationship_event
   const handleSubmit = event => {
     event.preventDefault();
-    console.log('submit new event')
     props.handleClose();
     fetch(`http://localhost:3000/events`, {
       method: 'POST',
@@ -100,20 +99,15 @@ const EventSubmitButton = props => {
       .then(res => res.json())
       .then(obj => {
         props.handleNewEvent(obj)
+        fetch(`http://localhost:3000/relationships/${obj.relationships[0].id}`)
+        .then(res => res.json())
+        .then(rel => props.viewRelationship(rel))
       })
     } else {
       props.updateEvents(eventObj);
     }
   }
 
-  // const resetRelationshipsData = () => {
-  //   fetch(`http://localhost:3000/users/1/relationships`)
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       props.setRelEventData({relationships: data})
-  //       console.log("Finished new event")
-  //     })
-  // }
 
   const displaySubmitButton = () => {
     if (props.handleNewEvent) {

@@ -5,7 +5,7 @@ const Home = props => {
   return (
     <div>
       <h1>
-        Welcome to my App!
+        App Homepage
       </h1>
     </div>
   )

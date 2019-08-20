@@ -92,17 +92,19 @@ class RelationshipsList extends Component {
   
   // show all relationships
   displayRelationships = () => {
-    return this.state.listOrder.map(rel => {
-      return (
-        <RelationshipCard
-          key={rel.id}
-          relationship={rel}
-          viewRelationship={this.props.viewRelationship}
-          updateRelationships={this.props.updateRelationships}
-          updateEvents={this.props.updateEvents}
-        />
-      );
-    });
+    if(this.state.listOrder.length !== 0) {
+      return this.state.listOrder.map(rel => {
+        return (
+          <RelationshipCard
+            key={rel.id}
+            relationship={rel}
+            viewRelationship={this.props.viewRelationship}
+            updateRelationships={this.props.updateRelationships}
+            updateEvents={this.props.updateEvents}
+          />
+        );
+      });
+    }
   }
 
   // display page
