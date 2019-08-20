@@ -39,6 +39,8 @@ const EventForm = props => {
         <EndDateTime endDate={endDate} setEndDate={setEndDate} startDate={startDate} />
         {/* Description */}
         <Description description={description} setDescription={setDescription}/>
+        {/* Send Notification? */}
+        <Form.Check label="Send friend notifications about this event?"/> 
       </Modal.Body>
 
       <Modal.Footer>
