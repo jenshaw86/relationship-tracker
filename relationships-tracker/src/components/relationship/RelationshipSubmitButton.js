@@ -51,10 +51,9 @@ const RelationshipSubmitButton = props => {
       })
     })
     .then(res => res.json())
-    .then(allRels => {
-      props.updateRelationships(allRels)
-      const editedRel = allRels.find(rel => rel.id === props.relationship.id)
-      props.viewRelationship(editedRel)
+    .then(rel => {
+      props.updateRelationships(rel)
+      props.viewRelationship(rel)
     })
   }
 

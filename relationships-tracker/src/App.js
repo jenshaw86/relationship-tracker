@@ -79,8 +79,8 @@ class App extends Component {
       <div className="app">
       <Router>
 
+       
       <Navbar />
-      
       <Route path='/' exact render={() => <Home /> } /> 
       <Route path='/account' render={() => <Account user={this.state.currentUser} events={this.state.events} updateUserProfile={this.updateUserProfile} />} />
       
