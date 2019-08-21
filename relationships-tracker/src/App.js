@@ -46,12 +46,14 @@ class App extends Component {
     })
   }
 
-  // updateEvents = data => this.setState({events: data})
   updateEvents = event => {
-    let events = this.state.events.map(ev => event.id === ev.id ? event : ev)
-    this.setState({events: events, eventView: event})
+    if (event.id) { // if the arg is an object
+      let events = this.state.events.map(ev => event.id === ev.id ? event : ev)
+      this.setState({events: events, eventView: event})
+    } else if (event.length) { //if the arg is an array
+      this.setState({events: event})
+    }
   }
-
 
   viewEvent = event => {
     this.setState({eventView: event})
