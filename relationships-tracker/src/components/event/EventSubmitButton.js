@@ -45,7 +45,7 @@ const EventSubmitButton = props => {
     })
     .then(res => res.json())
     .then((data) => {
-      refreshState(obj)
+      refreshStateAfterPost(obj)
     })
   }
 
@@ -53,9 +53,9 @@ const EventSubmitButton = props => {
   const handleSubmitEdit = event => {
     event.preventDefault();
     props.handleClose();
-    let prevInvitee = props.event.relationships[0].id
+    let prevInviteeId = props.event.relationships[0].id // keep previous invitee id, use later to update relationships
     console.log('patch event')
-    fetch(`http://localhost:3000/events/${props.event.id}`, {
+    fetch(`http://localhost:3000/events/${props.event.id}`, { // patch event itself
       method: 'PATCH',
       headers: {
         'Accept': 'application/json', 
@@ -71,13 +71,12 @@ const EventSubmitButton = props => {
       })
     })
     .then(res => res.json())
-    .then(obj => {
-
-      patchRelEvent(obj, prevInvitee)
+    .then(ev => {  // newly updated event. WARNING: hasn't updated relationship
+      patchRelEvent(ev, prevInviteeId) // move forward to patch relationship-event, take event
     })
   }
 
-  const patchRelEvent = (obj, prevInvitee) => {
+  const patchRelEvent = (ev, prevInviteeId) => { // patch relationship-event with new id first
     console.log('patch relevent')
     fetch(`http://localhost:3000/relationship_events/${props.event.relationship_events[0].id}`, {
       method: 'PATCH',
@@ -91,47 +90,69 @@ const EventSubmitButton = props => {
       })
     })
     .then(res => res.json())
-    .then(() => {
-      fetch(`http://localhost:3000/relationships/${prevInvitee}`)
+    .then((re) => { // get back relationship
+      fetch(`http://localhost:3000/relationships/${prevInviteeId}`) //update old relatinship next
       .then(res => res.json())
       .then(prev => {
         props.updateRelationships(prev)
       })
-
-      refreshState(obj)
+      refreshStateAfterPatch(re.event_id)
     })
   }
 
   // Replace Event State
-  const refreshState = (eventObj) => {
-    // if there's a new obj, then fetch obj and add to event state
-    if(props.handleNewEvent) { //creating a new even
-      fetch(`http://localhost:3000/events/${eventObj.id}`)
+  const refreshStateAfterPost = (eventObj) => {
+    fetch(`http://localhost:3000/events/${eventObj.id}`)
       .then(res => res.json())
       .then(obj => {
         props.handleNewEvent(obj)
         fetch(`http://localhost:3000/relationships/${obj.relationships[0].id}`)
         .then(res => res.json())
         .then(rel => {
-          // props.viewRelationship(rel) //update the view
-          // update the relationship in all relatinoships
           props.updateRelationships(rel)
           props.viewRelationship(rel)
         })
       })
-    } else { // editing an old event
-      props.updateEvents(eventObj); //Come back here after app
-      fetch(`http://localhost:3000/relationships/${eventObj.relationships[0].id}`)
+  }
+
+  const refreshStateAfterPatch = id => {
+    fetch(`http://localhost:3000/events/${id}`)
+    .then(res => res.json())
+    .then(ev => {
+      props.updateEvents(ev)
+      fetch(`http://localhost:3000/relationships/${ev.relationships[0].id}`)
       .then(res => res.json())
       .then(rel => {
+        props.updateRelationships(rel)
         props.viewRelationship(rel)
-        // map through existing relationships
-        // replace this instance with updated one
-
       })
-
-    }
+    })
   }
+  // const refreshState = (eventObj) => {
+  //   if(props.handleNewEvent) { //creating a new event
+  //     fetch(`http://localhost:3000/events/${eventObj.id}`)
+  //     .then(res => res.json())
+  //     .then(obj => {
+  //       props.handleNewEvent(obj)
+  //       fetch(`http://localhost:3000/relationships/${obj.relationships[0].id}`)
+  //       .then(res => res.json())
+  //       .then(rel => {
+  //         props.updateRelationships(rel)
+  //         props.viewRelationship(rel)
+  //       })
+  //     })
+    // } else { // editing an old event
+    //   props.updateEvents(eventObj); 
+    //   debugger;
+    //   fetch(`http://localhost:3000/relationships/${eventObj.relationships[0].id}`)
+    //   .then(res => res.json())
+    //   .then(rel => {
+    //     props.updateRelationships(rel)
+    //     props.viewRelationship(rel)
+    //   })
+
+    // }
+  // }
 
 
   const displaySubmitButton = () => {
