@@ -44,7 +44,9 @@ const EventSubmitButton = props => {
       })
     })
     .then(res => res.json())
-    .then(() => refreshState(obj))
+    .then((data) => {
+      refreshState(obj)
+    })
   }
 
   // PATCH event

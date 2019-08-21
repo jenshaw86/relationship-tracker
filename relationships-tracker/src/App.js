@@ -93,6 +93,8 @@ class App extends Component {
           handleNewEvent={this.handleNewEvent} 
           updateEvents={this.updateEvents}
           viewEvent={this.viewEvent}
+          viewRelationship={this.viewRelationship}
+          updateRelationships={this.updateRelationships}
       /> } />
 
       <Route path='/event/:name' render={ () => <EventProfile event={this.state.eventView} />} />

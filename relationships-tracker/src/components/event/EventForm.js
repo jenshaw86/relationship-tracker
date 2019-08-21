@@ -11,34 +11,24 @@ import Description from './form_components/Description';
 
 // TODO: DEBUG THIS. can't read property id of undefined 16
 const EventForm = props => {
-  console.log(props.event)
   const [eventName, setEventName] = useState(props.event ? props.event.name : '');
   const [location, setLocation] = useState(props.event ? props.event.location : '');
   const [description, setDescription] = useState(props.event ? props.event.description : '');
   const [startDate, setStartDate] = useState(props.event ? showDate(props.event.start_date) : new Date());
   const [endDate, setEndDate] = useState(props.event ? showDate(props.event.end_date) : startDate);
   // const [inviteeId, setInviteeId] = useState(props.relationship ? props.event.relationships[0].id : props.relationship.id) 
-  const [inviteeId, setInviteeId] = useState(props.relationships[0].id)
-
-  useEffect(() => {
+  const somefunction = () => {
     if (props.event) {
-      setInviteeId(props.event.relationships[0].id) 
-    } else if (props.relationship) {
-      setInviteeId(props.relationship.id)
-    } else {
-      setInviteeId(props.relationships.id)
-    }
-  }, [props])
-
-  const initialId = () => {
-    if (props.event) {
+      debugger;
       return props.event.relationships[0].id
     } else if (props.relationship) {
-      return props.event.relationship.id
+      return props.relationship.id
     } else {
       return props.relationships[0].id
     }
   }
+  const [inviteeId, setInviteeId] = useState(somefunction())
+
   // DEBUG: props.event doesn't exist, props.relationship doesn't exist, but props.relationships DOES!
 
   return (
