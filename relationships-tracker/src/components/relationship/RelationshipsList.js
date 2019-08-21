@@ -79,10 +79,10 @@ class RelationshipsList extends Component {
               <option value="first_za">First Name Alphabetically Z-A</option>
               <option value="last_az">Last Name Alphabetically A-Z</option>
               <option value="last_za">Last Name Alphabetically Z-A</option>
-              <option value="most_recent">Most Recently</option>
-              <option value="least_recent">Least Recently</option>
-              <option value="most_freq">Most Frequently</option>
-              <option value="least_freq">Least Frequently</option>
+              <option value="most_recent">Most Recently Seen</option>
+              <option value="least_recent">Least Recently Seen</option>
+              <option value="most_freq">Most Frequently Seen</option>
+              <option value="least_freq">Least Frequently Seen</option>
             </Form.Control>
           </Form.Group>
         </Form>

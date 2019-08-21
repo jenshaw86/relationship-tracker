@@ -9,9 +9,7 @@ import StartDateTime from './form_components/StartDateTime'
 import EndDateTime from './form_components/EndDateTime'
 import Description from './form_components/Description';
 
-// PROPS : 
-// functions setEvents() OR handleNewEvent()
-
+// TODO: DEBUG THIS. can't read property id of undefined 16
 const EventForm = props => {
   const [eventName, setEventName] = useState(props.event ? props.event.name : '');
   const [location, setLocation] = useState(props.event ? props.event.location : '');

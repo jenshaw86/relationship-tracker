@@ -17,7 +17,7 @@ const EventsList = props => {
   }
 
   return (
-    <div>
+    <div className="events-list">
       { displayAllEvents() }
     </div> 
   )

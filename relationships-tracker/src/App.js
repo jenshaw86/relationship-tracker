@@ -46,7 +46,12 @@ class App extends Component {
     })
   }
 
-  updateEvents = data => this.setState({events: data})
+  // updateEvents = data => this.setState({events: data})
+  updateEvents = event => {
+    let events = this.state.events.map(ev => event.id === ev.id ? event : ev)
+    this.setState({events: events, eventView: event})
+  }
+
 
   viewEvent = event => {
     this.setState({eventView: event})
@@ -60,8 +65,9 @@ class App extends Component {
     this.setState({relationshipView: person})
   }
 
-  updateRelationships = data => {
-    this.setState({relationships: data})
+  updateRelationships = relationship => {
+    let relationships = this.state.relationships.map(rel => rel.id === relationship.id ? relationship : rel)
+    this.setState({relationships: relationships})
   }
 
   updateUserProfile = data => {
@@ -70,7 +76,7 @@ class App extends Component {
 
   render() {
     return(
-      <div>
+      <div className="app">
       <Router>
 
       <Navbar />
@@ -104,6 +110,7 @@ class App extends Component {
       <Route path="/relationships/:id" 
         render={ () => <RelationshipProfile 
           relationship={this.state.relationshipView}
+          relationships={this.state.relationships}
           viewRelationship={this.viewRelationship}
           updateRelationships={this.updateRelationships}
           handleNewEvent={this.handleNewEvent} 

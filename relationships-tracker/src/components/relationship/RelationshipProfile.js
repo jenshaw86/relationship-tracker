@@ -33,7 +33,7 @@ const RelationshipProfile = (props) => {
           viewRelationship={props.viewRelationship} 
           updateRelationships={props.updateRelationships}
           />
-          <AddEventButton viewRelationship={props.viewRelationship} relationship={props.relationship} handleNewEvent={props.handleNewEvent} />
+          <AddEventButton updateRelationships={props.updateRelationships} viewRelationship={props.viewRelationship} relationship={props.relationship} handleNewEvent={props.handleNewEvent} relationships={props.relationships}/>
         </div>
         <div>
           <h3>{person.first_name} {person.last_name}</h3>

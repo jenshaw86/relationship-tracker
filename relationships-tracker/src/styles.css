@@ -1,9 +1,56 @@
-.home {
+html, body, #root, .app {
+  height: 100%;
+  width: 100%;
+  background-color: #f9f5f7;
+}
+
+.container {
+  height: 100%;
+  padding-top: 5%;
+  /* background-color: pink; */
+}
+
+.profile {
+  display: grid;
+  grid-template-columns: 250px auto;
+  grid-template-rows: 250px 50px auto;
+}
+
+.profile_img {
+  width: 200px;
+  border-radius: 50%; 
+  place-self: center;
+}
+
+.profile-info {
+  place-self: center;
+}
+
+.profile-edit-btn {
+  place-self: center;
+}
+
+/* 
+#landing-page {
   background: url("https://images.unsplash.com/photo-1486704155675-e4c07f8ad160?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9") no-repeat center center fixed;
+  background-size: cover;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  opacity: 20%;
+  width: 100%;
+  height: 100%;
+} */
+
+.jumbotron {
+  /* position: fixed;
+  top: 50%;
+  left: 50%; */
+  /* margin-top: -50px;
+  margin-left: -100px; */
+  background-color: #bbb5bb;
+  /* width: 60%; */
 }
 
 nav {
@@ -26,10 +73,88 @@ a:hover {
   color: #566355;
 }
 
-.header {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  margin-top: -50px;
-  margin-left: -100px;
+.btn-primary {
+  background-color: #2e6896;
+  border-color: #2e6896;
+  color: #fefefe;
+
+}
+
+.btn-primary:hover {
+  background-color: #204969;
+  color: #fefefe;
+
+}
+
+.btn-secondary:hover {
+  background-color: #808991;
+  border-color: #808991;
+  color: #fefefe;
+
+}
+
+.btn-secondary {
+  background-color: #8b939a;
+  border-color: #8b939a;
+  color: #fefefe;
+
+}
+
+.events-container {
+  display: grid;
+  grid-template-rows: 100px 100px 100px auto;
+  grid-template-columns: 200px 100px auto;
+  grid-column-gap: 10px;
+  grid-row-gap: 15px;
+}
+
+.events-container .header {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  align-self: center;
+}
+
+.events-container .new Button {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  vertical-align: center;
+}
+
+.events-1 {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  justify-self: stretch;
+
+}
+
+.events-2 {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 3;
+  grid-row-end: 4;
+}
+
+.events-list {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: span;
+}
+
+.event-btn {
+  background-color: #94aaaf;
+  border-color: #f9f5f7;
+  width: 80%;
+}
+
+.past-btn:hover, .upcoming-btn:hover {
+  background-color: #728f96;
+  border-color: #728f96;
+  
 }
