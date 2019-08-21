@@ -24,7 +24,7 @@ const EventDashboard = props => {
           <Link to={"/events/upcoming"}><Button className="event-btn upcoming-btn">Upcoming Events</Button></Link>
         </div>
       
-      <Route path={"/events/upcoming"} exact render={ (browserHistory) => <EventsList {...browserHistory} events={upcomingEvents} relationships={props.relationships} viewEvent={props.viewEvent} updateEvents={props.updateEvents} /> } />
+      <Route path={"/events/upcoming"} exact render={ (browserHistory) => <EventsList {...browserHistory} events={upcomingEvents} relationships={props.relationships} viewEvent={props.viewEvent} viewRelationship={props.viewRelationship} updateEvents={props.updateEvents} updateRelationships={props.updateRelationships} /> } />
       <Route path={"/events/past"} exact render={ (browserHistory) => <EventsList {...browserHistory} events={pastEvents} viewEvent={props.viewEvent} /> } />
     </Container>
   )

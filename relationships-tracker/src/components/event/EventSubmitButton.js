@@ -53,7 +53,7 @@ const EventSubmitButton = props => {
   const handleSubmitEdit = event => {
     event.preventDefault();
     props.handleClose();
-    let prevInvitee = event.relationships[0].id
+    let prevInvitee = props.event.relationships[0].id
     console.log('patch event')
     fetch(`http://localhost:3000/events/${props.event.id}`, {
       method: 'PATCH',
@@ -92,7 +92,7 @@ const EventSubmitButton = props => {
     })
     .then(res => res.json())
     .then(() => {
-      fetch(`http://localhost:3000/relationships/${prevInvitee.id}`)
+      fetch(`http://localhost:3000/relationships/${prevInvitee}`)
       .then(res => res.json())
       .then(prev => {
         props.updateRelationships(prev)

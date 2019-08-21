@@ -19,7 +19,6 @@ const EventForm = props => {
   // const [inviteeId, setInviteeId] = useState(props.relationship ? props.event.relationships[0].id : props.relationship.id) 
   const somefunction = () => {
     if (props.event) {
-      debugger;
       return props.event.relationships[0].id
     } else if (props.relationship) {
       return props.relationship.id
