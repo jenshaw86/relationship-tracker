@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, ButtonToolbar, Container } from 'react-bootstrap';
+import { Button, Container } from 'react-bootstrap';
 import { fullName, displayPhoneNumber } from '../../utils'
 import ProfileModal from './ProfileModal'
 

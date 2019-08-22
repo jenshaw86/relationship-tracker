@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, ButtonGroup, Container, ButtonToolbar} from 'react-bootstrap'
+import {Button, Container} from 'react-bootstrap'
 import {Link, Route} from 'react-router-dom'
 import {filterFutureEvents, filterPastEvents} from '../../utils';
 import EventsList from './EventsList';

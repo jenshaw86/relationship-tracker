@@ -8,6 +8,7 @@ class RelationshipsList extends Component {
     super(props)
     // this.state = {listOrder: this.props.relationships}
   }
+  
   static getDerivedStateFromProps(props, _state) {
     return {listOrder: props.relationships}
     // return {listOrder: props.relationships.sort((a,b) => a.created_at > b.created_at ? -1 : 1)}

@@ -1,10 +1,9 @@
 import React, {useState, useEffect} from 'react'
-import {Container, ButtonToolbar} from 'react-bootstrap'
+import {Container} from 'react-bootstrap'
 import {Redirect} from 'react-router-dom'
 import EditRelationshipButton from './EditRelationshipButton'
 import {lastConnection, connectionGap, filterFutureEvents, displayPhoneNumber, displayDateString} from '../../utils'
 import EventsList from '../event/EventsList'
-import AddEventButton from '../event/AddEventButton'
 
 const RelationshipProfile = (props) => {
   const futureEvents = props.events.filter(ev => {
@@ -13,9 +12,10 @@ const RelationshipProfile = (props) => {
 
   const [events, setEvents] = useState(futureEvents)
   
-  useEffect(() => {
+  useEffect((futureEvents) => {
     setEvents(futureEvents)
   }, [props.events])
+// Did it break? Check this argument
 
   const person = props.relationship
   let gap = connectionGap(person);
@@ -29,13 +29,14 @@ const RelationshipProfile = (props) => {
         return `You met up with ${person.first_name} ${gap} days ago.`
       }
     } else {
-      return `You haven't met up with ${person.first_name} yet! They'd probably love it if you invited them to coffee!`
+      return `You haven't met up with ${person.first_name} yet! 
+      They'd probably love it if you invited them to coffee!`
     }
   }
 
   const meetupReminder = () => {
     if (gap >= person.contact_frequency) {
-      return `It's been a while. Maybe it's time to make plans to get together!`
+      return `It's been a while. I think it's time to make plans to get together!`
     }
   }
 
@@ -90,7 +91,7 @@ const RelationshipProfile = (props) => {
 
           <div className="reminders">
             <p>Reminders:</p>
-            <span>{connectionGapMessage(gap)} </span><br></br>
+            <span>{connectionGapMessage(gap)} </span>
             <span>{meetupReminder()}</span><br/>
           </div>
 

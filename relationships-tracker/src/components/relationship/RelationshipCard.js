@@ -7,11 +7,6 @@ import EditRelationshipButton from './EditRelationshipButton';
 const RelationshipCard = props => {
   const person = props.relationship
 
-  const suggestMeetup = () => {
-    // If now minus last connected >= contact_frequency
-    // Then make suggestion
-    // Else don't
-  }
   return(
     <>
       <div className='relationship-card'>
