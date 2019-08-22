@@ -29,7 +29,9 @@ const EventForm = props => {
   const [inviteeId, setInviteeId] = useState(somefunction())
 
   useEffect(() => {
-    setEndDate(startDate)
+    if(endDate < startDate) {
+      setEndDate(startDate)
+    }
   }, [startDate])
   // DEBUG: props.event doesn't exist, props.relationship doesn't exist, but props.relationships DOES!
 
