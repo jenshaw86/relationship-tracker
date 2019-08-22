@@ -111,12 +111,12 @@ class RelationshipsList extends Component {
   displayRelationshipsPage = () => {
     if (this.props.relationships && this.props.relationships.length !== 0) {
       return (
-        <div>
+        <>
           {this.displayFilter()}
           <div className="relationships-list">
           {this.displayRelationships()}
           </div>
-        </div>
+        </>
       )
     } else if (this.props.relationships && this.props.relationships.length === 0) {
       return (
