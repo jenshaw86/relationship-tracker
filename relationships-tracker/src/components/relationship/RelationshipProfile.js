@@ -49,7 +49,7 @@ const RelationshipProfile = (props) => {
           <p>Phone:</p>
           <p>{displayPhoneNumber(person.phone_number)}</p>
         </div>
-        <EventsList events={props.relationship.events} viewEvent={props.viewEvent} />
+        {/* <EventsList events={props.relationship.events} viewEvent={props.viewEvent} /> */}
       </div>
     )
   } else {

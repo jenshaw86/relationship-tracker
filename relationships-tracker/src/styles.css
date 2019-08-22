@@ -109,7 +109,7 @@ a {
   vertical-align: center;
 }
 
-.events-1 {
+.events-2 {
   grid-column-start: 1;
   grid-column-end: 3;
   grid-row-start: 2;
@@ -118,7 +118,7 @@ a {
 
 }
 
-.events-2 {
+.events-1 {
   grid-column-start: 1;
   grid-column-end: 3;
   grid-row-start: 3;
