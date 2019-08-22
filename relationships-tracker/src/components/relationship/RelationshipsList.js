@@ -67,7 +67,7 @@ class RelationshipsList extends Component {
 
   displayFilter = () => {
     return(
-      <div>
+      <div className="reorder-select">
         <Form>
           <Form.Group controlId="exampleForm.ControlSelect1">
             <Form.Label>Order by:</Form.Label>
@@ -113,8 +113,9 @@ class RelationshipsList extends Component {
       return (
         <div>
           {this.displayFilter()}
-          <AddRelationshipButton handleNewRelationship={this.props.handleNewRelationship} />
+          <div className="relationships-list">
           {this.displayRelationships()}
+          </div>
         </div>
       )
     } else if (this.props.relationships && this.props.relationships.length === 0) {
@@ -130,8 +131,9 @@ class RelationshipsList extends Component {
 
   render() {
     return (
-      <Container>
-        <h3>You're keeping track of {this.props.relationships.length} people</h3>
+      <Container className="relationships-container">
+        <h3>Connections</h3>
+        <AddRelationshipButton handleNewRelationship={this.props.handleNewRelationship} />
         {this.displayRelationshipsPage()}    
       </Container>
     );

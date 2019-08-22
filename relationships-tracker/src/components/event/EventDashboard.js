@@ -11,9 +11,9 @@ const EventDashboard = props => {
   const pastEvents = filterPastEvents(props.events);
   return (
     <Container className="events-container">
-        <div className="header">
+        {/* <div className="header"> */}
           <h2>Events</h2>
-        </div>
+        {/* </div> */}
         <div className="new-btn">
           <AddEventButton handleNewEvent={props.handleNewEvent} relationships={props.relationships} updateRelationships={props.updateRelationships} viewRelationship={props.viewRelationship}/>
         </div>

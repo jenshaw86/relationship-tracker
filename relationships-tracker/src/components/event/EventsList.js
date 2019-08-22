@@ -16,8 +16,17 @@ const EventsList = props => {
     }
   }
 
+  const displayHeader = () => {
+    if (props.match.url === "/events/past") {
+      return <h3>Past Events</h3>
+    } else {
+      return <h3>Upcoming Events</h3>
+    }
+  }
+
   return (
     <div className="events-list">
+      {displayHeader()}
       { displayAllEvents() }
     </div> 
   )

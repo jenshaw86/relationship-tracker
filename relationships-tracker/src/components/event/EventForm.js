@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Form, Button, ButtonToolbar, Modal } from "react-bootstrap";
 import { showDate } from '../../utils'
 import EventSubmitButton from './EventSubmitButton'

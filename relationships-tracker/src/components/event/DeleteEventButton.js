@@ -15,7 +15,7 @@ const DeleteEvent = props => {
   }
 
   return (
-    <Button onClick={handleDelete}>Cancel Event</Button>
+    <Button onClick={handleDelete} className="delete-btn">Cancel</Button>
   )
 
 }

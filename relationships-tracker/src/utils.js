@@ -50,7 +50,34 @@ export const connectionGap = (person) => {
 
 // EVENT FUNCTIONS
 
-export const displayDate = (str) => {
+
+const getDateSections = str => {
+  let dateArray = new Date(str)
+  return dateArray.toDateString().split(" ")
+
+}
+
+export const displayDay = str => {
+  const [day] = getDateSections(str)
+  return day;
+}
+
+export const displayMonth = str => {
+  const [, month] = getDateSections(str)
+  return month
+}
+
+export const displayDate = str => {
+  const [, , date] = getDateSections(str)
+  return date
+}
+
+export const displayYear = str => {
+  const [,,, year] = getDateSections(str)
+  return year
+}
+
+export const displayDateString = (str) => {
   let dateArray = new Date(str)
   const [day, month, date, year] = dateArray.toDateString().split(" ")
   return `${day}, ${month} ${date}, ${year}`
@@ -61,9 +88,13 @@ export const displayTime = str => {
   let time = dateArray.toTimeString().split(" ")[0]
   let [hour, min] = time.split(":")
   let meridiem = "am"
-  if (hour > 12) {
+  if (hour == "00") {
+    hour = "12"
+  } else if (hour > 12) {
     hour = hour - 12;
     meridiem = "pm"
+  } else if (hour < 10) {
+    hour = hour.slice(1,2)
   }
   return `${hour}:${min} ${meridiem}`
 }

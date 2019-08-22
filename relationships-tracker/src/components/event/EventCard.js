@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {displayDate} from '../../utils'
+import {displayDay, displayMonth, displayDate, displayYear, displayTime} from '../../utils'
 import EditEventButton from './EditEventButton'
 import DeleteEventButton from './DeleteEventButton'
 
@@ -17,15 +17,25 @@ const EventCard = (props) => {
   }
 
   return(
-    <>
-      <Link to={"/event/${props.event.name}"} onClick={() => props.viewEvent(props.event)}  >
-        <div>
-          <h4>{displayDate(props.event.start_date)}</h4>
-          <h4>{props.event.name}</h4>
-        </div>
-      </Link>
+    <div className="event-card">
+      <p className="day">{displayDay(props.event.start_date)}</p>
+      <p className="event-date">
+        <span className="month">{displayMonth(props.event.start_date)}</span><br/>
+        <span className="date">{displayDate(props.event.start_date)}</span><br/>
+        <span className="year">{displayYear(props.event.start_date)}</span>
+      </p>
+      <div className="event-details">
+        <p>
+          <Link to={"/event/${props.event.name}"} onClick={() => props.viewEvent(props.event)} >
+            <span className="event-name">{props.event.name}</span><br/>
+          </Link>
+          <span className="time">{displayTime(props.event.start_date)}</span><br/>
+          <span className="location">{props.event.location}</span><br/>
+          <span className="company">with {props.event.relationships[0].first_name} {props.event.relationships[0].last_name}</span>
+        </p>
+      </div>
       {displayButtons()} {/* Edit and Delete Buttons */}
-    </>
+    </div>
   )
 }
 
