@@ -22,10 +22,10 @@ const RelationshipCard = props => {
         </div>
         <div>
         <Link to={`/relationships/${props.relationship.id}`} onClick={() => props.viewRelationship(person)} >
-          <span>{`${person.first_name} ${person.last_name}`}</span><br/>
-          <span>{person.relationship_type}</span><br/>
-          <span>Last met: {lastConnection(person)}</span><br/>
+          <span className="name">{`${person.first_name} ${person.last_name}`}</span><br/><br/>
         </Link>
+          <span className="connection"><i class="fas fa-user"></i>{person.relationship_type}</span><br/>
+          <span>Last met: {lastConnection(person)}</span><br/>
         </div>
         <EditRelationshipButton relationship={props.relationship} viewRelationship={props.viewRelationship} updateRelationships={props.updateRelationships}/>
         <DeleteRelationshipButton relationship={props.relationship} 

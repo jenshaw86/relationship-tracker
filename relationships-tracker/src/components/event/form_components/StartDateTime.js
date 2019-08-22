@@ -25,7 +25,7 @@ const StartDateTime = props => {
           onChange={time => props.setStartDate(time)}
           showTimeSelect
           showTimeSelectOnly
-          timeIntervals={15}
+          timeIntervals={30}
           dateFormat="h:mm aa"
           timeCaption="Time"
         />

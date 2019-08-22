@@ -72,13 +72,13 @@ const RelationshipProfile = (props) => {
   if(props.relationship.first_name) {
     return (
       <Container className="profile-container">
-        <img src={`${person.image}`} className="profile-img" alt={`${person.first_name} ${person.last_name}`}/>
+          <img src={`${person.image}`} className="profile-img" alt={`${person.first_name} ${person.last_name}`}/>
           <div className="profile-info">
             <h1>{person.first_name} {person.last_name}</h1><br/>
             
-            <span>{person.relationship_type}</span><br/>
-            <span>Email: {person.email}</span><br/>
-            <span>Phone: {displayPhoneNumber(person.phone_number)}</span><br/>
+            <span className="connection"><i class="fas fa-user"></i>{person.relationship_type}</span><br/>
+            <span><i class="fas fa-envelope"></i> Email: {person.email}</span><br/>
+            <span><i class="fas fa-mobile-alt"></i> Phone: {displayPhoneNumber(person.phone_number)}</span><br/>
           </div>
 
 
@@ -106,7 +106,7 @@ const RelationshipProfile = (props) => {
             {/* <AddEventButton updateRelationships={props.updateRelationships} viewRelationship={props.viewRelationship} relationship={props.relationship} handleNewEvent={props.handleNewEvent} relationships={props.relationships}/> */}
 
 
-            <EventsList events={events} viewEvent={props.viewEvent} />
+            <EventsList events={events} viewEvent={props.viewEvent} updateRelationships={props.updateRelationships} viewRelationship={props.viewRelationship} relationship={props.relationship} handleNewEvent={props.handleNewEvent} relationships={props.relationships} />
 
 
       </Container>

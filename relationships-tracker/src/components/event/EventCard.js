@@ -19,6 +19,7 @@ const EventCard = (props) => {
   return(
     <div className="event-card">
       <span className="day">{displayDay(props.event.start_date)}</span>
+      
       <div className="event-date">
         <span className="month">{displayMonth(props.event.start_date)}</span><br/>
         <span className="date">{displayDate(props.event.start_date)}</span><br/>
@@ -30,6 +31,7 @@ const EventCard = (props) => {
           </Link>
           <span className="time">{displayTime(props.event.start_date)}</span><br/>
           <span className="location">{props.event.location}</span><br/>
+          
           <span className="company">with {props.event.relationships[0].first_name} {props.event.relationships[0].last_name}</span>
       </div>
       {displayButtons()} {/* Edit and Delete Buttons */}
