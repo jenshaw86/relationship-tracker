@@ -9,13 +9,13 @@ const EditRelationshipButton = props => {
   const handleShow = () => setShow(true);
 
   return (
-    <div>
-      <Button onClick={() => handleShow()} >Edit Relationship</Button>
+    <>
+      <Button className="rel-edit-btn" onClick={() => handleShow()} >Edit</Button>
       <RelationshipModal show={show} handleClose={handleClose} relationship={props.relationship} 
       viewRelationship={props.viewRelationship}
       updateRelationships={props.updateRelationships}
       />
-    </div>
+    </>
   )
 }
 

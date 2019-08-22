@@ -16,7 +16,9 @@ const DeleteRelationshipButton = props => {
   }  
 
   return (
-    <Button onClick={() => handleOnClick()}>Remove</Button>
+    <>
+    <Button className="rel-delete-btn" onClick={() => handleOnClick()}>Remove</Button>
+    </>
   )
 }
 

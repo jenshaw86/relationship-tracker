@@ -10,10 +10,10 @@ const AddRelationshipButton = props => {
     const handleShow = () => setShow(true);
 
   return (
-    <div>
-      <Button size="sm" onClick={() => handleShow()}>New Connection</Button>
+    <>
+      <Button size="sm" className="new-btn" onClick={() => handleShow()}>New Connection</Button>
       <RelationshipModal show={show} handleClose={handleClose} handleNewRelationship={props.handleNewRelationship} />
-    </div>
+    </>
   )
 }
 

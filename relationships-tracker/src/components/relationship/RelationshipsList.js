@@ -132,7 +132,7 @@ class RelationshipsList extends Component {
   render() {
     return (
       <Container className="relationships-container">
-        <h3>Connections</h3>
+        <h2>Connections</h2>
         <AddRelationshipButton handleNewRelationship={this.props.handleNewRelationship} />
         {this.displayRelationshipsPage()}    
       </Container>

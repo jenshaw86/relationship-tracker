@@ -18,21 +18,19 @@ const EventCard = (props) => {
 
   return(
     <div className="event-card">
-      <p className="day">{displayDay(props.event.start_date)}</p>
-      <p className="event-date">
+      <span className="day">{displayDay(props.event.start_date)}</span>
+      <div className="event-date">
         <span className="month">{displayMonth(props.event.start_date)}</span><br/>
         <span className="date">{displayDate(props.event.start_date)}</span><br/>
         <span className="year">{displayYear(props.event.start_date)}</span>
-      </p>
+      </div>
       <div className="event-details">
-        <p>
           <Link to={"/event/${props.event.name}"} onClick={() => props.viewEvent(props.event)} >
             <span className="event-name">{props.event.name}</span><br/>
           </Link>
           <span className="time">{displayTime(props.event.start_date)}</span><br/>
           <span className="location">{props.event.location}</span><br/>
           <span className="company">with {props.event.relationships[0].first_name} {props.event.relationships[0].last_name}</span>
-        </p>
       </div>
       {displayButtons()} {/* Edit and Delete Buttons */}
     </div>

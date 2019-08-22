@@ -88,7 +88,7 @@ a {
  /* Events page */
 .events-container, .relationships-container {
   display: grid;
-  grid-template-rows: 80px 80px 50px auto;
+  grid-template-rows: 50px 50px 50px auto;
   grid-template-columns: 180px 150px auto;
   grid-gap: 10px;
 }
@@ -98,15 +98,14 @@ a {
   grid-column-end: 2;
   grid-row-start: 1;
   grid-row-end: 2;
-  align-self: center;
+  align-self: end;
 }
 
-.events-container .new Button {
+.events-container .new-btn {
   grid-column-start: 2;
   grid-column-end: 3;
   grid-row-start: 1;
   grid-row-end: 2;
-  vertical-align: center;
 }
 
 .events-2 {
@@ -115,7 +114,7 @@ a {
   grid-row-start: 2;
   grid-row-end: 3;
   justify-self: stretch;
-
+  align-self: end;
 }
 
 .events-1 {
@@ -129,13 +128,16 @@ a {
   grid-column-start: 3;
   grid-column-end: 4;
   grid-row-start: span 4;
+  border-left: 1px solid #c6c6c9;
+  padding-left: 30px;
+  margin-left: 30px;
 }
 
 /* Toggle event buttons */
 .event-btn {
   background-color: #94aaaf;
   border-color: #f9f5f7;
-  width: 80%;
+  width: 100%;
 }
 
 .past-btn:hover, .upcoming-btn:hover {
@@ -150,7 +152,8 @@ a {
   grid-template-columns: 100px 100px auto 140px;
   grid-gap: 5px;
   background-color: #ece9f2;
-  margin: 5px;
+  margin: 10px;
+  border-radius: .25em;
 }
 
 .event-card .day {
@@ -271,5 +274,56 @@ a {
 .relationships-list {
   grid-column-start: 3;
   grid-column-end: 4;
-  grid-row: span 3;
+  grid-row: span 4;
+  margin-left: 30px;
+  padding-left: 30px;
+  border-left: 1px solid #c6c6c9;
+}
+
+.image-container {
+ width: 120px;
+ height: 120px;
+ overflow: hidden;
+}
+
+.relationship-card img {
+  width: 120px;
+}
+
+.relationship-card {
+ display: grid;
+ grid-template-columns: 150px auto 100px;
+ grid-template-rows: 60px 60px;
+ grid-gap: 10px;
+ margin: 15px;
+ align-items: center;
+ background-color: #ece9f2;
+ padding: 10px 20px;
+ border-radius: .25em;
+}
+
+.relationship-card div:first-child {
+  grid-row: span 2;
+}
+
+.relationship-card div:nth-child(2) {
+  grid-row: span 2;
+}
+
+.relationship-card .rel-edit-btn {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  align-self: end;
+}
+
+.relationship-card .rel-delete-btn {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  align-self: start;
+}
+
+.relationship-card a {
+  text-decoration: none;
 }
