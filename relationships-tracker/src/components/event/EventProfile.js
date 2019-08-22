@@ -7,7 +7,7 @@ const EventProfile = props => {
     if (props.event.name) {
         return (
             <Container className="event-profile">
-                <div className="event-profile-top">
+                <div className="event-profile-card">
                     <span className="day">{displayDay(props.event.start_date)}</span>
 
                     <div className="event-date">

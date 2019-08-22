@@ -10,13 +10,13 @@ html, body, #root, .app {
   /* background-color: pink; */
 }
 
-.profile {
+.profile-container {
   display: grid;
   grid-template-columns: 250px auto;
-  grid-template-rows: 250px 50px auto;
+  grid-template-rows: 250px 50px 200px auto;
 }
 
-.profile_img {
+.profile-img {
   width: 200px;
   border-radius: 50%; 
   place-self: center;
@@ -28,6 +28,7 @@ html, body, #root, .app {
 
 .profile-edit-btn {
   place-self: center;
+  width: 100px;
 }
 
 .jumbotron {
@@ -226,11 +227,11 @@ a {
   place-self: center;
 }
 
-.event-profile-top {
+.event-profile-card {
   display: grid;
   grid-template-columns: 100px 100px auto;
   grid-gap: 5px;
-  padding: 15px;
+  padding: 25px 20px;
   background-color: #ece9f2;
   border: 1px solid #c6c6c9;
 }
@@ -251,12 +252,12 @@ a {
   border-top: 1px solid #c6c6c9;
   border-bottom: 1px solid #c6c6c9;
   margin-top: 20px;
-  padding: 20px 0;
+  padding: 20px;
 }
 
 .event-description {
-  margin-top: 20px;
   grid-column: span 3;
+  padding: 20px;
 }
 
 .event-description p:first-child {
@@ -326,4 +327,46 @@ a {
 
 .relationship-card a {
   text-decoration: none;
+}
+
+/* relationship profile */
+.profile-container .rel-edit-btn {
+  grid-column: 1/2;
+  grid-row: 2/3;
+  align-self: start;
+  justify-self: center;
+  width: 100px;
+}
+
+.reminders {
+  padding-top: 30px;
+  grid-column: 1/2;
+  grid-row: 3/4;
+  border-bottom   : 1px solid #c6c6c9;
+}
+
+.reminders p {
+  font-weight: bold;
+  
+}
+
+.profile-stats {
+  grid-column: 1/2;
+  grid-row: 4/5;
+  padding-top: 30px;
+}
+
+.profile-stats p span {
+  font-weight: bold;
+}
+
+.profile-container .events-list {
+  grid-column: 2/3;
+  grid-row: 3/span 2;
+  border-left: 1px solid #c6c6c9;
+}
+
+.connection-events {
+  padding-top: 20px;
+  padding-left: 10px;
 }

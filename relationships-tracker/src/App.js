@@ -119,6 +119,7 @@ class App extends Component {
           updateRelationships={this.updateRelationships}
           handleNewEvent={this.handleNewEvent} 
           viewEvent={this.viewEvent}
+          events={this.state.events}
           /> } 
       />
       </Router>

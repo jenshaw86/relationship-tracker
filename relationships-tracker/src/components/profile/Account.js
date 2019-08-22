@@ -10,17 +10,15 @@ const Account = props => {
 
   return (
     <>
-      <Container className="profile">
+      <Container className="profile-container">
 
-          <img src={`${props.user.image}`} className="profile_img" alt={`${props.user.first_name} ${props.user.last_name}`}/>
+          <img src={`${props.user.image}`} className="profile-img" alt={`${props.user.first_name} ${props.user.last_name}`}/>
         <div className="profile-info">
           <h1>{fullName(props.user.first_name, props.user.last_name)}</h1>
           <p>✉️ Email: {props.user.email}</p>
           <p>☏ Phone: {props.user.phone_number}</p>
         </div>
-        <div className="profile-edit-btn">
-          <Button size="sm" className="alt-primary-btn" onClick={() => handleShow()} >Edit Profile</Button>
-        </div>
+          <Button size="sm" className="profile-edit-btn alt-primary-btn" onClick={() => handleShow()} >Edit</Button>
         
         <ProfileModal show={show} handleClose={handleClose} user={props.user} updateUserProfile={props.updateUserProfile} />
       </Container>

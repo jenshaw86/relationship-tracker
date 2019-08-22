@@ -11,7 +11,7 @@ const EditEvent = props => {
 
   return (
     <>
-    <Button className="edit-btn" onClick={handleShow}>Edit</Button>
+    <Button className="edit-btn" size="sm" onClick={handleShow}>Edit</Button>
     <EventModal show={show} handleClose={handleClose} updateEvents={props.updateEvents} event={props.event} relationships={props.relationships} updateRelationships={props.updateRelationships} viewRelationship={props.viewRelationship}
      />
     </>

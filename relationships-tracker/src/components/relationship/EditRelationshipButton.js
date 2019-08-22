@@ -10,7 +10,7 @@ const EditRelationshipButton = props => {
 
   return (
     <>
-      <Button className="rel-edit-btn" onClick={() => handleShow()} >Edit</Button>
+      <Button className="rel-edit-btn profile-edit-btn" size="sm" onClick={() => handleShow()} >Edit</Button>
       <RelationshipModal show={show} handleClose={handleClose} relationship={props.relationship} 
       viewRelationship={props.viewRelationship}
       updateRelationships={props.updateRelationships}

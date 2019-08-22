@@ -22,10 +22,10 @@ export const lastConnection = (person) => {
 
       return `${day} ${month} ${date}, ${year}`
     } else {
-      return "never"
+      return "Never"
     }
   } else {
-    return "never"
+    return "Never"
   }
 }
 
