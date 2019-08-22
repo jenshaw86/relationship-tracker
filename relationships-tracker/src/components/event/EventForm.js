@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Form, Button, ButtonToolbar, Modal } from "react-bootstrap";
 import { showDate } from '../../utils'
 import EventSubmitButton from './EventSubmitButton'
@@ -28,6 +28,9 @@ const EventForm = props => {
   }
   const [inviteeId, setInviteeId] = useState(somefunction())
 
+  useEffect(() => {
+    setEndDate(startDate)
+  }, [startDate])
   // DEBUG: props.event doesn't exist, props.relationship doesn't exist, but props.relationships DOES!
 
   return (
@@ -50,7 +53,7 @@ const EventForm = props => {
         {/* Description */}
         <Description description={description} setDescription={setDescription}/>
         {/* Send Notification? */}
-        <Form.Check label="Send friend notifications about this event?"/> 
+        {/* <Form.Check label="Send friend notifications about this event?"/>  */}
       </Modal.Body>
 
       <Modal.Footer>

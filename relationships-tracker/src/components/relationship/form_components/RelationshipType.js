@@ -11,8 +11,9 @@ const RelationshipType = (props) => {
         onChange={(ev) => props.setRelType(ev.target.value)}            
         >
         <option>Friend</option>
-        <option>Family</option>
         <option>Co-worker</option>
+        <option>Classmate</option>
+        <option>Family</option>
         <option>Significant Other</option>
         <option>Other</option>
       </Form.Control>

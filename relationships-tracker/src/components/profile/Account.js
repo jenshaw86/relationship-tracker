@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, ButtonToolbar, Container } from 'react-bootstrap';
-import { fullName } from '../../utils'
+import { fullName, displayPhoneNumber } from '../../utils'
 import ProfileModal from './ProfileModal'
 
 const Account = props => { 
@@ -16,7 +16,7 @@ const Account = props => {
         <div className="profile-info">
           <h1>{fullName(props.user.first_name, props.user.last_name)}</h1>
           <p><i class="fas fa-envelope"></i> Email: {props.user.email}</p>
-          <p><i class="fas fa-mobile-alt"></i> Phone: {props.user.phone_number}</p>
+          <p><i class="fas fa-mobile-alt"></i> Phone: {displayPhoneNumber(props.user.phone_number)}</p>
         </div>
           <Button size="sm" className="profile-edit-btn alt-primary-btn" onClick={() => handleShow()} >Edit</Button>
         

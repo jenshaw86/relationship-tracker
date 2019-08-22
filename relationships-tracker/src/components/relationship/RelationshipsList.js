@@ -10,6 +10,7 @@ class RelationshipsList extends Component {
   }
   static getDerivedStateFromProps(props, _state) {
     return {listOrder: props.relationships}
+    // return {listOrder: props.relationships.sort((a,b) => a.created_at > b.created_at ? -1 : 1)}
   }
   
   handleChange = val => {
