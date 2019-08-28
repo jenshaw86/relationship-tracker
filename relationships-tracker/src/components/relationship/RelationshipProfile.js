@@ -12,7 +12,7 @@ const RelationshipProfile = (props) => {
 
   const [events, setEvents] = useState(futureEvents)
   
-  useEffect((futureEvents) => {
+  useEffect(() => {
     setEvents(futureEvents)
   }, [props.events])
 // Did it break? Check this argument
