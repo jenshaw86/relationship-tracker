@@ -19,8 +19,6 @@ const RelationshipProfile = (props) => {
 
   const person = props.relationship
   let gap = connectionGap(person);
-
-
   const connectionGapMessage = gap => {
     if (gap !== null) {
       if (gap === 1) {
@@ -35,7 +33,7 @@ const RelationshipProfile = (props) => {
   }
 
   const meetupReminder = () => {
-    if (gap >= person.contact_frequency) {
+    if (gap !== null && gap >= person.contact_frequency) {
       return `It's been a while. I think it's time to make plans to get together!`
     }
   }

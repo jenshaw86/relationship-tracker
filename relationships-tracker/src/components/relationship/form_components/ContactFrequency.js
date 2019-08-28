@@ -20,8 +20,10 @@ const ContactFrequency = props => {
         <Form.Label>How often do you want to connect?</Form.Label>
         <Form.Control 
           as="select" 
-          value={props.currentInterval} 
-          onChange={(ev) => props.setCurrentInterval(ev.target.value)}            
+          value={props.currentInterval}
+          onChange={(ev) => {
+            props.setCurrentInterval(ev.target.value)
+          }}            
           >
           {displayIntervals()}
         </Form.Control>

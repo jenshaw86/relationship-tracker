@@ -3,6 +3,7 @@ import {Button} from 'react-bootstrap';
 
 const RelationshipSubmitButton = props => {
   const handleSubmit = (event) => {
+    // debugger;
     event.preventDefault();
     props.handleClose();
     let imageUrl = props.image
@@ -31,6 +32,7 @@ const RelationshipSubmitButton = props => {
   }
 
   const handleSubmitEdit = (event) => {
+    debugger;
     event.preventDefault();
     props.handleClose();
     fetch(`http://localhost:3000/relationships/${props.relationship.id}`, {
