@@ -7,6 +7,8 @@ import Home from './containers/Home'
 import Account from './components/profile/Account'
 import RelationshipsList from './components/relationship/RelationshipsList'
 import RelationshipProfile from './components/relationship/RelationshipProfile'
+import SignUp from './components/user/Signup'
+import Login from './components/user/Login'
 import './styles.css'
 
 class App extends Component {
@@ -122,6 +124,11 @@ class App extends Component {
           events={this.state.events}
           /> } 
       />
+
+      <Route path="/signup" component={SignUp}/>
+      <Route path="/login" component={Login}/>
+      <Route path="/logout" component={Home}/>
+
       </Router>
     </div>
     )

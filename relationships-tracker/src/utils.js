@@ -88,7 +88,7 @@ export const displayTime = str => {
   let time = dateArray.toTimeString().split(" ")[0]
   let [hour, min] = time.split(":")
   let meridiem = "am"
-  if (hour == "00") {
+  if (hour === "00") {
     hour = "12"
   } else if (hour > 12) {
     hour = hour - 12;
