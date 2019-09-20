@@ -20,7 +20,6 @@ const RelationshipForm = props => {
   const [image, setImage] = useState(props.relationship ? props.relationship.image : '');
   const [currentInterval, setCurrentInterval] =  useState(props.relationship ? props.relationship.contact_frequency : 7);
 
-  console.log(currentInterval)
   return (
     
     <Form>
