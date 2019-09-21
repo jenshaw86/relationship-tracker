@@ -15,10 +15,7 @@ const Home = () => {
         <p>Keep track of the connections you care about <br/>
         and make plans for that next coffee date.</p>
         <p>
-          {/* <Link to="/account"><Button variant="primary">Get Started</Button></Link> */}
           <Link to="/signup"><Button variant="primary">Get Started</Button></Link>
-
-
         </p>
         </div>
       {/* </Jumbotron> */}
