@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {Container, Button, Form} from 'react-bootstrap';
 import {signup} from './../../services/api';
 
-const Signup = () => {
+const Signup = props => {
   const [error, setError] = useState(false)
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
@@ -12,10 +12,10 @@ const Signup = () => {
   const handleChange = ev => {
     ev.persist()
     switch(ev.target.name) {
-      case 'firstName':
+      case 'first_name':
         setFirstName(ev.target.value);
         break;
-      case 'lastName':
+      case 'last_name':
         setLastName(ev.target.value);
         break;
       case 'email':
@@ -29,29 +29,33 @@ const Signup = () => {
     }
   }
   
-  const handleSubmit = ev => {
+  const handleSubmit = (ev, props) => {
     ev.preventDefault();
     ev.persist();
-    let formData = []
+    
+    // push all form data into a single packaged array
+    let formData = {}
     for(let i = 0; i < ev.target.length - 1; i++) {
-      formData.push(ev.target[i].value)
+      formData[ev.target[i].name] = (ev.target[i].value)
     }
-    signup(formData)
-    .then(res => console.log(res))
+
+    // deliver form data and props.history to signup
+    // 
+    signup(formData, props.history)
   }
 
   return (
     <Container>  
       <h3>New User Signup</h3>
 
-      <Form onSubmit={ev => handleSubmit(ev)}>
+      <Form onSubmit={ev => handleSubmit(ev, props)}>
         <Form.Group>
           <Form.Label>First Name</Form.Label>
-          <Form.Control type="text" name="firstName" placeholder="First Name" value={firstName} onChange={ev => handleChange(ev)}/>
+          <Form.Control type="text" name="first_name" placeholder="First Name" value={firstName} onChange={ev => handleChange(ev)}/>
         </Form.Group>
         <Form.Group>
           <Form.Label>Last Name</Form.Label>
-          <Form.Control type="text" name="lastName" placeholder="Last Name" value={lastName} onChange={ev => handleChange(ev)}/>
+          <Form.Control type="text" name="last_name" placeholder="Last Name" value={lastName} onChange={ev => handleChange(ev)}/>
         </Form.Group>
         <Form.Group>
           <Form.Label>User Email</Form.Label>

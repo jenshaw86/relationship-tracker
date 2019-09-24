@@ -24,21 +24,21 @@ class App extends Component {
     }
   }
 
-  componentDidMount() {
-    fetch(`http://localhost:3000/users/1`) //TODO: specify user on login
-    .then(res => res.json())
-    .then(user => {
-      fetch(`http://localhost:3000/users/1/relationships`)
-      .then(res => res.json())
-      .then(user_relationships => {
-        fetch(`http://localhost:3000/users/1/events`)
-        .then(res => res.json())
-        .then(user_events => {
-          this.setState({currentUser: user, relationships: user_relationships, events: user_events})
-        })
-      })
-    })
-  }
+  // componentDidMount() {
+  //   fetch(`http://localhost:3000/users/1`) //TODO: specify user on login
+  //   .then(res => res.json())
+  //   .then(user => {
+  //     fetch(`http://localhost:3000/users/1/relationships`)
+  //     .then(res => res.json())
+  //     .then(user_relationships => {
+  //       fetch(`http://localhost:3000/users/1/events`)
+  //       .then(res => res.json())
+  //       .then(user_events => {
+  //         this.setState({currentUser: user, relationships: user_relationships, events: user_events})
+  //       })
+  //     })
+  //   })
+  // }
 
   handleNewEvent = event => {
     fetch(`http://localhost:3000/users/1/relationships`)
