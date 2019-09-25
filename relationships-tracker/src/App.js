@@ -9,18 +9,36 @@ import RelationshipsList from './components/relationship/RelationshipsList'
 import RelationshipProfile from './components/relationship/RelationshipProfile'
 import SignUp from './components/user/Signup'
 import Login from './components/user/Login'
+import {api} from './services/api'
 import './styles.css'
 
 class App extends Component {
 
   constructor() {
-    super()
+    super();
+
     this.state = {
+      auth: {
+        user: {}
+      },
       currentUser: {},
       events: [],
       relationships: [], 
       eventView: {},
       relationshipView: {}
+    }
+  }
+
+  // after component mounts, check if token is in local storage
+  componentDidMount() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      console.log("found a token!")
+
+      // find user
+      api.auth.getCurrentUser(token)
+    } else {
+      console.log("nope. no token here...")
     }
   }
 
@@ -39,6 +57,25 @@ class App extends Component {
   //     })
   //   })
   // }
+
+  // handles login in Login component
+  login = data => {
+    // create updated this.state.auth using auth POST response data containing user and JWT
+    const updatedState = {...this.state.auth, user: data};
+    // save JWT to local storage
+    localStorage.setItem('token', data.jwt);
+    // replace state.auth
+    this.setState({auth: updatedState});
+
+  }
+
+  logout = () => {
+    console.log('logging out')
+    // remove token from local storage
+    localStorage.removeItem('token');
+    // clear state
+    this.setState({auth: {user: {}} })
+  }
 
   handleNewEvent = event => {
     fetch(`http://localhost:3000/users/1/relationships`)
@@ -82,9 +119,7 @@ class App extends Component {
     return(
       <div className="app">
       <Router>
-
-       
-      <Navbar />
+      <Navbar handleLogout={this.logout} />
       <Route path='/' exact render={() => <Home /> } /> 
       <Route path='/account' render={() => <Account user={this.state.currentUser} events={this.state.events} updateUserProfile={this.updateUserProfile} />} />
       
@@ -126,7 +161,7 @@ class App extends Component {
       />
 
       <Route path="/signup" component={SignUp}/>
-      <Route path="/login" component={Login}/>
+      <Route path="/login" render={props => <Login {...props} handleLogin={this.login} /> } />
       <Route path="/logout" component={Home}/>
 
       </Router>

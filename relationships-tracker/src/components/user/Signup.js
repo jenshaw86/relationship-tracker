@@ -29,7 +29,7 @@ const Signup = props => {
     }
   }
   
-  const handleSubmit = (ev, props) => {
+  const handleSubmit = (ev, history) => {
     ev.preventDefault();
     ev.persist();
     
@@ -39,16 +39,24 @@ const Signup = props => {
       formData[ev.target[i].name] = (ev.target[i].value)
     }
 
-    // deliver form data and props.history to signup
-    // 
-    signup(formData, props.history)
+    // deliver form data to signup
+    signup(formData).then(res => {
+      // if signup is successful, redirect to login
+      if (!res.error) {
+        props.history.push('/login');
+      // if not, remain on page
+      } else {
+        setError(true);
+        console.log('signup failed');
+      }
+    })
   }
 
   return (
     <Container>  
       <h3>New User Signup</h3>
 
-      <Form onSubmit={ev => handleSubmit(ev, props)}>
+      <Form onSubmit={ev => handleSubmit(ev, props.history)}>
         <Form.Group>
           <Form.Label>First Name</Form.Label>
           <Form.Control type="text" name="first_name" placeholder="First Name" value={firstName} onChange={ev => handleChange(ev)}/>
