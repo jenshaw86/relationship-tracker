@@ -24,12 +24,6 @@ export const signup = (formData) => {
       body: JSON.stringify(formData)
     })
   .then(res => res.json())
-  // .then(json => {
-  //   // if user creation is successful, redirect user to login
-  //   if (json.user) {
-  //     history.push('/login')
-  //   }
-  // })
   )
 }
 
@@ -64,7 +58,10 @@ const getRelationships = (token, handleSetState) => {
   return (
     fetch(`${API_ROOT}/relationships`, auth_headers(token))
     .then(res => res.json())
-    .then(data => handleSetState(data))
+    .then(data => {
+      handleSetState(data)
+      console.log("relationships set")
+    })
   )
 }
 
@@ -73,7 +70,10 @@ const getEvents = (token, handleSetState) => {
   return (
     fetch(`${API_ROOT}/events`, auth_headers(token))
     .then(res => res.json())
-    .then(data => handleSetState(data))
+    .then(data => {
+      handleSetState(data)
+      console.log("events set")
+    })
   )
 }
 

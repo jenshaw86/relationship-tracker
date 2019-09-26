@@ -24,22 +24,24 @@ const Login = props => {
   }
 
   const handleSubmit = (ev) => {
-    ev.preventDefault();
+    ev.preventDefault()
     ev.persist();
     // collect all the form data into a single packaged array
     let formData = {};
     for(let i = 0; i < ev.target.length - 1; i++) {
       formData[ev.target[i].name] = (ev.target[i].value)
     }
-
+    
     api.auth.login(formData).then(res => { // res contains authorized user and JWT
       if (!res.error) { // if response contains no errors
         // log response
         console.log(res);
         // handle login at app.js
         props.handleLogin(res);
-        // redirect to home
-        props.history.push('/')
+        // ! After logging in but before loading account page, set user state
+        // redirect 
+        props.history.push('/account')
+
       } else { // if error found
         // set error state to true
         setError(true);

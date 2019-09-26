@@ -39,9 +39,10 @@ class App extends Component {
       // use token to get current user and set current user state
       api.auth.getCurrentUser(token)
       .then(user => { 
-        console.log(user)
-        const updatedState = {...this.state.auth, user: user};
+        console.log(user["user"])
+        const updatedState = {...this.state.auth, user: user["user"]};
         this.setState({auth: updatedState});
+        console.log("user set")
         api.data.getRelationships(token, this.handleSetState);
         api.data.getEvents(token, this.handleSetState);
       })
@@ -77,8 +78,9 @@ class App extends Component {
 
   // handles login in Login component
   login = data => {
+    console.log(data.user)
     // create updated this.state.auth using auth POST response data containing user and JWT
-    const updatedState = {...this.state.auth, user: data};
+    const updatedState = {...this.state.auth, user: data.user};
     // save JWT to local storage
     localStorage.setItem('token', data.jwt);
     // replace state.auth
@@ -139,7 +141,7 @@ class App extends Component {
       <Router>
       <Navbar handleLogout={this.logout} />
       <Route path='/' exact render={() => <Home /> } /> 
-      <Route path='/account' render={() => <Account user={this.state.currentUser} events={this.state.events} updateUserProfile={this.updateUserProfile} />} />
+      <Route path='/account' render={() => <Account user={this.state.auth.user} events={this.state.events} updateUserProfile={this.updateUserProfile} />} />
       
       {/* All and specific events */}
       <Route path="/events" 
