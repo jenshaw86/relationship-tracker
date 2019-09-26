@@ -1,6 +1,18 @@
 const API_ROOT = `http://localhost:3000/api/v1`;
 
-export const signup = (formData, history) => {
+const auth_headers = (token) => {
+  return (
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}` 
+      }
+    }
+  )
+} 
+
+export const signup = (formData) => {
 // Upon user signup, create new user
   return (
     fetch(`${API_ROOT}/users`, {
@@ -23,7 +35,7 @@ export const signup = (formData, history) => {
 
 // login creates a new authorization (POST), 
 // returns json object constaining authorized user and jwt
-export const login = formData => {
+const login = formData => {
   console.log("logging in")
   return (
     fetch(`${API_ROOT}/auth`, {
@@ -40,15 +52,9 @@ export const login = formData => {
 
 // getCurrentUser fetches (GET) the user that was authorized
 // return json object containing user id and email
-export const getCurrentUser = token => {
+const getCurrentUser = token => {
   return (
-    fetch(`${API_ROOT}/current_user`, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': `Bearer ${token}` 
-      }
-    })
+    fetch(`${API_ROOT}/current_user`, auth_headers(token))
     .then(res => res.json())
   )
 }
@@ -56,13 +62,7 @@ export const getCurrentUser = token => {
 const getRelationships = (token, handleSetState) => {
   console.log('getting relationships')
   return (
-    fetch(`${API_ROOT}/relationships`, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': `Bearer ${token}` 
-      }
-    })
+    fetch(`${API_ROOT}/relationships`, auth_headers(token))
     .then(res => res.json())
     .then(data => handleSetState(data))
   )
@@ -71,13 +71,7 @@ const getRelationships = (token, handleSetState) => {
 const getEvents = (token, handleSetState) => {
   console.log('getting events')
   return (
-    fetch(`${API_ROOT}/events`, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': `Bearer ${token}` 
-      }
-    })
+    fetch(`${API_ROOT}/events`, auth_headers(token))
     .then(res => res.json())
     .then(data => handleSetState(data))
   )
