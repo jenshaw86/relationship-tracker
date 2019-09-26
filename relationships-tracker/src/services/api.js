@@ -40,16 +40,46 @@ export const login = formData => {
 
 // getCurrentUser fetches (GET) the user that was authorized
 // return json object containing user id and email
-export const getCurrentUser = () => {
+export const getCurrentUser = token => {
   return (
     fetch(`${API_ROOT}/current_user`, {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': `Bearer token` 
+        'Authorization': `Bearer ${token}` 
       }
     })
     .then(res => res.json())
+  )
+}
+
+const getRelationships = (token, handleSetState) => {
+  console.log('getting relationships')
+  return (
+    fetch(`${API_ROOT}/relationships`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}` 
+      }
+    })
+    .then(res => res.json())
+    .then(data => handleSetState(data))
+  )
+}
+
+const getEvents = (token, handleSetState) => {
+  console.log('getting events')
+  return (
+    fetch(`${API_ROOT}/events`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}` 
+      }
+    })
+    .then(res => res.json())
+    .then(data => handleSetState(data))
   )
 }
 
@@ -57,5 +87,9 @@ export const api = {
   auth: {
     login,
     getCurrentUser
+  },
+  data: {
+    getRelationships,
+    getEvents
   }
 }

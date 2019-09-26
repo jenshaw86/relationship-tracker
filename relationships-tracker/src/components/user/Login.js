@@ -39,7 +39,7 @@ const Login = props => {
         // handle login at app.js
         props.handleLogin(res);
         // redirect to home
-        props.history.push('/account')
+        props.history.push('/')
       } else { // if error found
         // set error state to true
         setError(true);

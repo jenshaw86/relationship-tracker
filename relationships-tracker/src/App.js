@@ -34,14 +34,31 @@ class App extends Component {
     const token = localStorage.getItem('token');
     if (token) {
       console.log("found a token!")
-
-      // find user
+      // in case page is refreshed, 
+      // instead of state returning to a blank slate
+      // use token to get current user and set current user state
       api.auth.getCurrentUser(token)
+      .then(user => { 
+        console.log(user)
+        const updatedState = {...this.state.auth, user: user};
+        this.setState({auth: updatedState});
+        api.data.getRelationships(token, this.handleSetState);
+        api.data.getEvents(token, this.handleSetState);
+      })
     } else {
       console.log("nope. no token here...")
     }
   }
 
+  handleSetState = data => {
+    if (data.length !== 0) {
+      if (data[0].first_name) {
+        this.setState({relationships: data})
+      } else if (data[0].location) {
+        this.setState({events: data})
+      }
+    }
+  }
   // componentDidMount() {
   //   fetch(`http://localhost:3000/users/1`) //TODO: specify user on login
   //   .then(res => res.json())
@@ -116,6 +133,7 @@ class App extends Component {
   }
 
   render() {
+    
     return(
       <div className="app">
       <Router>
@@ -148,6 +166,7 @@ class App extends Component {
           updateEvents={this.updateEvents}
           /> } 
       />
+
       <Route path="/relationships/:id" 
         render={ () => <RelationshipProfile 
           relationship={this.state.relationshipView}
