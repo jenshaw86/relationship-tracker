@@ -82,10 +82,13 @@ class App extends Component {
     // create updated this.state.auth using auth POST response data containing user and JWT
     const updatedState = {...this.state.auth, user: data.user};
     // save JWT to local storage
-    localStorage.setItem('token', data.jwt);
+    const token = data.jwt
+    localStorage.setItem('token', token);
     // replace state.auth
     this.setState({auth: updatedState});
-
+    
+    api.data.getRelationships(token, this.handleSetState);
+    api.data.getEvents(token, this.handleSetState);
   }
 
   logout = () => {
