@@ -11,8 +11,8 @@ const Navbar = props => {
     return (
       <nav>
         <NavLink className="nav-link" to='/'>Home</NavLink>
-        <NavLink className="nav-link" to='/signup'>Sign Up</NavLink>
         <NavLink className="nav-link" to='/login'>Login</NavLink>
+        <NavLink className="nav-link" to='/signup'>Sign Up</NavLink>
       </nav>
     )
   } else {

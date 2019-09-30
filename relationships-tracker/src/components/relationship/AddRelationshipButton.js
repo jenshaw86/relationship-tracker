@@ -12,7 +12,7 @@ const AddRelationshipButton = props => {
   return (
     <>
       <Button size="sm" className="new-btn" onClick={() => handleShow()}>New Connection</Button>
-      <RelationshipModal show={show} handleClose={handleClose} handleNewRelationship={props.handleNewRelationship} />
+      <RelationshipModal show={show} handleClose={handleClose} handleNewRelationship={props.handleNewRelationship} userId={props.userId} />
     </>
   )
 }

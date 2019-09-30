@@ -124,8 +124,6 @@ class RelationshipsList extends Component {
       return (
         <div>
           <h4>You're not tracking any relationships!</h4>
-          <h5>Get started!</h5>
-          <AddRelationshipButton handleNewRelationship={this.props.handleNewRelationship}/>
         </div>
       )
     }
@@ -135,7 +133,7 @@ class RelationshipsList extends Component {
     return (
       <Container className="relationships-container">
         <h2>Connections</h2>
-        <AddRelationshipButton handleNewRelationship={this.props.handleNewRelationship} />
+        <AddRelationshipButton userId={this.props.userId} handleNewRelationship={this.props.handleNewRelationship} />
         {this.displayRelationshipsPage()}    
       </Container>
     );

@@ -165,3 +165,9 @@ export const displayPhoneNumber = num => {
     return "not given"
   }
 }
+
+export const utils = {
+  relationship: {
+    lastDate
+  }
+}

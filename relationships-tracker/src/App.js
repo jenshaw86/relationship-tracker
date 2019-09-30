@@ -33,24 +33,22 @@ class App extends Component {
   componentDidMount() {
     const token = localStorage.getItem('token');
     if (token) {
-      console.log("found a token!")
-      // in case page is refreshed, 
-      // instead of state returning to a blank slate
+      // console.log("found a token!")
+      
+      // in case page is refreshed, instead of state returning to a blank slate
       // use token to get current user and set current user state
       api.auth.getCurrentUser(token)
       .then(user => { 
-        console.log(user["user"])
         const updatedState = {...this.state.auth, user: user["user"]};
         this.setState({auth: updatedState});
-        console.log("user set")
+
         api.data.getRelationships(token, this.handleSetState);
         api.data.getEvents(token, this.handleSetState);
       })
-    } else {
-      console.log("nope. no token here...")
     }
   }
 
+  // handleSetState checks data for certain properties to determine which field in state to set data to
   handleSetState = data => {
     if (data.length !== 0) {
       if (data[0].first_name) {
@@ -60,39 +58,27 @@ class App extends Component {
       }
     }
   }
-  // componentDidMount() {
-  //   fetch(`http://localhost:3000/users/1`) //TODO: specify user on login
-  //   .then(res => res.json())
-  //   .then(user => {
-  //     fetch(`http://localhost:3000/users/1/relationships`)
-  //     .then(res => res.json())
-  //     .then(user_relationships => {
-  //       fetch(`http://localhost:3000/users/1/events`)
-  //       .then(res => res.json())
-  //       .then(user_events => {
-  //         this.setState({currentUser: user, relationships: user_relationships, events: user_events})
-  //       })
-  //     })
-  //   })
-  // }
 
   // handles login in Login component
   login = data => {
-    console.log(data.user)
+    // console.log(data.user)
+    
     // create updated this.state.auth using auth POST response data containing user and JWT
     const updatedState = {...this.state.auth, user: data.user};
+    
     // save JWT to local storage
     const token = data.jwt
     localStorage.setItem('token', token);
+    
     // replace state.auth
     this.setState({auth: updatedState});
-    
+    // fetch relationships and events and set respective state
     api.data.getRelationships(token, this.handleSetState);
     api.data.getEvents(token, this.handleSetState);
   }
 
   logout = () => {
-    console.log('logging out')
+    // console.log('logging out')
     // remove token from local storage
     localStorage.removeItem('token');
     // clear state
@@ -121,7 +107,9 @@ class App extends Component {
   }
 
   handleNewRelationship = (newRelationship) => {
-    this.setState({relationships: [...this.state.relationships, newRelationship]})
+    this.setState({relationships: [newRelationship, ...this.state.relationships]})
+    this.setState({relationshipView: newRelationship})
+    
   }
 
   viewRelationship = (person) => {
@@ -142,51 +130,52 @@ class App extends Component {
     return(
       <div className="app">
       <Router>
-      <Navbar handleLogout={this.logout} />
-      <Route path='/' exact render={() => <Home /> } /> 
-      <Route path='/account' render={() => <Account user={this.state.auth.user} events={this.state.events} updateUserProfile={this.updateUserProfile} />} />
-      
-      {/* All and specific events */}
-      <Route path="/events" 
-        render={ (browserHistory) => <EventDashboard
-          {...browserHistory}
-          events={this.state.events} 
-          relationships={this.state.relationships} 
-          handleNewEvent={this.handleNewEvent} 
-          updateEvents={this.updateEvents}
-          viewEvent={this.viewEvent}
-          viewRelationship={this.viewRelationship}
-          updateRelationships={this.updateRelationships}
-      /> } />
+        <Navbar handleLogout={this.logout} />
+        <Route exact path='/' render={() => <Home user={this.state.auth.user.email} /> } /> 
+        <Route path='/account' render={() => <Account user={this.state.auth.user} events={this.state.events} updateUserProfile={this.updateUserProfile} />} />
+        
+        {/* All and specific events */}
+        <Route path="/events" 
+          render={ (browserHistory) => <EventDashboard
+            {...browserHistory}
+            events={this.state.events} 
+            relationships={this.state.relationships} 
+            handleNewEvent={this.handleNewEvent} 
+            updateEvents={this.updateEvents}
+            viewEvent={this.viewEvent}
+            viewRelationship={this.viewRelationship}
+            updateRelationships={this.updateRelationships}
+        /> } />
 
-      <Route path='/event/:name' render={ () => <EventProfile event={this.state.eventView} />} />
+        <Route path='/event/:name' render={ () => <EventProfile event={this.state.eventView} />} />
 
-      {/* All relationships */}
-      <Route path="/relationships" exact 
-        render={() => <RelationshipsList 
-          relationships={this.state.relationships} 
-          handleNewRelationship={this.handleNewRelationship} 
-          viewRelationship={this.viewRelationship}
-          updateRelationships={this.updateRelationships}
-          updateEvents={this.updateEvents}
-          /> } 
-      />
+        {/* All relationships */}
+        <Route path="/relationships" exact 
+          render={() => <RelationshipsList 
+            userId={this.state.auth.user.id}
+            relationships={this.state.relationships} 
+            handleNewRelationship={this.handleNewRelationship} 
+            viewRelationship={this.viewRelationship}
+            updateRelationships={this.updateRelationships}
+            updateEvents={this.updateEvents}
+            /> } 
+        />
 
-      <Route path="/relationships/:id" 
-        render={ () => <RelationshipProfile 
-          relationship={this.state.relationshipView}
-          relationships={this.state.relationships}
-          viewRelationship={this.viewRelationship}
-          updateRelationships={this.updateRelationships}
-          handleNewEvent={this.handleNewEvent} 
-          viewEvent={this.viewEvent}
-          events={this.state.events}
-          /> } 
-      />
+        <Route path="/relationships/:id" 
+          render={ () => <RelationshipProfile 
+            relationship={this.state.relationshipView}
+            relationships={this.state.relationships}
+            viewRelationship={this.viewRelationship}
+            updateRelationships={this.updateRelationships}
+            handleNewEvent={this.handleNewEvent} 
+            viewEvent={this.viewEvent}
+            events={this.state.events}
+            /> } 
+        />
 
-      <Route path="/signup" component={SignUp}/>
-      <Route path="/login" render={props => <Login {...props} handleLogin={this.login} /> } />
-      <Route path="/logout" component={Home}/>
+        <Route path="/signup" component={SignUp}/>
+        <Route path="/login" render={props => <Login {...props} handleLogin={this.login} /> } />
+        <Route path="/logout" component={Home}/>
 
       </Router>
     </div>
