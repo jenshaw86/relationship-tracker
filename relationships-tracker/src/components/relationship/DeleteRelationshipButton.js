@@ -1,23 +1,14 @@
 import React from 'react';
-import {Button} from 'react-bootstrap'
+import { Button } from 'react-bootstrap';
+import { api } from './../../services/api';
 
 const DeleteRelationshipButton = props => {
-  const handleOnClick = () => {
-    fetch(`http://localhost:3000/relationships/${props.relationship.id}`, {
-      method: "DELETE"
-    })
-    .then(res => res.json())
-    .then(rels => {
-      props.updateRelationships(rels)
-      fetch(`http://localhost:3000/users/1/events`)
-      .then(res => res.json())
-      .then(events => props.updateEvents(events))
-    })
-  }  
+  
+  const handleOnClick = () => api.destroy.deleteRelationship(props);
 
   return (
     <>
-    <Button className="rel-delete-btn" size="sm" onClick={() => handleOnClick()}>Remove</Button>
+      <Button className="rel-delete-btn" size="sm" onClick={() => handleOnClick()}>Remove</Button>
     </>
   )
 }

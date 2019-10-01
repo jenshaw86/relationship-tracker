@@ -1,10 +1,10 @@
 import React from 'react'
-import {Modal} from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import RelationshipForm from './RelationshipForm'
 
 const RelationshipModal = props => {
 
-  const formType = () => props.handleNewRelationship ? "New Relationship" : "Edit Relationship"
+  const formType = () => props.handleNewRelationship ? "New Relationship" : "Edit Relationship";
 
   return (
     <>
@@ -19,4 +19,4 @@ const RelationshipModal = props => {
   )
 }
 
-export default RelationshipModal
+export default RelationshipModal;

@@ -1,6 +1,6 @@
 import React from 'react'
-import {Container, Button} from 'react-bootstrap'
-import {Link} from 'react-router-dom'
+import { Container, Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 const Home = props => {
 
@@ -21,4 +21,4 @@ const Home = props => {
   )
 }
 
-export default Home
+export default Home;

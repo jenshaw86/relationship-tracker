@@ -121,6 +121,10 @@ class App extends Component {
     this.setState({relationships: relationships})
   }
 
+  handleDeletedRelationship = updatedRelationships => {
+    this.setState({relationships: updatedRelationships})
+  }
+
   updateUserProfile = data => {
     this.setState({currentUser: data})
   }
@@ -157,6 +161,7 @@ class App extends Component {
             handleNewRelationship={this.handleNewRelationship} 
             viewRelationship={this.viewRelationship}
             updateRelationships={this.updateRelationships}
+            handleDeletedRelationship={this.handleDeletedRelationship}
             updateEvents={this.updateEvents}
             /> } 
         />

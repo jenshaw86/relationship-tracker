@@ -99,9 +99,11 @@ class RelationshipsList extends Component {
         return (
           <RelationshipCard
             key={rel.id}
+            userId={this.props.userId}
             relationship={rel}
             viewRelationship={this.props.viewRelationship}
             updateRelationships={this.props.updateRelationships}
+            handleDeletedRelationship={this.props.handleDeletedRelationship}
             updateEvents={this.props.updateEvents}
           />
         );

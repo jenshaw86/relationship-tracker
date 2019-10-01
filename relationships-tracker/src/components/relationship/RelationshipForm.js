@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import {Form, Button, ButtonToolbar, Modal} from "react-bootstrap";
+import React, { useState } from 'react'
+import { Form, Button, ButtonToolbar, Modal } from "react-bootstrap";
 // Form Components
 import FirstName from '../form/FirstName';
 import LastName from '../form/LastName';
@@ -18,7 +18,7 @@ const RelationshipForm = props => {
   const [email, setEmail] = useState(props.relationship ? props.relationship.email : '');
   const [phone, setPhone] = useState(props.relationship ? props.relationship.phone_number : '');
   const [image, setImage] = useState(props.relationship ? props.relationship.image : '');
-  const [currentInterval, setCurrentInterval] =  useState(props.relationship ? props.relationship.contact_frequency : 7);
+  const [currentInterval, setCurrentInterval] = useState(props.relationship ? props.relationship.contact_frequency : 7);
 
   return (
     
@@ -52,4 +52,4 @@ const RelationshipForm = props => {
   )
 }
 
-export default RelationshipForm
+export default RelationshipForm;
