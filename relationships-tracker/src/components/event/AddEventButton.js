@@ -12,7 +12,11 @@ const AddEvent = props => {
   return (
     <>
       <Button className="alt-primary-btn .new-btn" variant="primary" size="sm" onClick={handleShow}>New Event</Button>
-      <EventModal show={show} handleClose={handleClose} handleNewEvent={props.handleNewEvent} {...props}
+      <EventModal 
+        show={show} 
+        handleClose={handleClose} 
+        handleNewEvent={props.handleNewEvent} 
+        {...props}
       />
     </> 
   )

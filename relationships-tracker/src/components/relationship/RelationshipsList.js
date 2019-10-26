@@ -1,7 +1,9 @@
-import React, {Component} from "react";
+// TODO please, for the love of god, refactor this.
+
+import React, { Component } from "react";
 import RelationshipCard from "./RelationshipCard";
 import AddRelationshipButton from './AddRelationshipButton'
-import {Container, Form} from 'react-bootstrap'
+import { Container, Form } from 'react-bootstrap'
 
 class RelationshipsList extends Component {
   constructor(props) {
@@ -135,7 +137,10 @@ class RelationshipsList extends Component {
     return (
       <Container className="relationships-container">
         <h2>Connections</h2>
-        <AddRelationshipButton userId={this.props.userId} handleNewRelationship={this.props.handleNewRelationship} />
+        <AddRelationshipButton 
+          userId={this.props.userId} 
+          handleNewRelationship={this.props.handleNewRelationship} 
+        />
         {this.displayRelationshipsPage()}    
       </Container>
     );

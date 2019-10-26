@@ -32,7 +32,7 @@ const EventCard = (props) => {
           <span className="time">{displayTime(props.event.start_date)}</span><br/>
           <span className="location">{props.event.location}</span><br/>
           
-          <span className="company">with {props.event.relationships[0].first_name} {props.event.relationships[0].last_name}</span>
+          {/* <span className="company">with {props.event.relationships[0].first_name} {props.event.relationships[0].last_name}</span> */}
       </div>
       {displayButtons()} {/* Edit and Delete Buttons */}
     </div>

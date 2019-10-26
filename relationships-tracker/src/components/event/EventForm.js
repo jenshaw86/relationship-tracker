@@ -17,16 +17,20 @@ const EventForm = props => {
   const [startDate, setStartDate] = useState(props.event ? showDate(props.event.start_date) : new Date());
   const [endDate, setEndDate] = useState(props.event ? showDate(props.event.end_date) : startDate);
   // const [inviteeId, setInviteeId] = useState(props.relationship ? props.event.relationships[0].id : props.relationship.id) 
-  const somefunction = () => {
+  
+  // the purpose of someFunction, for now, is to determine what the contents of props are to therefore help determine whether to autofill the invited party state and section of the form
+  const somefunction = props => {
+    // debugger;
+    // if props contains an event, this is an edit form. return the id of the associated connection.
     if (props.event) {
       return props.event.relationships[0].id
-    } else if (props.relationship) {
+    } else if (props.relationship) { // if props contains a relationship, we're creating a new event through a connection, return the connection's id
       return props.relationship.id
-    } else {
+    } else { // if props doesn't contain either of the above, this is a new event creation. Return the first connection as a default
       return props.relationships[0].id
     }
   }
-  const [inviteeId, setInviteeId] = useState(somefunction())
+  const [inviteeId, setInviteeId] = useState(somefunction(props))
 
   useEffect((endDate) => {
     if(endDate < startDate) {
@@ -64,7 +68,15 @@ const EventForm = props => {
           <Button variant="secondary" onClick={() => props.handleClose()}>
             Close
           </Button>
-          <EventSubmitButton {...props} inviteeId={inviteeId} eventName={eventName} startDate={startDate} endDate={endDate} location={location} description={description} />
+          <EventSubmitButton 
+            {...props} 
+            inviteeId={inviteeId} 
+            eventName={eventName} 
+            startDate={startDate} 
+            endDate={endDate} 
+            location={location} 
+            description={description} 
+          />
         </ButtonToolbar>
       </Modal.Footer>
     </Form>

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Navbar from './components/Navbar'
 import EventDashboard from './components/event/EventDashboard'
@@ -39,6 +39,7 @@ class App extends Component {
       // use token to get current user and set current user state
       api.auth.getCurrentUser(token)
       .then(user => { 
+
         const updatedState = {...this.state.auth, user: user["user"]};
         this.setState({auth: updatedState});
 
@@ -50,10 +51,11 @@ class App extends Component {
 
   // handleSetState checks data for certain properties to determine which field in state to set data to
   handleSetState = data => {
+
     if (data.length !== 0) {
       if (data[0].first_name) {
         this.setState({relationships: data})
-      } else if (data[0].location) {
+      } else if (data[0].start_date) {
         this.setState({events: data})
       }
     }
@@ -85,12 +87,9 @@ class App extends Component {
     this.setState({auth: {user: {}} })
   }
 
-  handleNewEvent = event => {
-    fetch(`http://localhost:3000/users/1/relationships`)
-    .then(res => res.json())
-    .then(data => {
-      this.setState({events: [...this.state.events, event], relationships: data});
-    })
+  handleNewEvent = newEvent => {
+    this.setState({events: [...this.state.events, newEvent]});
+    this.setState({eventView: newEvent});
   }
 
   updateEvents = event => {
@@ -138,15 +137,17 @@ class App extends Component {
         <Route exact path='/' render={() => <Home user={this.state.auth.user.email} /> } /> 
         <Route path='/account' render={() => <Account user={this.state.auth.user} events={this.state.events} updateUserProfile={this.updateUserProfile} />} />
         
-        {/* All and specific events */}
+        {/* All and specific events */} 
+        {/* ? do we need to in include relationships data in this component? YES, we do -- for the form data. */}
         <Route path="/events" 
           render={ (browserHistory) => <EventDashboard
             {...browserHistory}
+            userId={this.state.auth.user.id}
             events={this.state.events} 
             relationships={this.state.relationships} 
             handleNewEvent={this.handleNewEvent} 
-            updateEvents={this.updateEvents}
             viewEvent={this.viewEvent}
+            updateEvents={this.updateEvents}
             viewRelationship={this.viewRelationship}
             updateRelationships={this.updateRelationships}
         /> } />

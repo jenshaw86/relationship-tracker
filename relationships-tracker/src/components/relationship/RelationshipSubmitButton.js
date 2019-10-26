@@ -8,10 +8,8 @@ const RelationshipSubmitButton = props => {
     event.preventDefault();
     props.handleClose();
     // If user doesn't provide a url, use a default image
-    // TODO: let's see if we can move this server-side
-    if(props.image === '') {
-      props.image = "https://www.thesun.co.uk/wp-content/uploads/2016/06/nintchdbpict000242868564.jpg"
-    }
+    // TODO: let's see if we can move this server-side later
+    // debugger;
 
     api.post.newRelationship(props);
   }

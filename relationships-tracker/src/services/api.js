@@ -34,6 +34,28 @@ const relConfigObj = (method, token, props) => {
   )
 }
 
+const evConfigObj = (method, token, props) => {
+  return(
+    {
+      method: `${method}`,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+
+      }, 
+      body: JSON.stringify({
+        name: props.eventName,
+        start_date: props.startDate,
+        end_date: props.endDate,
+        location: props.location,
+        description: props.description,
+        user_id: props.userId,
+      })
+    }
+  )
+}
+
 // Upon user signup, create a new user
 export const signup = formData => {
   return (
@@ -80,7 +102,9 @@ const getRelationships = (token, handleSetState) => {
   return (
     fetch(`${API_ROOT}/relationships`, auth_headers(token))
     .then(res => res.json())
-    .then(data => handleSetState(data))
+    .then(data => {
+      handleSetState(data)
+    })
   )
 }
 
@@ -122,14 +146,62 @@ const deleteRelationship = props => {
     })
 }
 
-// getEvents fetches authorized user's events and sets app's events state
+// getEvents fetches all of authorized user's events and sets app's events state
 const getEvents = (token, handleSetState) => {
-  console.log('getting events')
   return (
     fetch(`${API_ROOT}/events`, auth_headers(token))
     .then(res => res.json())
     .then(data => handleSetState(data))
   )
+}
+
+// first, new event is created by authorized user
+const newEvent = props => {
+  let token = localStorage.getItem('token');
+  return fetch(`${API_ROOT}/events`, evConfigObj('POST', token, props))
+  .then(res => res.json())
+  .then(newEv => newRelEvent(newEv, token, props))
+}
+
+// next, relationshipEvent is created
+const newRelEvent = (event, token, props) => {
+  return fetch(`${API_ROOT}/relationship_events`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }, 
+    body: JSON.stringify({
+      relationship_id: props.inviteeId,
+      event_id: event.id
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    refreshStateAfterPost(data.event_id, token, props)
+  })
+}
+
+// after event and relationshipEvent creation, fetch event (because it has a relationship_id now)
+// handle new event in App
+const refreshStateAfterPost = (eventId, token, props) => {
+  // debugger;
+  return fetch(`${API_ROOT}/events/${eventId}`, auth_headers(token))
+    .then(res => res.json())
+    .then(newEvent => {
+      props.handleNewEvent(newEvent);
+      getRelationship(newEvent.relationship_id, props);
+    })
+}
+
+const getRelationship = (id, props) => {
+  return fetch(`${API_ROOT}/relationships/${id}`)
+  .then(res => res.json())
+  .then(rel => {
+    props.updateRelationships(rel);
+    props.viewRelationship(rel)
+  })
 }
 
 export const api = {
@@ -142,7 +214,8 @@ export const api = {
     getEvents
   }, 
   post: {
-    newRelationship
+    newRelationship,
+    newEvent
   },
   patch: {
     updateRelationship
