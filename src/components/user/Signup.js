@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Container, Button, Form} from 'react-bootstrap';
-import {signup} from './../../services/api';
+import {signup} from '../../services/api';
 
 const Signup = props => {
   const [error, setError] = useState(false)

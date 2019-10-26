@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import { api } from './../../services/api';
+import { api } from '../../services/api';
 
 const DeleteRelationshipButton = props => {
   

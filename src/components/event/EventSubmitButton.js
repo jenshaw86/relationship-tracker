@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "react-bootstrap";
-import { api } from './../../services/api';
+import { api } from '../../services/api';
 
 const EventSubmitButton = props => {
   

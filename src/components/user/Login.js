@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Container, Button, Form} from 'react-bootstrap';
-import {api} from './../../services/api'
+import {api} from '../../services/api'
 
 const Login = props => {
   // local state for controlled login form input
