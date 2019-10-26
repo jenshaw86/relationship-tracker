@@ -186,17 +186,17 @@ const newRelEvent = (event, token, props) => {
 // after event and relationshipEvent creation, fetch event (because it has a relationship_id now)
 // handle new event in App
 const refreshStateAfterPost = (eventId, token, props) => {
-  // debugger;
   return fetch(`${API_ROOT}/events/${eventId}`, auth_headers(token))
     .then(res => res.json())
     .then(newEvent => {
       props.handleNewEvent(newEvent);
-      getRelationship(newEvent.relationship_id, props);
+      getRelationship(newEvent.relationships[0].id, token, props);
     })
 }
 
-const getRelationship = (id, props) => {
-  return fetch(`${API_ROOT}/relationships/${id}`)
+
+const getRelationship = (id, token, props) => {
+  return fetch(`${API_ROOT}/relationships/${id}`, auth_headers(token))
   .then(res => res.json())
   .then(rel => {
     props.updateRelationships(rel);
