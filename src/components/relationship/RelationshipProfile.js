@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import {Container} from 'react-bootstrap'
 import {Redirect} from 'react-router-dom'
 import EditRelationshipButton from './EditRelationshipButton'
@@ -6,9 +6,17 @@ import {lastConnection, connectionGap, filterFutureEvents, displayPhoneNumber, d
 import EventsList from '../event/EventsList'
 
 const RelationshipProfile = (props) => {
-  const futureEvents = props.events.filter(ev => {
-    return (ev.relationships[0].id === props.relationship.id) && ((new Date(ev.start_date).getTime()) > (new Date()).getTime())
-  }).sort((a,b) => (new Date(a.start_date)).getTime() - (new Date(b.start_date)).getTime())
+
+  // futureEvents lists all of the events that start after the current time
+  const futureEvents = () => {
+    if (props.events.length !== 0) {
+    props.events.filter(ev => {
+      return (ev.relationships[0].id === props.relationship.id) && ((new Date(ev.start_date).getTime()) > (new Date()).getTime())
+    }).sort((a,b) => (new Date(a.start_date)).getTime() - (new Date(b.start_date)).getTime())
+    } else {
+      return []
+    }
+  }
 
   const [events, setEvents] = useState(futureEvents)
   
@@ -68,6 +76,7 @@ const RelationshipProfile = (props) => {
     })
     return recentA > recentB ? -1 : 1
   }
+
   if(props.relationship.first_name) {
     return (
       <Container className="profile-container">

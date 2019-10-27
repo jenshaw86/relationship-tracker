@@ -56,6 +56,24 @@ const evConfigObj = (method, token, props) => {
   )
 }
 
+const relEvConfigObj = (method, token, props) => {
+  return(
+    {
+      method: `${method}`,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+
+      }, 
+      body: JSON.stringify({
+        event_id: props.event.id,
+        relationship_id: props.inviteId
+      })
+    }
+  )
+}
+
 // Upon user signup, create a new user
 export const signup = formData => {
   return (
@@ -179,12 +197,13 @@ const newRelEvent = (event, token, props) => {
   })
   .then(res => res.json())
   .then(data => {
+    // Todo: return data that contains the relationship and event objects, and directly handle refresh state with those objects already delivered 
     refreshStateAfterPost(data.event_id, token, props)
   })
 }
 
 // after event and relationshipEvent creation, fetch event (because it has a relationship_id now)
-// handle new event in App
+// handle new event in App.js
 const refreshStateAfterPost = (eventId, token, props) => {
   return fetch(`${API_ROOT}/events/${eventId}`, auth_headers(token))
     .then(res => res.json())
@@ -194,15 +213,54 @@ const refreshStateAfterPost = (eventId, token, props) => {
     })
 }
 
-
-const getRelationship = (id, token, props) => {
-  return fetch(`${API_ROOT}/relationships/${id}`, auth_headers(token))
+// update relationship so that relationship reflects event addition
+const getRelationship = (relationshipId, token, props) => {
+  return fetch(`${API_ROOT}/relationships/${relationshipId}`, auth_headers(token))
   .then(res => res.json())
-  .then(rel => {
-    props.updateRelationships(rel);
-    props.viewRelationship(rel)
+  .then(relationship => {
+    props.updateRelationships(relationship);
+    props.viewRelationship(relationship);
   })
 }
+
+const updateEvent = (event, props) => {
+  let token = localStorage.getItem('token');
+  let newInvitee = event.relationships[0].id !== props.inviteeId
+
+  return fetch(`${API_ROOT}/events/${event.id}`, evConfigObj('PATCH', token, props))
+  .then(res => res.json())
+  // consider if invitee form was changed. If there's a new invite, update relationship event.
+  // else just update the events
+  .then((updatedEvent) => {
+    if(newInvitee) {
+      console.log('new invite!')
+      updateRelEvent(updatedEvent.relationship_events[0].id, token, props, event)
+    } else {
+      console.log('same old!')
+      props.updateEvents(updatedEvent)
+    }
+  })
+}
+
+const updateRelEvent = (id, token, props, event) => {
+  fetch(`${API_ROOT}/relationship_events/${id}`, relEvConfigObj('PATCH', token, props))
+  .then(res => res.json())
+  .then(data => {
+    debugger;
+    // get the updated event to update the list of events in state
+    getEvent(data.event_id, token, props)
+    // update the new and old invitee
+    getRelationship(data.relationship_id, token, props)
+    getRelationship(event.relationships[0].id, token, props)
+  })
+}
+
+// Todo: this function is poorly worded. Should probably rename this to reflect its actual function
+const getEvent = (eventId, token, props) => {
+  return fetch(`${API_ROOT}/events/${eventId}`, auth_headers(token))
+  .then(res => res.json())
+  .then(event => props.updateEvents(event))
+} 
 
 export const api = {
   auth: {
@@ -218,7 +276,8 @@ export const api = {
     newEvent
   },
   patch: {
-    updateRelationship
+    updateRelationship,
+    updateEvent
   },
   destroy: {
     deleteRelationship

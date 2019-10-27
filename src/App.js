@@ -93,6 +93,7 @@ class App extends Component {
   }
 
   updateEvents = event => {
+    debugger;
     if (event.id) { // if the arg is an object
       let events = this.state.events.map(ev => event.id === ev.id ? event : ev)
       this.setState({events: events, eventView: event})

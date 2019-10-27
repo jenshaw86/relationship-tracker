@@ -56,26 +56,26 @@ const EventSubmitButton = props => {
     event.preventDefault();
     props.handleClose();
     let prevInviteeId = props.event.relationships[0].id // keep previous invitee id, use later to update relationships
-    console.log('patch event')
-    fetch(`http://localhost:3000/events/${props.event.id}`, { // patch event itself
-      method: 'PATCH',
-      headers: {
-        'Accept': 'application/json', 
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        name: props.eventName,
-        start_date: props.startDate,
-        end_date: props.endDate,
-        location: props.location,
-        description: props.description,
-        user_id: 1,
-      })
-    })
-    .then(res => res.json())
-    .then(ev => {  // newly updated event. WARNING: hasn't updated relationship
-      patchRelEvent(ev, prevInviteeId) // move forward to patch relationship-event, take event
-    })
+    api.patch.updateEvent(props.event, props);
+    // fetch(`http://localhost:3000/events/${props.event.id}`, { // patch event itself
+    //   method: 'PATCH',
+    //   headers: {
+    //     'Accept': 'application/json', 
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify({
+    //     name: props.eventName,
+    //     start_date: props.startDate,
+    //     end_date: props.endDate,
+    //     location: props.location,
+    //     description: props.description,
+    //     user_id: 1,
+    //   })
+    // })
+    // .then(res => res.json())
+    // .then(ev => {  // newly updated event. WARNING: hasn't updated relationship
+    //   patchRelEvent(ev, prevInviteeId) // move forward to patch relationship-event, take event
+    // })
   }
 
   const patchRelEvent = (ev, prevInviteeId) => { // patch relationship-event with new id first
