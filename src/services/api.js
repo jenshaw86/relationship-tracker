@@ -68,7 +68,7 @@ const relEvConfigObj = (method, token, props) => {
       }, 
       body: JSON.stringify({
         event_id: props.event.id,
-        relationship_id: props.inviteId
+        relationship_id: props.inviteeId
       })
     }
   )
@@ -233,16 +233,17 @@ const updateEvent = (event, props) => {
   // else just update the events
   .then((updatedEvent) => {
     if(newInvitee) {
-      console.log('new invite!')
-      updateRelEvent(updatedEvent.relationship_events[0].id, token, props, event)
+      console.log("new invite!")
+      debugger;
+      updateRelEvent(updatedEvent.relationship_events[0].id, token, event, props)
     } else {
-      console.log('same old!')
+      console.log("same old!")
       props.updateEvents(updatedEvent)
     }
   })
 }
 
-const updateRelEvent = (id, token, props, event) => {
+const updateRelEvent = (id, token, event, props) => {
   fetch(`${API_ROOT}/relationship_events/${id}`, relEvConfigObj('PATCH', token, props))
   .then(res => res.json())
   .then(data => {
@@ -250,16 +251,19 @@ const updateRelEvent = (id, token, props, event) => {
     // get the updated event to update the list of events in state
     getEvent(data.event_id, token, props)
     // update the new and old invitee
-    getRelationship(data.relationship_id, token, props)
-    getRelationship(event.relationships[0].id, token, props)
+    .then(getRelationship(data.relationship_id, token, props))
+    .then(getRelationship(event.relationships[0].id, token, props))
   })
 }
 
 // Todo: this function is poorly worded. Should probably rename this to reflect its actual function
 const getEvent = (eventId, token, props) => {
+  console.log('getting event')
   return fetch(`${API_ROOT}/events/${eventId}`, auth_headers(token))
   .then(res => res.json())
-  .then(event => props.updateEvents(event))
+  .then(event => {
+    props.updateEvents(event)
+  })
 } 
 
 export const api = {
