@@ -96,11 +96,15 @@ class App extends Component {
     console.log('updating events')
     if (event.id) { // if the arg is an object
       let events = this.state.events.map(ev => event.id === ev.id ? event : ev)
-      debugger;
+      debugger; 
       this.setState({events: events, eventView: event})
     } else if (event.length) { //if the arg is an array
       this.setState({events: event})
     }
+  }
+
+  handleDeletedEvent = updatedEvents => {
+    this.setState({events: updatedEvents})
   }
 
   viewEvent = event => {
@@ -150,6 +154,7 @@ class App extends Component {
             handleNewEvent={this.handleNewEvent} 
             viewEvent={this.viewEvent}
             updateEvents={this.updateEvents}
+            handleDeletedEvent={this.handleDeletedEvent}
             viewRelationship={this.viewRelationship}
             updateRelationships={this.updateRelationships}
         /> } />

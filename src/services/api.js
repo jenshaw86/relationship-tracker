@@ -266,6 +266,20 @@ const getEvent = (eventId, token, props) => {
   })
 } 
 
+const deleteEvent = props => {
+  let token = localStorage.getItem('token');
+  fetch(`${API_ROOT}/events/${props.event.id}`, {
+      method: "DELETE",
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    .then(res => res.json())
+    .then(events => {
+      props.handleDeletedEvent(events)
+    })
+}
+
 export const api = {
   auth: {
     login,
@@ -284,6 +298,7 @@ export const api = {
     updateEvent
   },
   destroy: {
-    deleteRelationship
+    deleteRelationship,
+    deleteEvent
   }
 }

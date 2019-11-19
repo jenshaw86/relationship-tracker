@@ -10,7 +10,7 @@ const EventCard = (props) => {
     return (
         <>
           <EditEventButton event={props.event} updateEvents={props.updateEvents} relationships={props.relationships} updateRelationships={props.updateRelationships} viewRelationship={props.viewRelationship} /> 
-          <DeleteEventButton event={props.event} updateEvents={props.updateEvents} />
+          <DeleteEventButton event={props.event} updateEvents={props.updateEvents} handleDeletedEvent={props.handleDeletedEvent} />
         </>
       )
     } 
