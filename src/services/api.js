@@ -111,7 +111,9 @@ const login = formData => {
 const getCurrentUser = token => {
   return (
     fetch(`${API_ROOT}/current_user`, auth_headers(token))
-    .then(res => res.json())
+    .then(res => {
+      return res.json()
+    })
   )
 }
 
@@ -169,7 +171,9 @@ const getEvents = (token, handleSetState) => {
   return (
     fetch(`${API_ROOT}/events`, auth_headers(token))
     .then(res => res.json())
-    .then(data => handleSetState(data))
+    .then(data => {
+      handleSetState(data)
+    })
   )
 }
 
@@ -234,7 +238,6 @@ const updateEvent = (event, props) => {
   .then((updatedEvent) => {
     if(newInvitee) {
       console.log("new invite!")
-      debugger;
       updateRelEvent(updatedEvent.relationship_events[0].id, token, event, props)
     } else {
       console.log("same old!")
@@ -247,7 +250,6 @@ const updateRelEvent = (id, token, event, props) => {
   fetch(`${API_ROOT}/relationship_events/${id}`, relEvConfigObj('PATCH', token, props))
   .then(res => res.json())
   .then(data => {
-    debugger;
     // get the updated event to update the list of events in state
     getEvent(data.event_id, token, props)
     // update the new and old invitee

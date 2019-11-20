@@ -79,7 +79,6 @@ const EventSubmitButton = props => {
   }
 
   const patchRelEvent = (ev, prevInviteeId) => { // patch relationship-event with new id first
-    console.log('patch relevent')
     fetch(`http://localhost:3000/relationship_events/${props.event.relationship_events[0].id}`, {
       method: 'PATCH',
       headers: {

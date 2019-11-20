@@ -26,7 +26,7 @@ const StartDateTime = props => {
           showTimeSelect
           showTimeSelectOnly
           timeIntervals={30}
-          dateFormat="h:mm aa"
+          dateFormat="h:mm aa" //hour, minute, am/pm
           timeCaption="Time"
         />
       </Form.Group>

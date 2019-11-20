@@ -39,10 +39,8 @@ class App extends Component {
       // use token to get current user and set current user state
       api.auth.getCurrentUser(token)
       .then(user => { 
-
         const updatedState = {...this.state.auth, user: user["user"]};
         this.setState({auth: updatedState});
-
         api.data.getRelationships(token, this.handleSetState);
         api.data.getEvents(token, this.handleSetState);
       })
@@ -51,13 +49,11 @@ class App extends Component {
 
   // handleSetState checks data for certain properties to determine which field in state to set data to
   handleSetState = data => {
-
-    if (data.length !== 0) {
-      if (data[0].first_name) {
-        this.setState({relationships: data})
-      } else if (data[0].start_date) {
-        this.setState({events: data})
-      }
+    // * event data is an object, while relationship data is an array
+    if (Array.isArray(data)) {
+      this.setState({relationships: data})
+    } else {
+      this.setState({events: data}) 
     }
   }
 
@@ -96,7 +92,6 @@ class App extends Component {
     console.log('updating events')
     if (event.id) { // if the arg is an object
       let events = this.state.events.map(ev => event.id === ev.id ? event : ev)
-      debugger; 
       this.setState({events: events, eventView: event})
     } else if (event.length) { //if the arg is an array
       this.setState({events: event})

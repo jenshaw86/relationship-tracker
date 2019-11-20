@@ -12,8 +12,12 @@ export const lastDate = (person) => {
 }
 
 export const lastConnection = (person) => {
+  debugger;
+  // if the person has at least one event
   if (person.events && person.events.length !== 0) {
+    // get the current time
     let now = Date.parse(new Date());
+    // filter the dates so that we only get future dates
     let filtered = person.events.filter(ev => Date.parse(ev.end_date) < now).sort((a,b) => a.end_date - b.end_date)
     if (filtered.length !== 0) {
       let last = new Date(filtered[filtered.length - 1].end_date)

@@ -5,27 +5,29 @@ import EditRelationshipButton from './EditRelationshipButton'
 import {lastConnection, connectionGap, filterFutureEvents, displayPhoneNumber, displayDateString} from '../../utils'
 import EventsList from '../event/EventsList'
 
-const RelationshipProfile = (props) => {
+const RelationshipProfile = props => {
 
   // futureEvents lists all of the events that start after the current time
-  const futureEvents = () => {
-    if (props.events.length !== 0) {
-    props.events.filter(ev => {
-      return (ev.relationships[0].id === props.relationship.id) && ((new Date(ev.start_date).getTime()) > (new Date()).getTime())
-    }).sort((a,b) => (new Date(a.start_date)).getTime() - (new Date(b.start_date)).getTime())
-    } else {
-      return []
-    }
-  }
+  // const futureEvents = () => {
+  //   if (props.events.length !== 0) {
+  //   props.events.filter(ev => {
+  //     return (ev.relationships[0].id === props.relationship.id) && ((new Date(ev.start_date).getTime()) > (new Date()).getTime())
+  //   }).sort((a,b) => (new Date(a.start_date)).getTime() - (new Date(b.start_date)).getTime())
+  //   } else {
+  //     return []
+  //   }
+  // }
 
-  const [events, setEvents] = useState(futureEvents)
+  // const [events, setEvents] = useState(futureEvents)
+  const [events, setEvents] = useState([])
+
   
-  useEffect(() => {
-    setEvents(futureEvents)
-  }, [props.events])
+  // useEffect(() => {
+  //   setEvents(futureEvents)
+  // }, [props.events])
 // Did it break? Check this argument
 
-  const person = props.relationship
+  const person = props.relationship;
   let gap = connectionGap(person);
   const connectionGapMessage = gap => {
     if (gap !== null) {

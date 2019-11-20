@@ -6,7 +6,7 @@ import EventsList from './EventsList';
 import AddEventButton from './AddEventButton';
 
 const EventDashboard = props => {
-
+  
   const upcomingEvents = filterFutureEvents(props.events); 
   const pastEvents = filterPastEvents(props.events);
   return (
