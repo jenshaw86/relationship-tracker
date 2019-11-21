@@ -12,7 +12,6 @@ export const lastDate = (person) => {
 }
 
 export const lastConnection = (person) => {
-  debugger;
   // if the person has at least one event
   if (person.events && person.events.length !== 0) {
     // get the current time

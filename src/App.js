@@ -22,7 +22,7 @@ class App extends Component {
         user: {}
       },
       currentUser: {},
-      events: [],
+      events: {},
       relationships: [], 
       eventView: {},
       relationshipView: {}
@@ -84,7 +84,8 @@ class App extends Component {
   }
 
   handleNewEvent = newEvent => {
-    this.setState({events: [...this.state.events, newEvent]});
+    let futureEvents = [...this.state.events.future_events, newEvent].sort((a,b) => a - b);
+    this.setState({events: {...this.state.events, future_events: futureEvents}});
     this.setState({eventView: newEvent});
   }
 
