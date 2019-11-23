@@ -1,2 +1,3 @@
-# relationship-tracker
-React frontend for a relationship tracker, solo project @ Flatiron School
+# StayConnected
+***
+React Frontend that allows users to manage and stay active with their social connections.
