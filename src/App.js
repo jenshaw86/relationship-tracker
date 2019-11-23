@@ -22,7 +22,10 @@ class App extends Component {
         user: {}
       },
       currentUser: {},
-      events: {},
+      events: {
+        future_events: [],
+        past_events: []
+      },
       relationships: [], 
       eventView: {},
       relationshipView: {}
@@ -84,18 +87,18 @@ class App extends Component {
   }
 
   handleNewEvent = newEvent => {
-    let futureEvents = [...this.state.events.future_events, newEvent].sort((a,b) => a - b);
-    this.setState({events: {...this.state.events, future_events: futureEvents}});
+    let events = [...this.state.events.future_events, newEvent].sort((a,b) => b.start_date > a.start_date ? -1 : 1);
+    this.setState({events: {...this.state.events, future_events: events}});
     this.setState({eventView: newEvent});
   }
 
   updateEvents = event => {
-    console.log('updating events')
-    if (event.id) { // if the arg is an object
-      let events = this.state.events.map(ev => event.id === ev.id ? event : ev)
-      this.setState({events: events, eventView: event})
-    } else if (event.length) { //if the arg is an array
+    if (Array.isArray(event)) { //if the arg is an array from relationship profile events list
       this.setState({events: event})
+    } else { // if the arg is an object from all events dashboard
+      let futureEvents = this.state.events.future_events.map(ev => event.id === ev.id ? event : ev)
+      let events = {...this.state.events, future_events: futureEvents}
+      this.setState({events: events, eventView: event})
     }
   }
 
