@@ -10,6 +10,9 @@ import RelationshipProfile from './components/relationship/RelationshipProfile'
 import SignUp from './components/user/Signup'
 import Login from './components/user/Login'
 import {api} from './services/api'
+import {getRelationships} from './services/relationshipsApi'
+import {getEvents} from './services/eventsApi'
+import {getCurrentUser} from './services/authApi'
 import './styles.css'
 
 class App extends Component {
@@ -21,7 +24,6 @@ class App extends Component {
       auth: {
         user: {}
       },
-      currentUser: {},
       events: {
         future_events: [],
         past_events: []
@@ -40,12 +42,12 @@ class App extends Component {
       
       // in case page is refreshed, instead of state returning to a blank slate
       // use token to get current user and set current user state
-      api.auth.getCurrentUser(token)
+      getCurrentUser(token)
       .then(user => { 
         const updatedState = {...this.state.auth, user: user["user"]};
         this.setState({auth: updatedState});
-        api.data.getRelationships(token, this.handleSetState);
-        api.data.getEvents(token, this.handleSetState);
+        getRelationships(token, this.handleSetState);
+        getEvents(token, this.handleSetState);
       })
     }
   }
@@ -74,8 +76,8 @@ class App extends Component {
     // replace state.auth
     this.setState({auth: updatedState});
     // fetch relationships and events and set respective state
-    api.data.getRelationships(token, this.handleSetState);
-    api.data.getEvents(token, this.handleSetState);
+    getRelationships(token, this.handleSetState);
+    getEvents(token, this.handleSetState);
   }
 
   logout = () => {
@@ -130,7 +132,7 @@ class App extends Component {
   }
 
   updateUserProfile = data => {
-    this.setState({currentUser: data})
+    this.setState({...this.state.auth, user: data.user})
   }
 
   render() {

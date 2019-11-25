@@ -23,24 +23,27 @@ const ProfileModal = props => {
   }, [props.user] )
 
   const handleEdit = () => {
-    // ev.preventDefault();
     props.handleClose();
-    fetch(`http://localhost:3000/users/${props.user.id}`, {
+    let token = localStorage.getItem('token');
+    fetch(`http://localhost:3000/api/v1/users/${props.user.id}`, {
       method: 'PATCH',
       headers: {
+        'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Authorization': `Bearer ${token}` 
       }, 
       body: JSON.stringify({
         first_name: firstName,
         last_name: lastName,
         email: email,
         phone_number: phone,
-        image: image,
+        image: image
       })
     })
     .then(res => res.json())
-    .then(data => props.updateUserProfile(data))
+    .then(data => {
+      props.updateUserProfile(data)
+    })
   }
 
   return (

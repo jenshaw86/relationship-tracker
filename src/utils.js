@@ -135,7 +135,6 @@ export const filterPastEvents = events => {
 
 // filter upcoming events
 export const filterFutureEvents = events => {
-  // debugger;
   if (events && events.length !== 0) {
     let now = new Date();
     now = now.toISOString();

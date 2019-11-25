@@ -1,10 +1,10 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import { api } from './../../services/api'
+import { deleteEvent } from './../../services/eventsApi'
 
 const DeleteEvent = props => {
   
-  const handleOnClick = () => api.destroy.deleteEvent(props);
+  const handleOnClick = () => deleteEvent(props);
 
   return (
     <Button onClick={handleOnClick} className="delete-btn" size="sm">Cancel</Button>

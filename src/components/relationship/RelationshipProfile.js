@@ -1,31 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import {Container} from 'react-bootstrap'
 import {Redirect} from 'react-router-dom'
 import EditRelationshipButton from './EditRelationshipButton'
-import {lastConnection, connectionGap, filterFutureEvents, displayPhoneNumber, displayDateString} from '../../utils'
+import {lastConnection, connectionGap, displayPhoneNumber} from '../../utils'
 import EventsList from '../event/EventsList'
 
 const RelationshipProfile = props => {
-
-  // futureEvents lists all of the events that start after the current time
-  // const futureEvents = () => {
-  //   if (props.events.length !== 0) {
-  //   props.events.filter(ev => {
-  //     return (ev.relationships[0].id === props.relationship.id) && ((new Date(ev.start_date).getTime()) > (new Date()).getTime())
-  //   }).sort((a,b) => (new Date(a.start_date)).getTime() - (new Date(b.start_date)).getTime())
-  //   } else {
-  //     return []
-  //   }
-  // }
-
-  // const [events, setEvents] = useState(futureEvents)
   const [events, setEvents] = useState([])
-
-  
-  // useEffect(() => {
-  //   setEvents(futureEvents)
-  // }, [props.events])
-// Did it break? Check this argument
 
   const person = props.relationship;
   let gap = connectionGap(person);
@@ -48,36 +29,36 @@ const RelationshipProfile = props => {
     }
   }
 
-  const nextMeetup = person => {
-    if (person.events.length !== 0) {
-      let upcoming = filterFutureEvents(person.events)
+  // const nextMeetup = person => {
+  //   if (person.events.length !== 0) {
+  //     let upcoming = filterFutureEvents(person.events)
     
-      let mostRecentEv = upcoming.sort((a,b) => a.startDate.getTime() - b.startDate.getTime())[0]
-      displayDateString(mostRecentEv.start_date)
-    } else {
-      return `No plans to meet up yet.`
-    }
-  }
+  //     let mostRecentEv = upcoming.sort((a,b) => a.startDate.getTime() - b.startDate.getTime())[0]
+  //     displayDateString(mostRecentEv.start_date)
+  //   } else {
+  //     return `No plans to meet up yet.`
+  //   }
+  // }
 
-  const mostRecentEvent = (a, b) => {
-    let recentA = 0;
-    let recentB = 0;
-    let now = (new Date()).getTime()
+  // const mostRecentEvent = (a, b) => {
+  //   let recentA = 0;
+  //   let recentB = 0;
+  //   let now = (new Date()).getTime()
 
-    a.events.forEach(ev => {
-      let endDate = new Date(ev.end_date.toLocaleString()).getTime()
-      if (endDate < now && endDate > recentA) {
-        recentA = endDate
-      }
-    })
-    b.events.forEach(ev => {
-      let endDate = new Date(ev.end_date.toLocaleString()).getTime()
-      if (endDate < now && endDate > recentB) {
-        recentB = endDate
-      }
-    })
-    return recentA > recentB ? -1 : 1
-  }
+  //   a.events.forEach(ev => {
+  //     let endDate = new Date(ev.end_date.toLocaleString()).getTime()
+  //     if (endDate < now && endDate > recentA) {
+  //       recentA = endDate
+  //     }
+  //   })
+  //   b.events.forEach(ev => {
+  //     let endDate = new Date(ev.end_date.toLocaleString()).getTime()
+  //     if (endDate < now && endDate > recentB) {
+  //       recentB = endDate
+  //     }
+  //   })
+  //   return recentA > recentB ? -1 : 1
+  // }
 
   if(props.relationship.first_name) {
     return (

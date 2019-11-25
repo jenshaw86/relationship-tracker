@@ -20,7 +20,6 @@ const EventForm = props => {
   
   // the purpose of someFunction, for now, is to determine what the contents of props are to therefore help determine whether to autofill the invited party state and section of the form
   const somefunction = props => {
-    // debugger;
     // if props contains an event, this is an edit form. return the id of the associated connection.
     if (props.event) {
       return props.event.relationships[0].id

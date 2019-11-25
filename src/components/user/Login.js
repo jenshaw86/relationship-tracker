@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Container, Button, Form} from 'react-bootstrap';
-import {api} from '../../services/api'
+import {login} from '../../services/authApi'
 
 const Login = props => {
   // local state for controlled login form input
@@ -33,7 +33,7 @@ const Login = props => {
       formData[ev.target[i].name] = (ev.target[i].value)
     }
     
-    api.auth.login(formData).then(res => { // res contains authorized user and JWT
+    login(formData).then(res => { // res contains authorized user and JWT
       if (!res.error) { // if response contains no errors
         // handle login at App.js
         props.handleLogin(res);
