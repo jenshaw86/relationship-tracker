@@ -11,28 +11,28 @@ export const lastDate = (person) => {
   }
 }
 
+// calculates when user last connected with relationship
 export const lastConnection = (person) => {
   // if the person has at least one event
-  if (person.events && person.events.length !== 0) {
-    // get the current time
-    let now = Date.parse(new Date());
-    // filter the dates so that we only get future dates
-    let filtered = person.events.filter(ev => Date.parse(ev.end_date) < now).sort((a,b) => a.end_date - b.end_date)
-    if (filtered.length !== 0) {
-      let last = new Date(filtered[filtered.length - 1].end_date)
-      let dateArr = last.toUTCString().split(" ");
-      let [day, date, month, year] = dateArr
-
+  if (person.events.length > 0) {
+    // get the current time in seconds
+    const now = Date.parse(new Date());
+    // filter the dates so that we only get past dates
+    const filtered = person.events.filter(ev => Date.parse(ev.end_date) < now).sort((a,b) => a.end_date - b.end_date)
+    // if there were any past events
+    if (filtered.length > 0) {
+      // find the most recent past event
+      const mostRecentEvent = filtered[filtered.length - 1];
+      const endTime = new Date(mostRecentEvent.end_date)
+      const dateArr = endTime.toString().split(" ");
+      const [day, month, date, year] = dateArr;
       return `${day} ${month} ${date}, ${year}`
-    } else {
-      return "Never"
     }
-  } else {
-    return "Never"
   }
+  return "You haven't met up yet!"
 }
 
-export const connectionGap = (person) => {
+export const connectionGap = person => {
   if (person.events && person.events.length !== 0) {
     let now = Date.parse(new Date());
     let filtered = person.events.filter(ev => Date.parse(ev.end_date) < now).sort((a,b) => a.end_date - b.end_date)

@@ -6,10 +6,14 @@ import {lastConnection, connectionGap, displayPhoneNumber} from '../../utils'
 import EventsList from '../event/EventsList'
 
 const RelationshipProfile = props => {
-  const [events, setEvents] = useState(props.events.future_events)
+  const events = props.relationship.events
+  const now = Date.parse(new Date());
+  const upcomingEvents = events.length > 0 ? events.filter(event => Date.parse(event.start_date) > now) : []
 
   const person = props.relationship;
+
   let gap = connectionGap(person);
+
   const connectionGapMessage = gap => {
     if (gap !== null) {
       if (gap === 1) {
@@ -97,7 +101,7 @@ const RelationshipProfile = props => {
             {/* <AddEventButton updateRelationships={props.updateRelationships} viewRelationship={props.viewRelationship} relationship={props.relationship} handleNewEvent={props.handleNewEvent} relationships={props.relationships}/> */}
 
 
-            <EventsList events={events} viewEvent={props.viewEvent} updateRelationships={props.updateRelationships} viewRelationship={props.viewRelationship} relationship={props.relationship} handleNewEvent={props.handleNewEvent} relationships={props.relationships} />
+            <EventsList events={upcomingEvents} viewEvent={props.viewEvent} updateRelationships={props.updateRelationships} viewRelationship={props.viewRelationship} relationship={props.relationship} handleNewEvent={props.handleNewEvent} relationships={props.relationships} />
 
 
       </Container>

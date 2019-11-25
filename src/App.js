@@ -63,7 +63,6 @@ class App extends Component {
 
   // handles login in Login component
   login = data => {
-    // console.log(data.user)
     
     // create updated this.state.auth using auth POST response data containing user and JWT
     const updatedState = {...this.state.auth, user: data.user};
@@ -114,7 +113,6 @@ class App extends Component {
   handleNewRelationship = (newRelationship) => {
     this.setState({relationships: [newRelationship, ...this.state.relationships]})
     this.setState({relationshipView: newRelationship})
-    
   }
 
   viewRelationship = (person) => {
