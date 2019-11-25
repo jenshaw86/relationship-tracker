@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {Container} from 'react-bootstrap'
 import {Redirect} from 'react-router-dom'
 import EditRelationshipButton from './EditRelationshipButton'
@@ -6,13 +6,14 @@ import {lastConnection, connectionGap, displayPhoneNumber} from '../../utils'
 import EventsList from '../event/EventsList'
 
 const RelationshipProfile = props => {
-  const events = props.relationship.events
-  const now = Date.parse(new Date());
-  const upcomingEvents = events.length > 0 ? events.filter(event => Date.parse(event.start_date) > now) : []
-
   const person = props.relationship;
+  const events = person.events;
+  const now = Date.now();
+  
+  const upcomingEvents = findUpcomingEvents();
+  const pastEvents = findPastEvents();
 
-  let gap = connectionGap(person);
+  const gap = findGap();
 
   const connectionGapMessage = gap => {
     if (gap !== null) {
@@ -32,7 +33,33 @@ const RelationshipProfile = props => {
       return `It's been a while. I think it's time to make plans to get together!`
     }
   }
-
+  
+  function findGap() {
+    if(pastEvents && pastEvents.length > 0) {
+      return connectionGap(pastEvents[0].end_date);
+    } else {
+      return null;
+    }
+  }
+  
+  function findUpcomingEvents() {
+    if (events && events.length) {
+      let futureEvents = events.filter(event => Date.parse(event.start_date) > now)
+      return futureEvents.sort((a,b) => a.start_date < b.start_date ? -1 : 1)
+    } else {
+      return []
+    }
+  }
+  
+  function findPastEvents() {
+    if (events && events.length) {
+      let prevEvents = events.filter(event => Date.parse(event.start_date) < now)
+      return prevEvents.sort((a,b) => a.start_date > b.start_date ? -1 : 1)
+    } else {
+      return []
+    }
+  }
+  
   // const nextMeetup = person => {
   //   if (person.events.length !== 0) {
   //     let upcoming = filterFutureEvents(person.events)

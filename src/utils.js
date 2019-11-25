@@ -1,29 +1,20 @@
 // RELATIONSHIP FUNCTIONS
 
-// display last connection date
-export const lastDate = (person) => {
-  if (person.events && person.events.length !== 0) {
-    let now = Date.parse(new Date());
-    let filtered = person.events.filter(ev => Date.parse(ev.end_date) < now).sort((a,b) => a.end_date - b.end_date)
-    if (filtered.length !== 0) {
-      return new Date(filtered[filtered.length - 1].end_date)
-    }
-  }
-}
-
-// calculates when user last connected with relationship
+// reports a date string of last event with relationship
 export const lastConnection = (person) => {
   // if the person has at least one event
   if (person.events.length > 0) {
     // get the current time in seconds
-    const now = Date.parse(new Date());
+    const now = Date.now();
     // filter the dates so that we only get past dates
     const filtered = person.events.filter(ev => Date.parse(ev.end_date) < now).sort((a,b) => a.end_date - b.end_date)
     // if there were any past events
     if (filtered.length > 0) {
       // find the most recent past event
       const mostRecentEvent = filtered[filtered.length - 1];
+      // convert date to date object
       const endTime = new Date(mostRecentEvent.end_date)
+      // convert date object to string
       const dateArr = endTime.toString().split(" ");
       const [day, month, date, year] = dateArr;
       return `${day} ${month} ${date}, ${year}`
@@ -32,22 +23,13 @@ export const lastConnection = (person) => {
   return "You haven't met up yet!"
 }
 
-export const connectionGap = person => {
-  if (person.events && person.events.length !== 0) {
-    let now = Date.parse(new Date());
-    let filtered = person.events.filter(ev => Date.parse(ev.end_date) < now).sort((a,b) => a.end_date - b.end_date)
-    if (filtered.length !== 0) {
-      let lastDate = new Date(filtered[filtered.length - 1].end_date)
-      let now = new Date();
-      let diffSec = Math.abs(now.getTime() - lastDate.getTime())
-      let diffDay = Math.ceil(diffSec/(1000*60*60*24))
-      return diffDay
-    } else {
-      return null
-    }
-  } else {
-    return null
-  }
+// The amt of time between now and the last event
+export const connectionGap = date => {
+  const now = Date.now();
+  const last = Date.parse(date);
+  const gapSecs = Math.abs(now - last);
+  const gapDays = Math.ceil(gapSecs/(60*60*24*1000));
+  return gapDays;
 }
 
 
@@ -165,11 +147,5 @@ export const displayPhoneNumber = num => {
     return `${country} (${area}) ${office}-${line}`
   } else {
     return "not given"
-  }
-}
-
-export const utils = {
-  relationship: {
-    lastDate
   }
 }
