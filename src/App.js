@@ -174,6 +174,7 @@ class App extends Component {
 
         <Route path="/relationships/:id" 
           render={ () => <RelationshipProfile 
+            userId={this.state.auth.user.id}
             relationship={this.state.relationshipView}
             relationships={this.state.relationships}
             viewRelationship={this.viewRelationship}

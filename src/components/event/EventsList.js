@@ -26,7 +26,13 @@ const EventsList = props => {
       return (
       <div className="connection-events">
       <h3>Upcoming Events</h3>
-      <AddEventButton updateRelationships={props.updateRelationships} viewRelationship={props.viewRelationship} relationship={props.relationship} handleNewEvent={props.handleNewEvent} relationships={props.relationships} />
+      <AddEventButton 
+        userId={props.userId}
+        relationship={props.relationship} 
+        relationships={props.relationships} 
+        viewRelationship={props.viewRelationship} 
+        updateRelationships={props.updateRelationships} 
+        handleNewEvent={props.handleNewEvent} />
       </div>
       )
     }
@@ -35,7 +41,7 @@ const EventsList = props => {
   return (
     <div className="events-list">
       {displayHeader()}
-      { displayAllEvents() }
+      {displayAllEvents()}
     </div> 
   )
 }

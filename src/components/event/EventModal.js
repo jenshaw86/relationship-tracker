@@ -1,8 +1,6 @@
-import React from 'react'
+import React from 'react';
 import {Modal, Button} from "react-bootstrap";
-import EventForm from './EventForm'
-
-// PROPS: setEvents()
+import EventForm from './EventForm';
 
 const EventModal = props => {
   

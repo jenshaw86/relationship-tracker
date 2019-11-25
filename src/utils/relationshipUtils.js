@@ -1,10 +1,7 @@
-export const connectionGapMessage = gap => {
+export const connectionGapMessage = (person, gap) => {
   if (gap !== null) {
-    if (gap === 1) {
-      return `You met up with ${person.first_name} yesterday.`
-    } else {
-      return `You met up with ${person.first_name} ${gap} days ago.`
-    }
+    const message = `You met up with ${person.first_name}`;
+    return gap === 1 ? `${message} yesterday.` : `${message} ${gap} days ago.`
   } else {
     return `You haven't met up with ${person.first_name} yet! 
     They'd probably love it if you invited them to coffee!`

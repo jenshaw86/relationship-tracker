@@ -16,7 +16,7 @@ const evConfigObj = (method, token, props) => {
         end_date: props.endDate,
         location: props.location,
         description: props.description,
-        user_id: props.userId,
+        user_id: props.userId
       })
     }
   )
@@ -56,7 +56,10 @@ export const newEvent = props => {
   let token = localStorage.getItem('token');
   return fetch(`${API_ROOT}/events`, evConfigObj('POST', token, props))
   .then(res => res.json())
-  .then(newEv => newRelEvent(newEv, token, props))
+  .then(newEv => {
+
+    newRelEvent(newEv, token, props)
+  })
 }
 
 // next, relationshipEvent is created
@@ -86,6 +89,7 @@ const refreshStateAfterPost = (eventId, token, props) => {
   return fetch(`${API_ROOT}/events/${eventId}`, auth_headers(token))
     .then(res => res.json())
     .then(newEvent => {
+
       props.handleNewEvent(newEvent);
       getRelationship(newEvent.relationships[0].id, token, props);
     })

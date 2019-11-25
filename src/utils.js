@@ -1,38 +1,3 @@
-// RELATIONSHIP FUNCTIONS
-
-// reports a date string of last event with relationship
-export const lastConnection = (person) => {
-  // if the person has at least one event
-  if (person.events.length > 0) {
-    // get the current time in seconds
-    const now = Date.now();
-    // filter the dates so that we only get past dates
-    const filtered = person.events.filter(ev => Date.parse(ev.end_date) < now).sort((a,b) => a.end_date - b.end_date)
-    // if there were any past events
-    if (filtered.length > 0) {
-      // find the most recent past event
-      const mostRecentEvent = filtered[filtered.length - 1];
-      // convert date to date object
-      const endTime = new Date(mostRecentEvent.end_date)
-      // convert date object to string
-      const dateArr = endTime.toString().split(" ");
-      const [day, month, date, year] = dateArr;
-      return `${day} ${month} ${date}, ${year}`
-    }
-  }
-  return "You haven't met up yet!"
-}
-
-// The amt of time between now and the last event
-export const connectionGap = date => {
-  const now = Date.now();
-  const last = Date.parse(date);
-  const gapSecs = Math.abs(now - last);
-  const gapDays = Math.ceil(gapSecs/(60*60*24*1000));
-  return gapDays;
-}
-
-
 // EVENT FUNCTIONS
 
 

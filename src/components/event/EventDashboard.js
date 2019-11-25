@@ -13,11 +13,11 @@ const EventDashboard = props => {
       <h2>Events</h2>
 
       <AddEventButton 
-        userId={props.userId}
-        handleNewEvent={props.handleNewEvent} 
+        userId={props.userId}  
         relationships={props.relationships} 
-        updateRelationships={props.updateRelationships} 
         viewRelationship={props.viewRelationship}
+        updateRelationships={props.updateRelationships} 
+        handleNewEvent={props.handleNewEvent} 
       />
 
         <div className="events-1">

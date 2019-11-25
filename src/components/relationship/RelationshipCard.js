@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { lastConnection } from '../../utils'
+import { lastConnection } from '../../utils/relationshipUtils'
 import DeleteRelationshipButton from './DeleteRelationshipButton'
 import EditRelationshipButton from './EditRelationshipButton';
 
