@@ -8,7 +8,6 @@ const relConfigObj = (method, token, props) => {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
-
       }, 
       body: JSON.stringify({
         first_name: props.firstName,

@@ -9,7 +9,6 @@ import RelationshipsList from './components/relationship/RelationshipsList'
 import RelationshipProfile from './components/relationship/RelationshipProfile'
 import SignUp from './components/user/Signup'
 import Login from './components/user/Login'
-import {api} from './services/api'
 import {getRelationships} from './services/relationshipsApi'
 import {getEvents} from './services/eventsApi'
 import {getCurrentUser} from './services/authApi'
@@ -132,7 +131,7 @@ class App extends Component {
   }
 
   updateUserProfile = data => {
-    this.setState({...this.state.auth, user: data.user})
+    this.setState({auth: {user: data.user}})
   }
 
   render() {

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import { api } from '../../services/api';
 import { newRelationship, updateRelationship } from '../../services/relationshipsApi';
 
 const RelationshipSubmitButton = props => {

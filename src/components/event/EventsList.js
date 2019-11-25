@@ -5,6 +5,7 @@ import AddEventButton from './AddEventButton'
 const EventsList = props => {
 
   const displayAllEvents = () => {
+    debugger;
     if (props.events && props.events.length !== 0 ) {
       return props.events.map(event => {
         return <EventCard 

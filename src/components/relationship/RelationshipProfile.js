@@ -6,7 +6,7 @@ import {lastConnection, connectionGap, displayPhoneNumber} from '../../utils'
 import EventsList from '../event/EventsList'
 
 const RelationshipProfile = props => {
-  const [events, setEvents] = useState([])
+  const [events, setEvents] = useState(props.events.future_events)
 
   const person = props.relationship;
   let gap = connectionGap(person);

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import {Modal, Form, Button, ButtonToolbar} from "react-bootstrap";
+import {updateUser} from './../../services/usersApi'
 import FirstName from '../form/FirstName'
 import LastName from '../form/LastName';
 import Email from '../form/Email';
@@ -24,26 +25,14 @@ const ProfileModal = props => {
 
   const handleEdit = () => {
     props.handleClose();
-    let token = localStorage.getItem('token');
-    fetch(`http://localhost:3000/api/v1/users/${props.user.id}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': `Bearer ${token}` 
-      }, 
-      body: JSON.stringify({
-        first_name: firstName,
-        last_name: lastName,
-        email: email,
-        phone_number: phone,
-        image: image
-      })
-    })
-    .then(res => res.json())
-    .then(data => {
-      props.updateUserProfile(data)
-    })
+    let formData = {
+      firstName: firstName, 
+      last_name: lastName, 
+      email: email,
+      phone: phone,
+      image: image
+    }
+    updateUser(props, formData)
   }
 
   return (
