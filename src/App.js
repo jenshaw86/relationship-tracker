@@ -9,15 +9,15 @@ import RelationshipsList from './components/relationship/RelationshipsList'
 import RelationshipProfile from './components/relationship/RelationshipProfile'
 import SignUp from './components/user/Signup'
 import Login from './components/user/Login'
-import {getRelationships} from './services/relationshipsApi'
+import {getRelationships, getRelationship} from './services/relationshipsApi'
 import {getEvents} from './services/eventsApi'
 import {getCurrentUser} from './services/authApi'
 import './styles.css'
 
 class App extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       auth: {
@@ -51,6 +51,13 @@ class App extends Component {
     }
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.events !== prevState.events) {
+      const token = localStorage.getItem('token');
+      getRelationships(token, this.handleSetState);
+      getRelationship(this.state.relationshipView, this.viewRelationship);
+    }
+  }
   // handleSetState checks data for certain properties to determine which field in state to set data to
   handleSetState = data => {
     // * event data is an object, while relationship data is an array
@@ -180,6 +187,7 @@ class App extends Component {
             viewRelationship={this.viewRelationship}
             updateRelationships={this.updateRelationships}
             handleNewEvent={this.handleNewEvent} 
+            handleDeletedEvent={this.handleDeletedEvent}
             viewEvent={this.viewEvent}
             events={this.state.events}
             /> } 

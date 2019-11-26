@@ -51,13 +51,15 @@ const RelationshipProfile = props => {
 
           <EventsList 
             userId={props.userId}
+            relationship={props.relationship} 
+            relationships={props.relationships} 
+            viewRelationship={props.viewRelationship} 
+            updateRelationships={props.updateRelationships} 
             events={upcomingEvents} 
             viewEvent={props.viewEvent} 
-            updateRelationships={props.updateRelationships} 
-            viewRelationship={props.viewRelationship} 
-            relationship={props.relationship} 
-            handleNewEvent={props.handleNewEvent} 
-            relationships={props.relationships} />
+            handleNewEvent={props.handleNewEvent}
+            handleDeletedEvent={props.handleDeletedEvent}
+            />
 
 
       </Container>

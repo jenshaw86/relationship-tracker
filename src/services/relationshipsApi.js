@@ -34,6 +34,14 @@ export const getRelationships = (token, handleSetState) => {
   )
 }
 
+export const getRelationship = (person, viewRelationship) => {
+  let token = localStorage.getItem('token');
+  fetch(`${API_ROOT}/relationships/${person.id}`, auth_headers(token))
+  .then(res => res.json())
+  .then(data => viewRelationship(data))
+}
+
+
 // newRelationship posts authorized user's new relationship, then adds new relationship existing list in state
 export const newRelationship = props => {
   let token = localStorage.getItem('token');
