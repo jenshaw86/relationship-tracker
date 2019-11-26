@@ -9,10 +9,11 @@ const EditEvent = props => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const relationship = props.relationship ? props.relationship : props.event.relationships[0]
   return (
     <>
     <Button className="edit-btn" size="sm" onClick={handleShow}>Edit</Button>
-    <EventModal show={show} handleClose={handleClose} updateEvents={props.updateEvents} event={props.event} relationships={props.relationships} updateRelationships={props.updateRelationships} viewRelationship={props.viewRelationship}
+    <EventModal show={show} handleClose={handleClose} updateEvents={props.updateEvents} event={props.event} relationship={relationship} relationships={props.relationships} updateRelationships={props.updateRelationships} viewRelationship={props.viewRelationship}
      />
     </>
   )

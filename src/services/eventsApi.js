@@ -107,7 +107,7 @@ const getRelationship = (relationshipId, token, props) => {
 
 export const updateEvent = (event, props) => {
   let token = localStorage.getItem('token');
-  let newInvitee = event.relationships[0].id !== props.inviteeId
+  let newInvitee = props.relationship.id !== props.inviteeId
 
   return fetch(`${API_ROOT}/events/${event.id}`, evConfigObj('PATCH', token, props))
   .then(res => res.json())

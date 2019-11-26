@@ -20,16 +20,21 @@ const EventForm = props => {
   
   // the purpose of someFunction, for now, is to determine what the contents of props are to therefore help determine whether to autofill the invited party state and section of the form
   const somefunction = props => {
+    debugger;
     // if props contains an event, this is an edit form. return the id of the associated connection.
-    if (props.event) {
-      return props.event.relationships[0].id
+    if (props.event || props.relationship) {
+      debugger;
+      return props.relationship.id;
     } else if (props.relationship) { // if props contains a relationship, we're creating a new event through a connection, return the connection's id
+      debugger;
       return props.relationship.id
     } else { // if props doesn't contain either of the above, this is a new event creation. Return the first connection as a default
+      debugger;
       return props.relationships[0].id
     }
   }
-  const [inviteeId, setInviteeId] = useState(somefunction(props))
+  // const [inviteeId, setInviteeId] = useState(props.event || props.relationship ? props.relationship.id : props.relationships[0].id)
+  const [inviteeId, setInviteeId] = useState(props.event || props.relationship ? props.relationship.id : props.relationships[0].id)
 
   useEffect((endDate) => {
     if(endDate < startDate) {

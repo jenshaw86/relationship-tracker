@@ -9,7 +9,7 @@ const EventCard = (props) => {
     if (props.relationships) {
     return (
         <>
-          <EditEventButton event={props.event} updateEvents={props.updateEvents} relationships={props.relationships} updateRelationships={props.updateRelationships} viewRelationship={props.viewRelationship} /> 
+          <EditEventButton event={props.event} updateEvents={props.updateEvents} relationship={props.relationship} relationships={props.relationships} updateRelationships={props.updateRelationships} viewRelationship={props.viewRelationship} /> 
           <DeleteEventButton event={props.event} updateEvents={props.updateEvents} handleDeletedEvent={props.handleDeletedEvent} />
         </>
       )

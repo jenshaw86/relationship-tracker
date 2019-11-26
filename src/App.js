@@ -189,6 +189,7 @@ class App extends Component {
             handleNewEvent={this.handleNewEvent} 
             handleDeletedEvent={this.handleDeletedEvent}
             viewEvent={this.viewEvent}
+            updateEvents={this.updateEvents}
             events={this.state.events}
             /> } 
         />

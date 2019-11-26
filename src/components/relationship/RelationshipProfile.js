@@ -58,6 +58,7 @@ const RelationshipProfile = props => {
             events={upcomingEvents} 
             viewEvent={props.viewEvent} 
             handleNewEvent={props.handleNewEvent}
+            updateEvents={props.updateEvents}
             handleDeletedEvent={props.handleDeletedEvent}
             />
 
