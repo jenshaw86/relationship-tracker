@@ -1,4 +1,4 @@
-export const API_ROOT = `https://git.heroku.com/lit-taiga-97735.git`;
+export const API_ROOT = `https://lit-taiga-97735.herokuapp.com/`;
 
 export const auth_headers = token => {
   return ({
