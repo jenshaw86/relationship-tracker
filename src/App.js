@@ -13,7 +13,6 @@ import {getRelationships, getRelationship} from './services/relationshipsApi'
 import {getEvents} from './services/eventsApi'
 import {getCurrentUser} from './services/authApi'
 import './styles.css'
-const ROOT_PATH = "/stay-connected"
 
 class App extends Component {
   
@@ -145,7 +144,7 @@ class App extends Component {
       <div className="app">
       <Router>
         <Navbar handleLogout={this.logout} />
-        <Route path={`${ROOT_PATH}/account`} render={() => <Account user={this.state.auth.user} events={this.state.events} updateUserProfile={this.updateUserProfile} />} />
+        <Route path={`/account`} render={() => <Account user={this.state.auth.user} events={this.state.events} updateUserProfile={this.updateUserProfile} />} />
         
         {/* All and specific events */} 
         {/* ? do we need to in include relationships data in this component? YES, we do -- for the form data. */}
@@ -193,10 +192,10 @@ class App extends Component {
             /> } 
         />
 
-        <Route path={`${ROOT_PATH}/signup`} component={SignUp}/>
-        <Route path={`${ROOT_PATH}/login`} render={props => <Login {...props} handleLogin={this.login} /> } />
-        <Route path={`${ROOT_PATH}/logout`} component={Home}/>
-        <Route path={ROOT_PATH} render={() => <Home user={this.state.auth.user.email} /> } /> 
+        <Route path={`/signup`} component={SignUp}/>
+        <Route path={`/login`} render={props => <Login {...props} handleLogin={this.login} /> } />
+        <Route path={`/logout`} component={Home}/>
+        <Route path={`/`} render={() => <Home user={this.state.auth.user.email} /> } /> 
 
       </Router>
     </div>
