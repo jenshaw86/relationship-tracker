@@ -1,4 +1,4 @@
-export const API_ROOT = `http://localhost:3000/api/v1`;
+export const API_ROOT = `https://git.heroku.com/lit-taiga-97735.git`;
 
 export const auth_headers = token => {
   return ({

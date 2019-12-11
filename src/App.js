@@ -13,12 +13,13 @@ import {getRelationships, getRelationship} from './services/relationshipsApi'
 import {getEvents} from './services/eventsApi'
 import {getCurrentUser} from './services/authApi'
 import './styles.css'
+const ROOT_PATH = "/stay-connected"
 
 class App extends Component {
-
+  
   constructor(props) {
     super(props);
-
+    
     this.state = {
       auth: {
         user: {}
@@ -32,7 +33,7 @@ class App extends Component {
       relationshipView: {}
     }
   }
-
+  
   // after component mounts, check if token is in local storage
   componentDidMount() {
     const token = localStorage.getItem('token');
@@ -50,7 +51,7 @@ class App extends Component {
       })
     }
   }
-
+  
   componentDidUpdate(prevProps, prevState) {
     if (this.state.events !== prevState.events) {
       const token = localStorage.getItem('token');
@@ -67,7 +68,7 @@ class App extends Component {
       this.setState({events: data}) 
     }
   }
-
+  
   // handles login in Login component
   login = data => {
     
@@ -84,7 +85,7 @@ class App extends Component {
     getRelationships(token, this.handleSetState);
     getEvents(token, this.handleSetState);
   }
-
+  
   logout = () => {
     // console.log('logging out')
     // remove token from local storage
@@ -92,13 +93,13 @@ class App extends Component {
     // clear state
     this.setState({auth: {user: {}} })
   }
-
+  
   handleNewEvent = newEvent => {
     let events = [...this.state.events.future_events, newEvent].sort((a,b) => b.start_date > a.start_date ? -1 : 1);
     this.setState({events: {...this.state.events, future_events: events}});
     this.setState({eventView: newEvent});
   }
-
+  
   updateEvents = event => {
     if (Array.isArray(event)) { //if the arg is an array from relationship profile events list
       this.setState({events: event})
@@ -108,45 +109,43 @@ class App extends Component {
       this.setState({events: events, eventView: event})
     }
   }
-
+  
   handleDeletedEvent = updatedEvents => {
     this.setState({events: updatedEvents})
   }
-
+  
   viewEvent = event => {
     this.setState({eventView: event})
   }
-
+  
   handleNewRelationship = (newRelationship) => {
     this.setState({relationships: [newRelationship, ...this.state.relationships]})
     this.setState({relationshipView: newRelationship})
   }
-
+  
   viewRelationship = (person) => {
     this.setState({relationshipView: person})
   }
-
+  
   updateRelationships = relationship => {
     let relationships = this.state.relationships.map(rel => rel.id === relationship.id ? relationship : rel)
     this.setState({relationships: relationships})
   }
-
+  
   handleDeletedRelationship = updatedRelationships => {
     this.setState({relationships: updatedRelationships})
   }
-
+  
   updateUserProfile = data => {
     this.setState({auth: {user: data.user}})
   }
-
+  
   render() {
-    
     return(
       <div className="app">
       <Router>
         <Navbar handleLogout={this.logout} />
-        <Route exact path='/' render={() => <Home user={this.state.auth.user.email} /> } /> 
-        <Route path='/account' render={() => <Account user={this.state.auth.user} events={this.state.events} updateUserProfile={this.updateUserProfile} />} />
+        <Route path={`${ROOT_PATH}/account`} render={() => <Account user={this.state.auth.user} events={this.state.events} updateUserProfile={this.updateUserProfile} />} />
         
         {/* All and specific events */} 
         {/* ? do we need to in include relationships data in this component? YES, we do -- for the form data. */}
@@ -194,9 +193,10 @@ class App extends Component {
             /> } 
         />
 
-        <Route path="/signup" component={SignUp}/>
-        <Route path="/login" render={props => <Login {...props} handleLogin={this.login} /> } />
-        <Route path="/logout" component={Home}/>
+        <Route path={`${ROOT_PATH}/signup`} component={SignUp}/>
+        <Route path={`${ROOT_PATH}/login`} render={props => <Login {...props} handleLogin={this.login} /> } />
+        <Route path={`${ROOT_PATH}/logout`} component={Home}/>
+        <Route path={ROOT_PATH} render={() => <Home user={this.state.auth.user.email} /> } /> 
 
       </Router>
     </div>

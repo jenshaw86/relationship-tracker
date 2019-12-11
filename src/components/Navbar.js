@@ -6,22 +6,24 @@ import {NavLink} from 'react-router-dom';
 // TODO: if token isn't available, render home page with the following links
       // Home, Login, Signup
 
+const ROOT_PATH = `/stay-connected`
+
 const Navbar = props => {
   if (!localStorage.getItem('token')) {
     return (
       <nav>
-        <NavLink className="nav-link" to='/'>Home</NavLink>
-        <NavLink className="nav-link" to='/login'>Login</NavLink>
-        <NavLink className="nav-link" to='/signup'>Sign Up</NavLink>
+        <NavLink className="nav-link" to={ROOT_PATH}>Home</NavLink>
+        <NavLink className="nav-link" to={`${ROOT_PATH}/login`}>Login</NavLink>
+        <NavLink className="nav-link" to={`${ROOT_PATH}/signup`}>Sign Up</NavLink>
       </nav>
     )
   } else {
     return (
       <nav>
-        <NavLink className="nav-link" to='/'>Home</NavLink>
-        <NavLink className="nav-link" to='/account'>Account</NavLink>
-        <NavLink className="nav-link" to='/relationships'>Connections</NavLink>
-        <NavLink className="nav-link" to='/events/upcoming'>Events</NavLink>
+        <NavLink className="nav-link" to={ROOT_PATH}>Home</NavLink>
+        <NavLink className="nav-link" to={`${ROOT_PATH}/account`}>Account</NavLink>
+        <NavLink className="nav-link" to={`${ROOT_PATH}/relationships`}>Connections</NavLink>
+        <NavLink className="nav-link" to={`${ROOT_PATH}/events/upcoming`}>Events</NavLink>
         <NavLink 
           to="/login"
           className="nav-link" 
